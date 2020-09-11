@@ -29,7 +29,7 @@ export default {
 
 <style>
   #app {
-    height: 800px;
+    height: 1000px;
     position: fixed;
     top: 0px;
     left: 0px;
