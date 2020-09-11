@@ -5,13 +5,13 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Index from './bus'
+import Bus from './bus'
 
 Vue.config.productionTip = false
 // element-ui
 Vue.use(ElementUI)
 // vueBus
-Vue.prototype.$Bus = Index
+Vue.prototype.$Bus = Bus
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
