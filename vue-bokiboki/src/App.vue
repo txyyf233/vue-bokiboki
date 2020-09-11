@@ -1,3 +1,6 @@
+<head>
+  <link rel="icon" href="head_logo.png" type="image/x-icon">
+</head>
 <template>
   <div id="app" :style="{width:appWidth + 'px'}">
     <router-view/>
