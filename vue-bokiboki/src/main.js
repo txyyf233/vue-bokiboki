@@ -3,9 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import Index from './bus'
 
 Vue.config.productionTip = false
-
+// element-ui
+Vue.use(ElementUI)
+// vueBus
+Vue.prototype.$Bus = Index
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

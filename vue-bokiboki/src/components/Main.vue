@@ -28,7 +28,7 @@ export default {
     background-color: #438a5e;
   }
   #vuHeadImg {
-    margin: 10px 50px;
+    margin: 10px 3%;
     height: 40px;
   }
 </style>
