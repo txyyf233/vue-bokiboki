@@ -67,6 +67,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         ? 'index.html'
         : config.build.index,
       template: 'index.html',
+      favicon: path.resolve('logo.png'),
       inject: true,
       favicon: path.resolve('head_logo.png'),
       minify: {

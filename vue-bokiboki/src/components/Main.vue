@@ -1,6 +1,8 @@
 <template>
-  <div id="vuMain">
-    {{msg}}
+  <div id="vuMain">{{msg}}
+    <div>
+      <img id="vuHeadImg" src="@/assets/bokiboki.png">
+    </div>
   </div>
 </template>
 
@@ -9,7 +11,7 @@ export default {
   name: 'Main',
   data () {
     return {
-      msg: '123'
+      msg: ''
     }
   }
 }
@@ -22,7 +24,11 @@ export default {
     height: 60px;
     position: fixed;
     top: 0px;
-    z-index: 4396;
-    background-color: rgba(67,138,94,1);
+    z-index: 999;
+    background-color: #438a5e;
+  }
+  #vuHeadImg {
+    margin: 10px 3%;
+    height: 40px;
   }
 </style>

@@ -1,14 +1,12 @@
-<head>
-  <link rel="icon" href="head_logo.png" type="image/x-icon">
-</head>
 <template>
-  <div id="app" :style="{width:appWidth + 'px'}">
+  <div id="app" :style="{width : appWidth + 'px'}">
     <router-view/>
   </div>
 </template>
 
 <script>
-var oldWidth = document.documentElement.clientWidth
+var oldWidth = window.innerWidth
+var newWidth
 oldWidth = oldWidth > 600 ? oldWidth : 600
 export default {
   name: 'App',
@@ -18,11 +16,11 @@ export default {
     }
   },
   mounted () {
-    var newWidth = document.documentElement.clientWidth
     window.onresize = () => {
+      newWidth = window.innerWidth
       if (newWidth > 600) {
         oldWidth = newWidth
-        this.appWidth = newWidth
+        this.appWidth = oldWidth
       }
     }
   }
@@ -31,7 +29,7 @@ export default {
 
 <style>
   #app {
-    height: 800px;
+    height: 1000px;
     position: fixed;
     top: 0px;
     left: 0px;

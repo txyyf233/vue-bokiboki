@@ -9,10 +9,7 @@ export default new Router({
     {
       path: '/',
       name: 'Main',
-      component: Main,
-      meta: {
-        title: 'ヽ(✿ﾟ▽ﾟ)ノ bokiboki～'
-      }
+      component: Main
     }
   ]
 })

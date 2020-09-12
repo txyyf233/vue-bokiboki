@@ -3,17 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import bus from './bus'
 
 Vue.config.productionTip = false
-
-router.beforeEach((to, from, next) => {
-  /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next()
-})
-
+// element-ui
+Vue.use(ElementUI)
+Vue.prototype.$bus = bus
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
