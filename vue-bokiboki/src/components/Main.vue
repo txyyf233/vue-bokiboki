@@ -1,7 +1,19 @@
 <template>
-  <div id="vuMain">{{msg}}
-    <div>
-      <img id="vuHeadImg" src="@/assets/bokiboki.png">
+  <div>
+    <div id="vuMain">
+      <a>
+        <img id="vuHeadImg" src="@/assets/bokiboki.png">
+      </a>
+      <ul id="vuHeadUl" style="background-color: lightgray">
+        <li style="background-color: aqua">
+          <div id="vuSearch" style="border-radius: 30px;background-color: lightcoral">
+            <input id="vuSearch-input" placeholder="请输入内容" style="border: 0px;background-color: rgba(0,0,0,0)">
+            <a id="vuSearch-search"><i class="el-icon-search"></i></a>
+          </div>
+        </li>
+        <li>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -11,7 +23,7 @@ export default {
   name: 'Main',
   data () {
     return {
-      msg: ''
+      vuInput: ''
     }
   }
 }
@@ -28,7 +40,16 @@ export default {
     background-color: #438a5e;
   }
   #vuHeadImg {
-    margin: 10px 3%;
-    height: 40px;
+    padding: 10px 3%;
+    height: 60px;
+  }
+  #vuHeadUl {
+    height: 60px;
+    float: right;
+    margin-top: 0px;
+  }
+  #vuHeadUl li{
+    list-style: none;
+    height: 100%;
   }
 </style>
