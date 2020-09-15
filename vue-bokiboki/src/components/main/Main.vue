@@ -7,6 +7,13 @@
       <el-col :span="4"><div class="vu-label-div"></div></el-col>
       <el-col :span="8"><div class="vu-label-div"></div></el-col>
     </el-row>
+    <el-row>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="8"><div class="vu-label-div"></div></el-col>
+    </el-row>
   </div>
 </template>
 
@@ -30,11 +37,10 @@ export default {
   #vu-main {
   }
   .vu-label-div {
-    height: 200px;
+    height: 500px;
     margin: 10px 10px 10px 10px;
     border-radius: 3px;
     box-shadow: rgba(0,0,0,0.5);
     background-color: #438a5e;
-    overflow: hidden;
   }
 </style>
