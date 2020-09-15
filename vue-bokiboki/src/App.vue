@@ -16,7 +16,7 @@
               <el-dropdown>
               <span class="el-dropdown-link">
                 <i class="el-icon-caret-bottom el-icon--right"
-                   style="position: relative;left: -15px"></i>
+                   style="position: relative;left: -20px"></i>
               </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>个人中心</el-dropdown-item>
@@ -88,7 +88,7 @@ export default {
     padding: 0;
     border: 0;
   }
-  #app {
+  html {
     background-color: rgba(0,0,0,0.2);
   }
   #vu-top {
