@@ -37,6 +37,9 @@
       </el-col>
     </el-row>
     <div id="vu-hidden"></div>
+    <div id="vu-goTop" class="vu-fixed"><i class="el-icon-caret-top"></i></div>
+    <div id="vu-add" class="vu-fixed"><i class="el-icon-circle-plus"></i></div>
+    <div id="vu-massage" class="vu-fixed"><i class="el-icon-s-comment"></i></div>
     <router-view/>
   </div>
 </template>
@@ -98,7 +101,7 @@ export default {
     top: 0px;
     z-index: 999;
     background-color: #438a5e;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
   #vu-head {
     width: inherit;
@@ -160,5 +163,26 @@ export default {
     line-height:40px;
     color: rgba(0,0,0,0.5);
     font-size: 25px;
+  }
+  .vu-fixed {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 22px;
+    color: rgba(0,0,0,0.8);
+    text-align: center;
+    line-height: 40px;
+    background-color: #438a5e;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  }
+  #vu-massage {
+    bottom: 20px;
+  }
+  #vu-add {
+    bottom: 80px;
+  }
+  #vu-goTop {
+    bottom: 140px;
   }
 </style>
