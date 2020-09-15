@@ -1,5 +1,12 @@
 <template>
   <div id="vu-main">
+    <el-row>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="4"><div class="vu-label-div"></div></el-col>
+      <el-col :span="8"><div class="vu-label-div"></div></el-col>
+    </el-row>
   </div>
 </template>
 
@@ -21,6 +28,13 @@ export default {
     border: 0;
   }
   #vu-main {
-    width: 100%;
+  }
+  .vu-label-div {
+    height: 200px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 3px;
+    box-shadow: rgba(0,0,0,0.5);
+    background-color: #438a5e;
+    overflow: hidden;
   }
 </style>

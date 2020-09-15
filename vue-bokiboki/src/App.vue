@@ -33,9 +33,6 @@
       </ul>
     </div>
     <div id="vu-hidden"></div>
-    <el-backtop class="el-backtop" target="#app">
-      <div id="vu-goTop"><i class="el-icon-caret-top"></i></div>
-    </el-backtop>
     <router-view/>
   </div>
 </template>
@@ -94,7 +91,6 @@ export default {
   }
   #app {
     background-color: rgba(0,0,0,0.2);
-    overflow-y: scroll;
   }
   #vu-top {
     width: inherit;
