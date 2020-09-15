@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="vu-main" :style="{width : mainWidth + 'px',backgroundColor: colorTheme}">
+  <div id="app" :style="{width: mainWidth + 'px', height: mainHeight + 'px'}">
+    <div id="vu-main" :style="{left: mainLeft + 'px'}">
       <ul id="vu-head">
         <li id="vu-img-li">
           <a><img id="vu-img" src="@/assets/bokiboki.png"></a>
@@ -39,61 +39,69 @@
 <script>
 var oldWidth = window.innerWidth
 var newWidth
-var minWindow = 720
-oldWidth = oldWidth > minWindow ? oldWidth : minWindow
+oldWidth = oldWidth > 720 ? oldWidth : 720
 export default {
   name: 'App',
   data () {
     return {
-      colorTheme: '#438a5e',
       mainWidth: oldWidth,
+      mainHeight: window.innerHeight,
+      mainLeft: 0,
       vuSearch: '',
       result: '',
-      headSrc: 'http://hbimg.huabanimg.com/8603d73dfe2117e717f21dfcdeffd06a5bbd3a4a225ed3-9OdaSK_fw658/format/webp',
+      headSrc: ''
     }
   },
   methods: {
-    searchMethods: function () {
-      if(this.vuSearch){
+    searchMethods () {
+      if (this.vuSearch) {
         this.result = this.vuSearch
       }
     },
-    errorHandler: function () {
+    errorHandler () {
       return true
+    },
+    getScroll () {
+      this.mainLeft = (document.documentElement.scrollLeft || document.body.scrollLeft) * -1
     }
   },
   mounted () {
     window.onresize = () => {
       newWidth = window.innerWidth
       console.log('当前浏览器窗口宽度' + newWidth + 'px')
-      if (newWidth > minWindow) {
-        oldWidth = newWidth
-        this.mainWidth = oldWidth
+      if (newWidth > 720) {
+        this.mainWidth = newWidth
       }
+      this.mainHeight = window.innerHeight
     }
+    window.addEventListener('scroll', this.getScroll, true)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.getScroll)
   }
 }
 </script>
 
 <style>
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
   #app {
-    position: absolute;
-    top: 0px;
-    left: 0px;
     background-color: rgba(0,0,0,0.2);
   }
   #vu-main {
-    width: 100%;
+    width: inherit;
     height: 60px;
-    position: absolute;
+    position: fixed;
     top: 0px;
-    left: 0px;
-    margin: 0px 0px;
-    padding: 0px 0px;
     z-index: 999;
+    background-color: #438a5e;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   }
   #vu-head {
-    width: 100%;
+    width: inherit;
     height: 60px;
     margin: 0px 0px;
     padding: 0px 0px;
@@ -103,7 +111,7 @@ export default {
   }
   #vu-img-li {
     width: 20%;
-    height: 100%;
+    height: 60px;
     left: 0px;
     float: left;
   }
@@ -114,7 +122,7 @@ export default {
   }
   #vu-search-li {
     width: 40%;
-    height: 100%;
+    height: 60px;
     float: left;
   }
   #vu-search {
@@ -132,7 +140,7 @@ export default {
   }
   #vu-menu-li {
     width: 40%;
-    height: 100%;
+    height: 60px;
     float: left;
   }
   #vu-menu-li div {
