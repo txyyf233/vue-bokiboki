@@ -1,6 +1,6 @@
 <template>
   <div id="app" :style="{width: mainWidth + 'px', height: mainHeight + 'px'}">
-    <div id="vu-main" :style="{left: mainLeft + 'px'}">
+    <div id="vu-top" :style="{left: mainLeft + 'px'}">
       <ul id="vu-head">
         <li id="vu-img-li">
           <a><img id="vu-img" src="@/assets/bokiboki.png"></a>
@@ -32,14 +32,18 @@
         </li>
       </ul>
     </div>
+    <div id="vu-hidden"></div>
+    <el-backtop class="el-backtop" target="#app">
+      <div id="vu-goTop"><i class="el-icon-caret-top"></i></div>
+    </el-backtop>
     <router-view/>
   </div>
 </template>
 
-<script>
+<script scoped>
 var oldWidth = window.innerWidth
 var newWidth
-oldWidth = oldWidth > 720 ? oldWidth : 720
+oldWidth = oldWidth > 768 ? oldWidth : 768
 export default {
   name: 'App',
   data () {
@@ -69,7 +73,7 @@ export default {
     window.onresize = () => {
       newWidth = window.innerWidth
       console.log('当前浏览器窗口宽度' + newWidth + 'px')
-      if (newWidth > 720) {
+      if (newWidth > 768) {
         this.mainWidth = newWidth
       }
       this.mainHeight = window.innerHeight
@@ -90,8 +94,9 @@ export default {
   }
   #app {
     background-color: rgba(0,0,0,0.2);
+    overflow-y: scroll;
   }
-  #vu-main {
+  #vu-top {
     width: inherit;
     height: 60px;
     position: fixed;
@@ -101,6 +106,12 @@ export default {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   }
   #vu-head {
+    width: inherit;
+    height: 60px;
+    margin: 0px 0px;
+    padding: 0px 0px;
+  }
+  #vu-hidden {
     width: inherit;
     height: 60px;
     margin: 0px 0px;
@@ -154,5 +165,14 @@ export default {
     line-height:40px;
     color: rgba(0,0,0,0.5);
     font-size: 25px;
+  }
+  #vu-goTop {
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 6px rgba(0,0,0, 0.5);
+    text-align: center;
+    line-height: 40px;
+    border-radius: 30px;
+    color: #438a5e;
   }
 </style>
