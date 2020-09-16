@@ -35,8 +35,8 @@
           </ul>
         </div>
       </el-col>
+      <el-col :span="24"><div id="vu-hidden"></div></el-col>
     </el-row>
-    <div id="vu-hidden"></div>
     <div id="vu-goTop" class="vu-fixed"><i class="el-icon-caret-top"></i></div>
     <div id="vu-add" class="vu-fixed"><i class="el-icon-circle-plus"></i></div>
     <div id="vu-massage" class="vu-fixed"><i class="el-icon-s-comment"></i></div>
@@ -164,6 +164,9 @@ export default {
     color: rgba(0,0,0,0.5);
     font-size: 25px;
   }
+  #vu-menu-li i:hover {
+    color: rgba(0,0,0,0.7);
+  }
   .vu-fixed {
     width: 40px;
     height: 40px;
@@ -172,9 +175,13 @@ export default {
     color: rgba(0,0,0,0.8);
     text-align: center;
     line-height: 40px;
-    background-color: #438a5e;
+    font-size: 15px;
+    background-color: rgba(67,138,94,0);
     border-radius: 30px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+  }
+  .vu-fixed:hover {
+    background-color: rgba(67,138,94,1);
   }
   #vu-massage {
     bottom: 20px;
