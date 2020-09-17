@@ -37,7 +37,7 @@
       </el-col>
       <el-col :span="24"><div id="vu-hidden"></div></el-col>
     </el-row>
-    <div id="vu-goTop" class="vu-fixed"><i class="el-icon-caret-top"></i></div>
+    <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon-caret-top"></i></div>
     <div id="vu-add" class="vu-fixed"><i class="el-icon-circle-plus"></i></div>
     <div id="vu-massage" class="vu-fixed"><i class="el-icon-s-comment"></i></div>
     <router-view/>
@@ -45,15 +45,17 @@
 </template>
 
 <script scoped>
+var windowWidth = window.innerWidth
 export default {
   name: 'App',
   data () {
     return {
-      mainWidth: 'inherit',
+      mainWidth: (windowWidth < 768 ? 768 : windowWidth) + 'px',
       mainTop: 0,
       vuSearch: '',
       result: '',
-      headSrc: ''
+      headSrc: '',
+      goTopHidden: 'none'
     }
   },
   methods: {
@@ -67,6 +69,11 @@ export default {
     },
     getScroll () {
       this.mainTop = document.documentElement.scrollTop || document.body.scrollTop
+      if (this.mainTop > 300) {
+        this.goTopHidden = ''
+      } else {
+        this.goTopHidden = 'none'
+      }
     }
   },
   mounted () {
@@ -179,6 +186,7 @@ export default {
     background-color: rgba(67,138,94,0);
     border-radius: 30px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    z-index: 999;
   }
   .vu-fixed:hover {
     background-color: rgba(67,138,94,1);
