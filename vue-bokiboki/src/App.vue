@@ -83,6 +83,7 @@ export default {
       } else {
         this.mainWidth = 'inherit'
       }
+      this.store.commit('appWidth', this.mainWidth)
     }
     window.addEventListener('scroll', this.getScroll, true)
   },
