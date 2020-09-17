@@ -6,15 +6,17 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import bus from './bus'
+import store from './store'
 
 Vue.config.productionTip = false
-// element-ui
 Vue.use(ElementUI)
 Vue.prototype.$bus = bus
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
