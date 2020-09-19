@@ -1,8 +1,8 @@
 <template>
-  <div id="app" :style="{width: mainWidth}">
+  <div id="app" :style="{width: appWidth + 'px'}">
     <el-row>
       <el-col :span="24">
-        <div id="vu-top" :style="{top: mainTop + 'px'}">
+        <div id="vu-top" :style="{top: appTop + 'px'}">
           <ul id="vu-head">
             <li id="vu-img-li">
               <a><img id="vu-img" src="@/assets/bokiboki.png"></a>
@@ -50,8 +50,8 @@ export default {
   name: 'App',
   data () {
     return {
-      mainWidth: (windowWidth < 768 ? 768 : windowWidth) + 'px',
-      mainTop: 0,
+      appWidth: windowWidth < 768 ? 768 : windowWidth,
+      appTop: 0,
       vuSearch: '',
       result: '',
       headSrc: '',
@@ -68,8 +68,8 @@ export default {
       return true
     },
     getScroll () {
-      this.mainTop = document.documentElement.scrollTop || document.body.scrollTop
-      if (this.mainTop > 300) {
+      this.appTop = document.documentElement.scrollTop || document.body.scrollTop
+      if (this.appTop > 300) {
         this.goTopHidden = ''
       } else {
         this.goTopHidden = 'none'
@@ -78,12 +78,13 @@ export default {
   },
   mounted () {
     window.onresize = () => {
+      windowWidth = window.innerWidth
       if (window.innerWidth < 768) {
-        this.mainWidth = '768px'
+        this.appWidth = 768
       } else {
-        this.mainWidth = 'inherit'
+        this.appWidth = windowWidth
       }
-      this.store.commit('appWidth', this.mainWidth)
+      this.$store.commit('appWidth', this.appWidth)
     }
     window.addEventListener('scroll', this.getScroll, true)
   },

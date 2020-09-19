@@ -1,5 +1,5 @@
 <template>
-  <div id="vu-main" :style="{width: mainWidth}" >
+  <div id="vu-main" :style="{width: mainWidth = this.$store.state.appWidth + 'px'}" >
     <el-row>
       <el-col :xs="12" :sm="6" :md="6" :lg="4"><div class="vu-label-div"></div></el-col>
       <el-col :xs="12" :sm="6" :md="6" :lg="4"><div class="vu-label-div"></div></el-col>
@@ -16,22 +16,22 @@ export default {
   name: 'Main',
   data () {
     return {
-      mainWidth: this.store.state.appWidth,
+      mainWidth: '',
       mainHidden: '',
       mainHiddenA: ''
     }
   },
   watch: {
-    mainWidth (value) {
-      alert(value)
-      if (value < 768) {
-        this.mainWidth = 'none'
+    mainWidth (val) {
+      val = val.substring(0, val.length - 2)
+      if (val <= 768) {
+        this.mainHidden = 'none'
         this.mainHiddenA = 'none'
-      } else if (this.value > 768 && this.value < 1220) {
-        this.mainWidth = ''
+      } else if (val > 768 && val <= 1200) {
+        this.mainHidden = ''
         this.mainHiddenA = 'none'
       } else {
-        this.mainWidth = ''
+        this.mainHidden = ''
         this.mainHiddenA = ''
       }
     }
