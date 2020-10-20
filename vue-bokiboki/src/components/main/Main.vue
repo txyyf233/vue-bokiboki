@@ -1,56 +1,22 @@
 <template>
-  <div id="vu-main" :style="{width: mainWidth = this.$store.state.appWidth + 'px'}" >
-    <el-row>
-      <el-col :xs="12" :sm="6" :md="6" :lg="4"><div class="vu-label-div"></div></el-col>
-      <el-col :xs="12" :sm="6" :md="6" :lg="4"><div class="vu-label-div"></div></el-col>
-      <el-col :sm="6" :md="6" :lg="4" :style="{display: mainHidden}"><div class="vu-label-div"></div></el-col>
-      <el-col :sm="6" :md="6" :lg="4" :style="{display: mainHidden}"><div class="vu-label-div"></div></el-col>
-      <el-col :span="4" :style="{display: mainHiddenA}"><div class="vu-label-div"></div></el-col>
-      <el-col :span="4" :style="{display: mainHiddenA}"><div class="vu-label-div"></div></el-col>
-    </el-row>
+  <div>
+    <headTop></headTop>
+    <div style="height: 2000px;width: 100px;background-color: lightcoral;float: right"></div>
   </div>
 </template>
 
 <script>
+import HeadTop from '@/components/middle/HeadTop'
 export default {
   name: 'Main',
   data () {
     return {
-      mainWidth: '',
-      mainHidden: '',
-      mainHiddenA: ''
     }
   },
-  watch: {
-    mainWidth (val) {
-      val = val.substring(0, val.length - 2)
-      if (val <= 768) {
-        this.mainHidden = 'none'
-        this.mainHiddenA = 'none'
-      } else if (val > 768 && val <= 1200) {
-        this.mainHidden = ''
-        this.mainHiddenA = 'none'
-      } else {
-        this.mainHidden = ''
-        this.mainHiddenA = ''
-      }
-    }
-  }
+  components: { HeadTop }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-  .vu-label-div {
-    height: 300px;
-    margin: 10px 10px 10px 10px;
-    border-radius: 3px;
-    box-shadow: rgba(0,0,0,0.5);
-    background-color: #438a5e;
-  }
 </style>
