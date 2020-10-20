@@ -20,7 +20,7 @@
                   <i class="el-icon el-icon-message-solid"></i>
                 </el-menu-item>
                 <el-submenu index="3">
-                  <template slot="title" style="color: #222222">
+                  <template slot="title">
                     <el-avatar :size="40" :src="headSrc" @error="errorHandler" fit="scale-down">
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
