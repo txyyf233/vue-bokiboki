@@ -1,7 +1,7 @@
 <template>
     <div>
       <el-container class="vu-head">
-        <el-header style="height: 60px;background-color: #438a5e">
+        <el-header class="el-header">
           <el-row>
             <el-col :span="4" style="padding-top: 10px">
               <img src="@/assets/bokiboki.png" style="height: 40px">
@@ -12,7 +12,7 @@
               </el-input>
             </el-col>
             <el-col :span="12">
-              <el-menu mode="horizontal" background-color="#438a5e" text-color="#202020" active-text-color="#000000" style="float: right">
+              <el-menu class="el-menu" mode="horizontal" text-color="#222222" active-text-color="#000000" background-color="#438a5e">
                 <el-menu-item index="1">
                   <i class="el-icon el-icon-menu"></i>
                 </el-menu-item>
@@ -34,9 +34,10 @@
           </el-row>
         </el-header>
       </el-container>
-      <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon el-icon-caret-top"></i></div>
-      <div id="vu-add" class="vu-fixed"><i class="el-icon el-icon-circle-plus"></i></div>
-      <div id="vu-massage" class="vu-fixed"><i class="el-icon el-icon-s-comment"></i></div>
+      <el-row><el-col :span="24"><div style="height: 60px"></div></el-col></el-row>
+      <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon el-icon-arrow-up"></i></div>
+      <div id="vu-add" class="vu-fixed"><i class="el-icon el-icon-cherry"></i></div>
+      <div id="vu-massage" class="vu-fixed"><i class="el-icon el-icon-chat-dot-square"></i></div>
     </div>
 </template>
 
@@ -83,6 +84,14 @@ export default {
   .el-icon {
     color: #222222;
     font-size: 20px;
+  }
+  .el-header {
+    height: 60px;
+    background-color:#438a5e;
+  }
+  .el-menu {
+    height: 60px;
+    float: right
   }
   .vu-head {
     position: fixed;

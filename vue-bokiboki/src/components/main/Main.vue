@@ -1,7 +1,7 @@
 <template>
   <div>
     <headTop></headTop>
-    <div style="height: 2000px;width: 100px;background-color: lightcoral;float: right"></div>
+    <div style="height: 100px;width: 100px;background-color: lightcoral;float: right"></div>
   </div>
 </template>
 
