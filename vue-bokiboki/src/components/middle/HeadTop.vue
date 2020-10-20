@@ -3,16 +3,16 @@
       <el-container class="vu-head">
         <el-header class="el-header">
           <el-row>
-            <el-col :span="4" style="padding-top: 10px">
-              <img src="@/assets/bokiboki.png" style="height: 40px">
+            <el-col :sm="4" :xs="8">
+              <img src="@/assets/bokiboki.png" @click="drawer = true" style="height: 40px;margin-top: 10px">
             </el-col>
-            <el-col :span="8" style="padding-top: 10px">
-              <el-input id="vu-search" placeholder="请输入搜索内容" v-model="vuSearch">
+            <el-col :sm="12" :xs="16">
+              <el-input placeholder="请输入搜索内容" v-model="vuSearch" style="height: 40px;margin-top: 10px">
                 <i @click="searchMethods" class="el-icon-search el-input__icon" slot="suffix" style="font-size: 20px;margin-right: 10px"></i>
               </el-input>
             </el-col>
-            <el-col :span="12">
-              <el-menu class="el-menu" mode="horizontal" text-color="#222222" active-text-color="#000000" background-color="#438a5e">
+            <el-col :sm="8" class="hidden-xs-only">
+              <el-menu class="el-menu" mode="horizontal" text-color="#333333" background-color="#438a5e">
                 <el-menu-item index="1">
                   <i class="el-icon el-icon-menu"></i>
                 </el-menu-item>
@@ -38,14 +38,23 @@
       <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon el-icon-arrow-up"></i></div>
       <div id="vu-add" class="vu-fixed"><i class="el-icon el-icon-cherry"></i></div>
       <div id="vu-massage" class="vu-fixed"><i class="el-icon el-icon-chat-dot-square"></i></div>
+      <el-drawer size="40px" style="margin-top: 60px"
+        :visible.sync="drawer"
+        :direction="direction"
+        :with-header="false">
+        <div style="height: 100%;width: 100%;background-color: rgba(0,0,0,0.3)"></div>
+      </el-drawer>
     </div>
 </template>
 
 <script scoped>
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
   name: 'HeadTop',
   data () {
     return {
+      drawer: false,
+      direction: 'ttb',
       vuSearch: '',
       headSrc: '',
       goTopHidden: 'none'
@@ -82,7 +91,7 @@ export default {
 
 <style scoped>
   .el-icon {
-    color: #222222;
+    color: #333333;
     font-size: 20px;
   }
   .el-header {
@@ -91,7 +100,7 @@ export default {
   }
   .el-menu {
     height: 60px;
-    float: right
+    float: right;
   }
   .vu-head {
     position: fixed;
@@ -107,7 +116,7 @@ export default {
     right: 22px;
     color: rgba(0,0,0,0.8);
     text-align: center;
-    line-height: 40px;
+    line-height: 45px;
     font-size: 15px;
     background-color: rgba(67,138,94,0);
     border-radius: 30px;
