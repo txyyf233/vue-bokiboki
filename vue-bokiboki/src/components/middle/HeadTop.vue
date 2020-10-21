@@ -1,10 +1,13 @@
 <template>
     <div>
-      <el-container class="vu-head">
+      <el-container class="el-container">
         <el-header class="el-header">
           <el-row>
-            <el-col :sm="4" :xs="8">
+            <el-col :xs="8" class="hidden-sm-and-up">
               <img src="@/assets/bokiboki.png" @click="drawer = true" style="height: 40px;margin-top: 10px">
+            </el-col>
+            <el-col :sm="4" class="hidden-xs-only">
+              <img src="@/assets/bokiboki.png" @click="goMain" style="height: 40px;margin-top: 10px">
             </el-col>
             <el-col :sm="12" :xs="16">
               <el-input placeholder="请输入搜索内容" v-model="vuSearch" style="height: 40px;margin-top: 10px">
@@ -38,17 +41,20 @@
       <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon el-icon-arrow-up"></i></div>
       <div id="vu-add" class="vu-fixed"><i class="el-icon el-icon-cherry"></i></div>
       <div id="vu-massage" class="vu-fixed"><i class="el-icon el-icon-chat-dot-square"></i></div>
-      <el-drawer size="40px" style="margin-top: 60px"
+      <el-drawer class="el-drawer" size="40px"
         :visible.sync="drawer"
         :direction="direction"
         :with-header="false">
-        <div style="height: 100%;width: 100%;background-color: rgba(0,0,0,0.3)"></div>
+        <el-tag class="el-tag">首页</el-tag>
+        <el-tag class="el-tag">个人中心</el-tag>
+        <el-tag class="el-tag">消息</el-tag>
+        <el-tag class="el-tag">采集板</el-tag>
+        <el-tag class="el-tag">设置 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</el-tag>
       </el-drawer>
     </div>
 </template>
 
-<script scoped>
-import 'element-ui/lib/theme-chalk/display.css'
+<script>
 export default {
   name: 'HeadTop',
   data () {
@@ -56,11 +62,15 @@ export default {
       drawer: false,
       direction: 'ttb',
       vuSearch: '',
+      result: '',
       headSrc: '',
       goTopHidden: 'none'
     }
   },
   methods: {
+    goMain () {
+      return this.router.push('Main')
+    },
     searchMethods () {
       if (this.vuSearch) {
         this.result = this.vuSearch
@@ -102,7 +112,23 @@ export default {
     height: 60px;
     float: right;
   }
-  .vu-head {
+  .el-drawer {
+    margin-top: 60px;
+    line-height: 40px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  /deep/ .el-drawer::-webkit-scrollbar {
+    display: none;
+  }
+  /deep/ .el-drawer:focus {
+    outline:none;
+  }
+  .el-tag {
+    background-color: #438a5e;
+    color: rgba(0,0,0,0.8);
+  }
+  .el-container {
     position: fixed;
     top: 0px;
     left: 0px;
