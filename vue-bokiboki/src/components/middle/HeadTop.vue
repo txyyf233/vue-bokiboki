@@ -45,7 +45,7 @@
         :visible.sync="drawer"
         :direction="direction"
         :with-header="false">
-        <el-tag class="el-tag">首页</el-tag>
+        <el-tag class="el-tag" @click="goMain">首页</el-tag>
         <el-tag class="el-tag">个人中心</el-tag>
         <el-tag class="el-tag">消息</el-tag>
         <el-tag class="el-tag">采集板</el-tag>
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     goMain () {
-      return this.router.push('Main')
+      return this.$router.push('/')
     },
     searchMethods () {
       if (this.vuSearch) {
