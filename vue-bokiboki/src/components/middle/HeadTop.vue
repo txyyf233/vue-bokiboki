@@ -46,10 +46,10 @@
         :direction="direction"
         :with-header="false">
         <el-tag class="el-tag" @click="goMain">首页</el-tag>
-        <el-tag class="el-tag">个人中心</el-tag>
+        <el-tag class="el-tag" @click="goLogin">个人中心</el-tag>
         <el-tag class="el-tag">消息</el-tag>
         <el-tag class="el-tag">采集板</el-tag>
-        <el-tag class="el-tag">设置 啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</el-tag>
+        <el-tag class="el-tag">设置</el-tag>
       </el-drawer>
     </div>
 </template>
@@ -70,6 +70,9 @@ export default {
   methods: {
     goMain () {
       return this.$router.push('/')
+    },
+    goLogin () {
+      return this.$router.push('/login')
     },
     searchMethods () {
       if (this.vuSearch) {
@@ -114,9 +117,12 @@ export default {
   }
   .el-drawer {
     margin-top: 60px;
-    line-height: 40px;
+    line-height: 37px;
     text-align: center;
     white-space: nowrap;
+  }
+  /deep/ .el-drawer {
+    overflow-x: scroll;
   }
   /deep/ .el-drawer::-webkit-scrollbar {
     display: none;
