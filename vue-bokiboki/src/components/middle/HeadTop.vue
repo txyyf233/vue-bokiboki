@@ -17,10 +17,7 @@
             <el-col :sm="8" class="hidden-xs-only">
               <el-menu class="el-menu" mode="horizontal" text-color="#333333" background-color="#438a5e">
                 <el-menu-item index="1">
-                  <el-popover placement="bottom" width="400" trigger="click">
-                    <el-tag class="el-tag">标签</el-tag>
-                    <i slot="reference" class="el-icon el-icon-menu"></i>
-                  </el-popover>
+                  <i class="el-icon el-icon-menu"></i>
                 </el-menu-item>
                 <el-menu-item index="2">
                   <i class="el-icon el-icon-message-solid"></i>
@@ -31,7 +28,7 @@
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </template>
-                  <el-menu-item index="2-1"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
+                  <el-menu-item index="2-1" @click="goLogin"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
                   <el-menu-item index="2-2"><i class="el-icon el-icon-s-shop"></i>&nbsp;采集板</el-menu-item>
                   <el-menu-item index="2-3"><i class="el-icon el-icon-s-tools"></i>&nbsp;设置</el-menu-item>
                 </el-submenu>
@@ -42,8 +39,6 @@
       </el-container>
       <el-row><el-col :span="24"><div style="height: 60px"></div></el-col></el-row>
       <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon el-icon-arrow-up"></i></div>
-      <div id="vu-add" class="vu-fixed"><i class="el-icon el-icon-cherry"></i></div>
-      <div id="vu-massage" class="vu-fixed"><i class="el-icon el-icon-chat-dot-square"></i></div>
       <el-drawer class="el-drawer" size="40px"
         :visible.sync="drawer"
         :direction="direction"
@@ -66,7 +61,7 @@ export default {
       direction: 'ttb',
       vuSearch: '',
       result: '',
-      headSrc: '',
+      headSrc: 'https://hbimg.huabanimg.com/9744aba7aed24d5c882905dab9e637fdeeac1679100c0-w37Awv_fw658/format/webp',
       goTopHidden: 'none'
     }
   },
@@ -151,7 +146,7 @@ export default {
     right: 22px;
     color: rgba(0,0,0,0.8);
     text-align: center;
-    line-height: 45px;
+    line-height: 40px;
     font-size: 15px;
     background-color: rgba(67,138,94,0);
     border-radius: 30px;
@@ -160,12 +155,6 @@ export default {
   }
   .vu-fixed:hover {
     background-color: rgba(67,138,94,1);
-  }
-  #vu-massage {
-    bottom: 20px;
-  }
-  #vu-add {
-    bottom: 80px;
   }
   #vu-goTop {
     bottom: 140px;
