@@ -17,7 +17,10 @@
             <el-col :sm="8" class="hidden-xs-only">
               <el-menu class="el-menu" mode="horizontal" text-color="#333333" background-color="#438a5e">
                 <el-menu-item index="1">
-                  <i class="el-icon el-icon-menu"></i>
+                  <el-popover placement="bottom" width="400" trigger="click">
+                    <el-tag class="el-tag">标签</el-tag>
+                    <i slot="reference" class="el-icon el-icon-menu"></i>
+                  </el-popover>
                 </el-menu-item>
                 <el-menu-item index="2">
                   <i class="el-icon el-icon-message-solid"></i>
