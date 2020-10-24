@@ -18,8 +18,8 @@
               <el-button class="el-button" type="primary" @click="submitForm('signInForm')">Sign in</el-button>
             </el-form-item>
             <el-row>
-              <el-col :span="16"><p style="color: rgba(67,138,94,0.9)" align="left">Forget password?</p></el-col>
-              <el-col :span="8"><p style="color: rgba(67,138,94,0.9)" align="right">Sign up</p></el-col>
+              <el-col :span="16"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goResetPass">Forget password?</p></el-col>
+              <el-col :span="8"><p style="color: rgba(67,138,94,0.9)" align="right" @click="goJoin">Sign up</p></el-col>
             </el-row>
           </el-form>
         </el-row>
@@ -33,16 +33,16 @@ import HeadTop from '@/components/middle/HeadTop'
 export default {
   name: 'Login',
   data () {
-    var validatePass = (rule, value, callback) => {
+    var validateName = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入用户名'))
+        callback(new Error('请输入密码'))
       } else {
         callback()
       }
     }
-    var validateName = (rule, value, callback) => {
+    var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
@@ -65,12 +65,33 @@ export default {
   },
   components: {HeadTop},
   methods: {
+    goResetPass () {
+      return this.$router.push('/resetPass')
+    },
+    goJoin () {
+      return this.$router.push('/join')
+    },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$message({message: '登录成功', type: 'success'})
+          this.$axios({
+            method: 'post',
+            url: '/api/login/login',
+            data: this.signInForm,
+            timeout: 10000
+          }).then((response) => {
+            console.log(response)
+            var resposeData = response.data
+            if (resposeData.code === '0') {
+              this.$message({message: resposeData.message, type: 'error'})
+            } else {
+              this.$message({message: resposeData.message, type: 'success'})
+            }
+          }).catch((error) =>
+            this.$message({message: error, type: 'success'})
+          )
         } else {
-          this.$message({message: '错了哦，用户名或密码', type: 'error'})
+          this.$message({message: '错了，请检查用户名或密码', type: 'error'})
           return false
         }
       })
