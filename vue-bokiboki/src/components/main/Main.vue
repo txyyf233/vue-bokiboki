@@ -18,11 +18,34 @@
 import HeadTop from '@/components/middle/HeadTop'
 export default {
   name: 'Main',
+  components: { HeadTop },
   data () {
     return {
     }
   },
-  components: { HeadTop }
+  mounted: function () {
+    this.getList()
+  },
+  methods: {
+    getList () {
+      this.$axios({
+        method: 'post',
+        url: '/api/main/list',
+        data: {},
+        timeout: 10000
+      }).then((response) => {
+        console.log(response)
+        var resposeData = response.data
+        if (resposeData.code === '1') {
+          this.$message({message: resposeData.message, type: 'success'})
+        } else {
+          this.$message({message: resposeData.message, type: 'error'})
+        }
+      }).catch((error) =>
+        this.$message({message: error, type: 'error'})
+      )
+    }
+  }
 }
 </script>
 

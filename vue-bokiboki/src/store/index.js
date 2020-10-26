@@ -3,9 +3,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 const state = {
 }
+// 同步
 const mutations = {
 }
-
+// 异步
 const actions = {
 }
 

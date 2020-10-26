@@ -82,16 +82,17 @@ export default {
           }).then((response) => {
             console.log(response)
             var resposeData = response.data
-            if (resposeData.code === '0') {
-              this.$message({message: resposeData.message, type: 'error'})
-            } else {
+            if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success'})
+              localStorage.removeItem('token')
+              localStorage.setItem('token', resposeData.resource.token)
+            } else {
+              this.$message({message: resposeData.message, type: 'error'})
             }
           }).catch((error) =>
-            this.$message({message: error, type: 'success'})
+            this.$message({message: error, type: 'error'})
           )
         } else {
-          this.$message({message: '错了，请检查用户名或密码', type: 'error'})
           return false
         }
       })
