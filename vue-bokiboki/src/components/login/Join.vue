@@ -17,9 +17,6 @@
             <el-form-item label="Password" prop="passWord">
               <el-input v-model="signUpForm.passWord" show-password></el-input>
             </el-form-item>
-            <el-form-item label="CheckPassword" prop="checkPassWord">
-              <el-input v-model="signUpForm.checkPassWord" show-password></el-input>
-            </el-form-item>
             <el-form-item>
               <el-button class="el-button" type="primary" @click="submitForm('signUpForm')">Create accout</el-button>
             </el-form-item>
@@ -59,20 +56,12 @@ export default {
         callback()
       }
     }
-    var validateCheckPass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
-      } else {
-        callback()
-      }
-    }
     return {
       labelPosition: 'top',
       signUpForm: {
         userName: '',
         email: '',
-        passWord: '',
-        checkPassWord: ''
+        passWord: ''
       },
       rules: {
         userName: [
@@ -83,9 +72,6 @@ export default {
         ],
         passWord: [
           { validator: validatePass, trigger: 'blur' }
-        ],
-        checkPassWord: [
-          { validator: validateCheckPass, trigger: 'blur' }
         ]
       }
     }
