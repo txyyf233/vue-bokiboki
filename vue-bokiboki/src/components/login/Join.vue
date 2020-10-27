@@ -37,7 +37,7 @@ export default {
   data () {
     var validateName = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
@@ -51,7 +51,7 @@ export default {
     }
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入用户名'))
+        callback(new Error('请输入密码'))
       } else {
         callback()
       }
@@ -84,7 +84,22 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$message({message: '注册成功', type: 'success'})
+          this.$axios({
+            method: 'post',
+            url: '/api/login/create',
+            data: this.signUpForm,
+            timeout: 10000
+          }).then((response) => {
+            console.log(response)
+            var resposeData = response.data
+            if (resposeData.code === '1') {
+              this.$message({message: resposeData.message, type: 'success'})
+            } else {
+              this.$message({message: resposeData.message, type: 'error'})
+            }
+          }).catch((error) =>
+            this.$message({message: error, type: 'error'})
+          )
         } else {
           return false
         }
