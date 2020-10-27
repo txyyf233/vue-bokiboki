@@ -86,7 +86,6 @@ export default {
         if (valid) {
           this.$message({message: '注册成功', type: 'success'})
         } else {
-          this.$message({message: '错了，请检查表单', type: 'error'})
           return false
         }
       })

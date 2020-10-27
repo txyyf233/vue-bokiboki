@@ -11,7 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
+      '/api': {//前缀/api时使用代理
         target: 'http://localhost:8090', // 接口的域名
         changeOrigin: true, //接口跨域
         pathRewrite: {

@@ -13,10 +13,10 @@
             </el-form-item>
             <el-form-item label="Check code" prop="checkCode">
               <el-row>
-                <el-col :span="12">
+                <el-col :span="13">
                   <el-input v-model="resetPassForm.checkCode"></el-input>
                 </el-col>
-                <el-col :span="10" offset="2">
+                <el-col :span="10" offset="1">
                   <el-button  class="el-button" type="primary" @click="sendCode">发送验证码</el-button>
                 </el-col>
               </el-row>
@@ -99,7 +99,6 @@ export default {
         if (valid) {
           this.$message({message: '登录成功', type: 'success'})
         } else {
-          this.$message({message: '错了，请检查表单', type: 'error'})
           return false
         }
       })
