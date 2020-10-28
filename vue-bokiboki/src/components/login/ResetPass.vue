@@ -8,7 +8,7 @@
             <div style="text-align: center">
               <img src="@/assets/bokiboki.png" style="height: 60px">
             </div>
-            <el-form-item label="Username or email address" prop="userName">
+            <el-form-item label="Username" prop="userName">
               <el-input v-model="resetPassForm.userName" ></el-input>
             </el-form-item>
             <el-form-item label="Check code" prop="checkCode">
@@ -21,7 +21,7 @@
                 </el-col>
               </el-row>
             </el-form-item>
-            <el-form-item label="Password" prop="passWord">
+            <el-form-item label="Password" prop="passWord" :style="display=isHidden">
               <el-input v-model="resetPassForm.passWord" show-password></el-input>
             </el-form-item>
             <el-form-item>
@@ -45,7 +45,7 @@ export default {
   data () {
     var validateName = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
@@ -59,13 +59,14 @@ export default {
     }
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入用户名'))
+        callback(new Error('请输入密码'))
       } else {
         callback()
       }
     }
     return {
       labelPosition: 'top',
+      isHidden: 'none',
       resetPassForm: {
         userName: '',
         checkCode: '',
@@ -93,11 +94,44 @@ export default {
       return this.$router.push('/join')
     },
     sendCode () {
+      this.$axios({
+        method: 'post',
+        url: '/api/login/checkCode',
+        data: this.resetPassForm,
+        timeout: 10000
+      }).then((response) => {
+        console.log(response)
+        var resposeData = response.data
+        if (resposeData.code === '1') {
+          this.$message({message: resposeData.message, type: 'success'})
+        } else {
+          this.$message({message: resposeData.message, type: 'error'})
+        }
+      }).catch((error) =>
+        this.$message({message: error, type: 'error'})
+      )
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$message({message: '登录成功', type: 'success'})
+          this.$axios({
+            method: 'post',
+            url: '/api/login/forget',
+            data: this.resetPassForm,
+            timeout: 10000
+          }).then((response) => {
+            console.log(response)
+            var resposeData = response.data
+            if (resposeData.code === '1') {
+              this.$message({message: resposeData.message, type: 'success'})
+              localStorage.removeItem('token')
+              localStorage.setItem('token', resposeData.resource.token)
+            } else {
+              this.$message({message: resposeData.message, type: 'error'})
+            }
+          }).catch((error) =>
+            this.$message({message: error, type: 'error'})
+          )
         } else {
           return false
         }
