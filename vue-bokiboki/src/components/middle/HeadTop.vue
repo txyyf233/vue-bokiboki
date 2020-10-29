@@ -10,7 +10,7 @@
               <img src="@/assets/bokiboki.png" @click="goMain" style="height: 40px;margin-top: 10px">
             </el-col>
             <el-col :sm="12" :xs="16">
-              <el-input placeholder="请输入搜索内容" v-model="vuSearch" style="height: 40px;margin-top: 10px">
+              <el-input placeholder="请输入搜索内容" v-model="vuSearch" @keyup.enter.native="searchMethods" style="height: 40px;margin-top: 10px">
                 <i @click="searchMethods" class="el-icon-search el-input__icon" slot="suffix" style="font-size: 20px;margin-right: 10px"></i>
               </el-input>
             </el-col>

@@ -34,21 +34,30 @@ export default {
   name: 'Login',
   data () {
     var validateName = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
+      console.log(value + '-----' + this.regular.name.test(value))
+      if (value.trim() === '') {
+        callback(new Error('请输入用户名'))
+      } else if (!this.regular.name.test(value.trim())) {
+        callback(new Error('格式：汉字 字母 数字'))
       } else {
         callback()
       }
     }
     var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入用户名'))
+      if (value.trim() === '') {
+        callback(new Error('请输入密码'))
+      } else if (!this.regular.pass.test(value.trim())) {
+        callback(new Error('密码限定数字字母'))
       } else {
         callback()
       }
     }
     return {
       labelPosition: 'top',
+      regular: {
+        name: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/,
+        pass: /^[a-zA-Z0-9]{4,10}$/
+      },
       signInForm: {
         userName: '',
         passWord: ''
@@ -73,6 +82,7 @@ export default {
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
+        console.log(valid)
         if (valid) {
           this.$axios({
             method: 'post',

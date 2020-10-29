@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {//前缀/api时使用代理
-        target: 'http://localhost:8090', // 接口的域名
+        target: 'http://localhost:9527', // 接口的域名
         changeOrigin: true, //接口跨域
         pathRewrite: {
           '^/api': '',
@@ -22,7 +22,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 4396, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
