@@ -15,7 +15,8 @@
               </el-input>
             </el-col>
             <el-col :sm="8" class="hidden-xs-only">
-              <el-menu class="el-menu" mode="horizontal" text-color="#333333" background-color="#438a5e">
+              <el-menu class="el-menu" mode="horizontal" text-color="#333333" background-color="#056674">
+<!--               #056674;#438a5e-->
                 <el-menu-item index="1">
                   <i class="el-icon el-icon-menu"></i>
                 </el-menu-item>
@@ -107,7 +108,8 @@ export default {
   }
   .el-header {
     height: 60px;
-    background-color:#438a5e;
+    /*background-color:#438a5e;*/
+    background-color:#056674;
   }
   .el-menu {
     height: 60px;
@@ -129,7 +131,8 @@ export default {
     outline:none;
   }
   .el-tag {
-    background-color: #438a5e;
+    /*background-color: #438a5e;*/
+    background-color: #056674;
     color: rgba(0,0,0,0.8);
   }
   .el-container {

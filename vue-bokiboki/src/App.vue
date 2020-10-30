@@ -17,6 +17,7 @@ export default {
     border: 0;
   }
   html {
-    background-color: rgba(0,0,0,0.2);
+    /*background-color: rgba(0,0,0,0.2);*/
+    background-color: #e0ece4;
   }
 </style>

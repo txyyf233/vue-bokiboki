@@ -23,7 +23,7 @@
               </el-row>
             </el-form-item>
             <el-form-item label="新密码" prop="passWord" :style="{display:passwordisHidden}">
-              <el-input v-model="resetPassForm.passWord" show-password></el-input>
+              <el-input v-model="resetPassForm.passWord" ></el-input>
             </el-form-item>
             <el-form-item>
               <el-button class="el-button" type="primary" @click="submitForm('resetPassForm')">更换密码并登录</el-button>
@@ -210,6 +210,7 @@ export default {
   }
   .el-button {
     width: 100%;
-    background-color: #438a5e
+    /*background-color: #438a5e*/
+    background-color: #056674;
   }
 </style>

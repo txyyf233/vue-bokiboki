@@ -15,7 +15,7 @@
               <el-input v-model="signUpForm.email" clearable></el-input>
             </el-form-item>
             <el-form-item label="Password" prop="passWord">
-              <el-input v-model="signUpForm.passWord" show-password></el-input>
+              <el-input v-model="signUpForm.passWord"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button class="el-button" type="primary" @click="submitForm('signUpForm')">Create accout</el-button>
@@ -121,6 +121,7 @@ export default {
   }
   .el-button {
     width: 100%;
-    background-color: #438a5e
+    /*background-color: #438a5e*/
+    background-color: #056674;
   }
 </style>
