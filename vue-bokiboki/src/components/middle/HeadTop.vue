@@ -132,6 +132,7 @@ export default {
   }
   .el-tag {
     /*background-color: #438a5e;*/
+    /*e0ece4 ff4b5c 056674 66bfbf*/
     background-color: #056674;
     color: rgba(0,0,0,0.8);
   }
