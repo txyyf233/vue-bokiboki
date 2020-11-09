@@ -4,8 +4,9 @@
     <el-row style="margin-top: 10px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px">
-          <el-card :body-style="{ padding: '0px' }">
+        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative">
+          <div  class="collectButton" :style="{display: collectDisplay}">采集</div>
+          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
             <el-image :src="cardSrc" class="image" :preview-src-list="srcList"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ cardName }}</span>
@@ -23,13 +24,30 @@
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        1
+        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative">
+          <div  class="collectButton" :style="{display: collectDisplay}">采集</div>
+          <el-card :body-style="{ padding: '0px' }">
+            <el-image src="http://pic3.pocoimg.cn/image/poco/works/55/2019/0124/18/15483243923086801_186664387.jpg?imageMogr2/auto-orient/thumbnail/x800/blur/1x0/quality/100&" class="image" :preview-src-list="srcList"></el-image>
+            <div style="padding: 13px">
+              <span style="font-size: 11px">{{ cardName }}</span>
+              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
+              <div style="height: 40px;width: 40px;float: left">
+                <el-avatar :size="40" :src="headSrc" @error="errorHandler" fit="scale-down">
+                  <img src="@/assets/errorImg.png"/>
+                </el-avatar>
+              </div>
+              <div style="height: 40px;line-height: 40px">
+                <span style="font-size: 8px">{{userNick}}</span>
+              </div>
+            </div>
+          </el-card>
+        </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        1
+        &nbsp;
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        1
+        &nbsp;
       </el-col>
       <el-col class="hidden-md-and-down" :lg="6">
         <el-card :body-style="{ padding: '0px' }" style="background-color: white;border-radius: 5px;margin: 10px">
@@ -82,11 +100,12 @@ export default {
       userNick: '今天的风儿甚是喧嚣啊',
       userCare: '',
       userFans: '',
-      cardSrc: 'http://pic3.pocoimg.cn/image/poco/works/06/2020/1029/11/16039421889025499_201533676.JPG?imageMogr2/auto-orient/thumbnail/x800/blur/1x0/quality/100&',
-      srcList: ['http://pic3.pocoimg.cn/image/poco/works/06/2020/1029/11/16039421889025499_201533676.JPG?imageMogr2/auto-orient/thumbnail/x800/blur/1x0/quality/100&'],
+      cardSrc: 'https://hbimg.huabanimg.com/8e78c1b3a7aabb25ace41581dc7abf2a0a8c4558aa59b-6yKnEG_fw658/format/webp',
+      srcList: ['https://hbimg.huabanimg.com/8e78c1b3a7aabb25ace41581dc7abf2a0a8c4558aa59b-6yKnEG_fw658/format/webp'],
       cardName: '泪眼问花花不语，乱红飞过秋千我去',
       cardLaud: '',
       cardCollect: '',
+      collectDisplay: 'none',
       content: '',
       editorOption: {
         placeholder: '编辑文章内容'
@@ -114,6 +133,12 @@ export default {
       }).catch((error) =>
         this.$message({message: error, type: 'error'})
       )
+    },
+    mouseOverCard () {
+      this.collectDisplay = ''
+    },
+    mouseOutCard () {
+      this.collectDisplay = 'none'
     }
   }
 }
@@ -124,12 +149,34 @@ export default {
   .el-divider--horizontal{
     margin: 8px 0;
   }
+  .collectButton {
+    height: 25px;
+    width: 50px;
+    font-size: 13px;
+    color: rgba(255,75,92,0.6);
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px rgba(255,75,92,0.4);
+    text-align: center;
+    line-height: 25px;
+    background-color: rgba(255,255,255,0.4);
+    float:right;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+  }
+
+  el-button--default:hover{
+    color: #333333;
+    border: #333333;
+  }
 
   .image {
     width: 100%;
     display: block;
     object-fit: cover;
     object-position: center;
+    max-height: 1000px;
   }
   .vu-fixed {
     width: 40px;
