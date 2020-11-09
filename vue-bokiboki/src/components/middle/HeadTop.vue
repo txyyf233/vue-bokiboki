@@ -39,7 +39,7 @@
         </el-header>
       </el-container>
       <el-row><el-col :span="24"><div style="height: 60px"></div></el-col></el-row>
-      <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}"><i class="el-icon el-icon-arrow-up"></i></div>
+      <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}" @click="goTop"><i class="el-icon el-icon-arrow-up"></i></div>
       <el-drawer class="el-drawer" size="40px"
         :visible.sync="drawer"
         :direction="direction"
@@ -72,6 +72,10 @@ export default {
     },
     goLogin () {
       return this.$router.push('/login')
+    },
+    goTop () {
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     },
     searchMethods () {
       if (this.vuSearch) {
@@ -161,6 +165,6 @@ export default {
     background-color: rgba(5,102,116,1);
   }
   #vu-goTop {
-    bottom: 140px;
+    bottom: 110px;
   }
 </style>
