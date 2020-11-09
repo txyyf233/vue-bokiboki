@@ -10,11 +10,16 @@ import 'element-ui/lib/theme-chalk/display.css'
 import bus from './bus'
 import axios from 'axios'
 import qs from 'qs'
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(VueQuillEditor)
 Vue.prototype.$bus = bus
 Vue.prototype.$axios = axios
 Vue.prototype.$qs = qs

@@ -158,7 +158,7 @@ export default {
     z-index: 999;
   }
   .vu-fixed:hover {
-    background-color: rgba(67,138,94,1);
+    background-color: rgba(5,102,116,1);
   }
   #vu-goTop {
     bottom: 140px;
