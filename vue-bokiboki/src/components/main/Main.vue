@@ -4,10 +4,10 @@
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
-          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
-          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
+        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
+          <div  class="collectButton">采集</div>
+          <el-card :body-style="{ padding: '0px' }">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
@@ -24,10 +24,10 @@
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
-          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
-          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
+        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
+          <div  class="collectButton">采集</div>
+          <el-card :body-style="{ padding: '0px' }">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
@@ -44,10 +44,10 @@
         </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
-          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
-          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
+        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
+          <div  class="collectButton">采集</div>
+          <el-card :body-style="{ padding: '0px' }">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
@@ -64,10 +64,10 @@
         </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(4,i)">
-          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
-          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
+        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(4,i)">
+          <div  class="collectButton">采集</div>
+          <el-card :body-style="{ padding: '0px' }">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
@@ -178,13 +178,10 @@ export default {
       }
       return false
     },
-    // 指到卡片效果
-    mouseOverCard () {
-      this.collectDisplay = ''
-    },
-    // 移出卡片效果
-    mouseOutCard () {
-      this.collectDisplay = 'none'
+    cardImgSrc2 (item) {
+      var arr = []
+      arr.push(item.cardImgSrc)
+      return arr
     }
   }
 }
@@ -194,6 +191,12 @@ export default {
 <style scoped>
   .el-divider--horizontal{
     margin: 8px 0;
+  }
+  .cardDiv {
+    background-color: white;
+    border-radius: 5px;
+    margin: 5px;
+    position: relative
   }
   .collectButton {
     height: 25px;
@@ -211,12 +214,6 @@ export default {
     right: 5px;
     z-index: 100;
   }
-
-  el-button--default:hover{
-    color: #333333;
-    border: #333333;
-  }
-
   .image {
     width: 100%;
     display: block;
