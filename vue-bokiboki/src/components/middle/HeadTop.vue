@@ -64,7 +64,7 @@ export default {
       // 搜索结果
       result: '',
       // 头像
-      headSrc: 'https://hbimg.huabanimg.com/9744aba7aed24d5c882905dab9e637fdeeac1679100c0-w37Awv_fw658/format/webp',
+      headSrc: 'http://pic3.pocoimg.cn/image/poco/works/55/2020/1107/21/16047561596118410_178397864.jpg?imageMogr2/auto-orient/thumbnail/x800/blur/1x0/quality/100&',
       // 回到顶部按钮状态
       goTopHidden: 'none'
     }

@@ -1,10 +1,10 @@
 <template>
   <div>
     <headTop></headTop>
-    <el-row style="margin-top: 10px">
+    <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
+        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
           <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
           <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
@@ -17,14 +17,14 @@
                 </el-avatar>
               </div>
               <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{userName}}</span>
+                <span style="font-size: 8px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
+        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
           <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
           <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
@@ -37,14 +37,14 @@
                 </el-avatar>
               </div>
               <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{userName}}</span>
+                <span style="font-size: 8px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
         </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
+        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
           <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
           <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
@@ -57,14 +57,14 @@
                 </el-avatar>
               </div>
               <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{userName}}</span>
+                <span style="font-size: 8px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
         </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(4,i)">
+        <div style="background-color: white;border-radius: 5px;margin: 5px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(4,i)">
           <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
           <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
@@ -77,14 +77,14 @@
                 </el-avatar>
               </div>
               <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{userName}}</span>
+                <span style="font-size: 8px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
         </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="6">
-        <el-card :body-style="{ padding: '0px' }" style="background-color: white;border-radius: 5px;margin: 10px">
+        <el-card :body-style="{ padding: '0px' }" style="background-color: white;border-radius: 5px;margin: 5px">
           <div style="height: 80px">
             <div style="height: 60px;width: 60px;float: left;margin: 10px">
               <el-avatar :size="60" :src="headSrc" @error="errorHandler" fit="scale-down">
@@ -163,9 +163,7 @@ export default {
         console.log(response)
         var resposeData = response.data
         if (resposeData.code === '1') {
-          this.mainList.push(resposeData.resource)
-          // console.log(this.mainList)
-          this.$message({message: resposeData.message, type: 'success'})
+          this.mainList = resposeData.resource
         } else {
           this.$message({message: resposeData.message, type: 'error'})
         }
@@ -175,7 +173,7 @@ export default {
     },
     cardIf (num, i) {
       var mainLine = this.$store.state.mainLine
-      if (num === (i + 1) || ((i + 1) % mainLine === num)) {
+      if (num === (i + 1) || (i + 1) % mainLine === num || (num === mainLine && (i + 1) % mainLine === 0)) {
         return true
       }
       return false
