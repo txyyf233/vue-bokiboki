@@ -4,50 +4,84 @@
     <el-row style="margin-top: 10px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative">
-          <div  class="collectButton" :style="{display: collectDisplay}">采集</div>
+        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
+          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
           <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
-            <el-image :src="cardSrc" class="image" :preview-src-list="srcList"></el-image>
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
             <div style="padding: 13px">
-              <span style="font-size: 11px">{{ cardName }}</span>
+              <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
               <div style="height: 40px;width: 40px;float: left">
-                <el-avatar :size="40" :src="headSrc" @error="errorHandler" fit="scale-down">
+                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
               </div>
               <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{userNick}}</span>
+                <span style="font-size: 8px">{{userName}}</span>
               </div>
             </div>
           </el-card>
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative">
-          <div  class="collectButton" :style="{display: collectDisplay}">采集</div>
-          <el-card :body-style="{ padding: '0px' }">
-            <el-image src="http://pic3.pocoimg.cn/image/poco/works/55/2019/0124/18/15483243923086801_186664387.jpg?imageMogr2/auto-orient/thumbnail/x800/blur/1x0/quality/100&" class="image" :preview-src-list="srcList"></el-image>
+        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
+          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
+          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
             <div style="padding: 13px">
-              <span style="font-size: 11px">{{ cardName }}</span>
+              <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
               <div style="height: 40px;width: 40px;float: left">
-                <el-avatar :size="40" :src="headSrc" @error="errorHandler" fit="scale-down">
+                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
               </div>
               <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{userNick}}</span>
+                <span style="font-size: 8px">{{userName}}</span>
               </div>
             </div>
           </el-card>
         </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        &nbsp;
+        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
+          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
+          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
+            <div style="padding: 13px">
+              <span style="font-size: 11px">{{ item.cardName }}</span>
+              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
+              <div style="height: 40px;width: 40px;float: left">
+                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                  <img src="@/assets/errorImg.png"/>
+                </el-avatar>
+              </div>
+              <div style="height: 40px;line-height: 40px">
+                <span style="font-size: 8px">{{userName}}</span>
+              </div>
+            </div>
+          </el-card>
+        </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
-        &nbsp;
+        <div style="background-color: white;border-radius: 5px;margin: 10px;position: relative" v-for="(item,i) in mainList" :key="item" v-if="cardIf(4,i)">
+          <div  class="collectButton" :style="{display: item.collectDisplay}">采集</div>
+          <el-card :body-style="{ padding: '0px' }"  @mouseenter.native="mouseOverCard" @mouseleave.native="mouseOutCard">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="item.cardImgSrc"></el-image>
+            <div style="padding: 13px">
+              <span style="font-size: 11px">{{ item.cardName }}</span>
+              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
+              <div style="height: 40px;width: 40px;float: left">
+                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                  <img src="@/assets/errorImg.png"/>
+                </el-avatar>
+              </div>
+              <div style="height: 40px;line-height: 40px">
+                <span style="font-size: 8px">{{userName}}</span>
+              </div>
+            </div>
+          </el-card>
+        </div>
       </el-col>
       <el-col class="hidden-md-and-down" :lg="6">
         <el-card :body-style="{ padding: '0px' }" style="background-color: white;border-radius: 5px;margin: 10px">
@@ -97,24 +131,29 @@ export default {
   components: { HeadTop },
   data () {
     return {
+      // 卡片list
+      mainList: [{
+        // 卡片图片地址
+        cardImgSrc: '',
+        // 卡片标题
+        cardName: '',
+        // 卡片的赞
+        cardLaudNum: '',
+        // 卡片采集
+        cardCollectNum: '',
+        // 用户名
+        userName: '',
+        // 用户头像
+        userImgSrc: '',
+        // 卡片采集按钮状态
+        collectDisplay: 'none'
+      }],
       // 右侧用户昵称
-      userNick: '今天的风儿甚是喧嚣啊',
+      userNick: '',
       // 右侧用户关注
       userCare: '',
       // 右侧用户粉丝
       userFans: '',
-      // 卡片图片地址
-      cardSrc: 'https://hbimg.huabanimg.com/8e78c1b3a7aabb25ace41581dc7abf2a0a8c4558aa59b-6yKnEG_fw658/format/webp',
-      // 卡片图片预览
-      srcList: ['https://hbimg.huabanimg.com/8e78c1b3a7aabb25ace41581dc7abf2a0a8c4558aa59b-6yKnEG_fw658/format/webp'],
-      // 卡片标题
-      cardName: '泪眼问花花不语，乱红飞过秋千我去',
-      // 卡片的赞
-      cardLaud: '',
-      // 卡片采集
-      cardCollect: '',
-      // 卡片采集按钮状态
-      collectDisplay: 'none',
       // 富文本内容
       content: '',
       // 富文本工具栏
@@ -123,7 +162,7 @@ export default {
       }
     }
   },
-  mounted: function () {
+  mounted () {
     // 卡片列表初始化
     this.getList()
   },
@@ -139,6 +178,8 @@ export default {
         console.log(response)
         var resposeData = response.data
         if (resposeData.code === '1') {
+          this.mainList = resposeData.resource
+          console.log(this.mainList)
           this.$message({message: resposeData.message, type: 'success'})
         } else {
           this.$message({message: resposeData.message, type: 'error'})
@@ -146,6 +187,18 @@ export default {
       }).catch((error) =>
         this.$message({message: error, type: 'error'})
       )
+    },
+    cardIf (num, i) {
+      console.log('列号：' + num)
+      console.log('索引：' + (i + 1))
+      var mainLine = this.$store.state.mainLine
+      console.log('列：' + mainLine)
+      if (num === (i + 1) || ((i + 1) % mainLine === num)) {
+        console.log(true)
+        return true
+      }
+      console.log(false)
+      return false
     },
     // 指到卡片效果
     mouseOverCard () {

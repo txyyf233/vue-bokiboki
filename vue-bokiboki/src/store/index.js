@@ -9,6 +9,12 @@ const state = {
 }
 // 同步
 const mutations = {
+  windowWidth (state, value) {
+    state.windowWidth = value
+  },
+  mainLine (state, value) {
+    state.mainLine = value
+  }
 }
 // 异步
 const actions = {
