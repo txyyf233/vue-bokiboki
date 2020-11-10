@@ -132,22 +132,7 @@ export default {
   data () {
     return {
       // 卡片list
-      mainList: [{
-        // 卡片图片地址
-        cardImgSrc: '',
-        // 卡片标题
-        cardName: '',
-        // 卡片的赞
-        cardLaudNum: '',
-        // 卡片采集
-        cardCollectNum: '',
-        // 用户名
-        userName: '',
-        // 用户头像
-        userImgSrc: '',
-        // 卡片采集按钮状态
-        collectDisplay: 'none'
-      }],
+      mainList: [],
       // 右侧用户昵称
       userNick: '',
       // 右侧用户关注
@@ -178,8 +163,8 @@ export default {
         console.log(response)
         var resposeData = response.data
         if (resposeData.code === '1') {
-          this.mainList = resposeData.resource
-          console.log(this.mainList)
+          this.mainList.push(resposeData.resource)
+          // console.log(this.mainList)
           this.$message({message: resposeData.message, type: 'success'})
         } else {
           this.$message({message: resposeData.message, type: 'error'})
