@@ -16,7 +16,6 @@
             </el-col>
             <el-col :sm="8" class="hidden-xs-only">
               <el-menu class="el-menu" mode="horizontal" text-color="#333333" background-color="#056674">
-<!--               #056674;#438a5e-->
                 <el-menu-item index="1">
                   <i class="el-icon el-icon-menu"></i>
                 </el-menu-item>
@@ -60,23 +59,31 @@ export default {
     return {
       drawer: false,
       direction: 'ttb',
+      // 搜索内容
       vuSearch: '',
+      // 搜索结果
       result: '',
+      // 头像
       headSrc: 'https://hbimg.huabanimg.com/9744aba7aed24d5c882905dab9e637fdeeac1679100c0-w37Awv_fw658/format/webp',
+      // 回到顶部按钮状态
       goTopHidden: 'none'
     }
   },
   methods: {
+    // 跳转主页面
     goMain () {
       return this.$router.push('/')
     },
+    // 跳转登录面
     goLogin () {
       return this.$router.push('/login')
     },
+    // 回到顶部
     goTop () {
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
     },
+    // 提交搜索
     searchMethods () {
       if (this.vuSearch) {
         this.result = this.vuSearch
@@ -85,6 +92,7 @@ export default {
     errorHandler () {
       return true
     },
+    // 页面离顶部距离
     getScroll () {
       this.appTop = document.documentElement.scrollTop || document.body.scrollTop
       if (this.appTop > 300) {
@@ -95,7 +103,15 @@ export default {
     }
   },
   mounted () {
+    // 窗口大小监听
     window.onresize = () => {
+      var windowWidth = window.innerWidth
+      this.$store.commit('windowWidth', windowWidth)
+      if (windowWidth < 1200) {
+        this.$store.commit('mainLine', 2)
+      } else {
+        this.$store.commit('mainLine', 4)
+      }
     }
     window.addEventListener('scroll', this.getScroll, true)
   },

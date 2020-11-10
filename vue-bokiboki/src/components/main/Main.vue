@@ -97,25 +97,38 @@ export default {
   components: { HeadTop },
   data () {
     return {
+      // 右侧用户昵称
       userNick: '今天的风儿甚是喧嚣啊',
+      // 右侧用户关注
       userCare: '',
+      // 右侧用户粉丝
       userFans: '',
+      // 卡片图片地址
       cardSrc: 'https://hbimg.huabanimg.com/8e78c1b3a7aabb25ace41581dc7abf2a0a8c4558aa59b-6yKnEG_fw658/format/webp',
+      // 卡片图片预览
       srcList: ['https://hbimg.huabanimg.com/8e78c1b3a7aabb25ace41581dc7abf2a0a8c4558aa59b-6yKnEG_fw658/format/webp'],
+      // 卡片标题
       cardName: '泪眼问花花不语，乱红飞过秋千我去',
+      // 卡片的赞
       cardLaud: '',
+      // 卡片采集
       cardCollect: '',
+      // 卡片采集按钮状态
       collectDisplay: 'none',
+      // 富文本内容
       content: '',
+      // 富文本工具栏
       editorOption: {
         placeholder: '编辑文章内容'
       }
     }
   },
   mounted: function () {
+    // 卡片列表初始化
     this.getList()
   },
   methods: {
+    // 卡片列表
     getList () {
       this.$axios({
         method: 'post',
@@ -134,9 +147,11 @@ export default {
         this.$message({message: error, type: 'error'})
       )
     },
+    // 指到卡片效果
     mouseOverCard () {
       this.collectDisplay = ''
     },
+    // 移出卡片效果
     mouseOutCard () {
       this.collectDisplay = 'none'
     }
