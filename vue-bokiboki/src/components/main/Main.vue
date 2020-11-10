@@ -189,15 +189,10 @@ export default {
       )
     },
     cardIf (num, i) {
-      console.log('列号：' + num)
-      console.log('索引：' + (i + 1))
       var mainLine = this.$store.state.mainLine
-      console.log('列：' + mainLine)
       if (num === (i + 1) || ((i + 1) % mainLine === num)) {
-        console.log(true)
         return true
       }
-      console.log(false)
       return false
     },
     // 指到卡片效果
