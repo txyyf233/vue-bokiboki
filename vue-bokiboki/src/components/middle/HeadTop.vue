@@ -42,6 +42,7 @@
       <el-drawer class="el-drawer" size="40px"
         :visible.sync="drawer"
         :direction="direction"
+        ref="drawerClose"
         :with-header="false">
         <el-tag class="el-tag" @click="goMain">首页</el-tag>
         <el-tag class="el-tag" @click="goLogin">个人中心</el-tag>
@@ -72,6 +73,7 @@ export default {
   methods: {
     // 跳转主页面
     goMain () {
+      this.$refs.drawerClose.closeDrawer()
       return this.$router.push('/')
     },
     // 跳转登录面
