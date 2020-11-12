@@ -8,7 +8,7 @@
           <div class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
-            <div style="padding: 13px">
+            <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
               <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
@@ -28,7 +28,7 @@
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
-            <div style="padding: 13px">
+            <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
               <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
@@ -48,7 +48,7 @@
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
-            <div style="padding: 13px">
+            <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
               <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
@@ -68,7 +68,7 @@
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
-            <div style="padding: 13px">
+            <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
               <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
