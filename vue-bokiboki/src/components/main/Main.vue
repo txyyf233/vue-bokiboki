@@ -5,19 +5,19 @@
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
-          <div  class="collectButton">采集</div>
+          <div class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
-              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
-              <div style="height: 40px;width: 40px;float: left">
-                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+              <el-divider content-position="left"></el-divider>
+              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+                <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
               </div>
-              <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{item.userName}}</span>
+              <div style="height: 30px;line-height: 30px">
+                <span style="font-size: 10px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
@@ -30,14 +30,14 @@
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
-              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
-              <div style="height: 40px;width: 40px;float: left">
-                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+              <el-divider content-position="left"></el-divider>
+              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+                <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
               </div>
-              <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{item.userName}}</span>
+              <div style="height: 30px;line-height: 30px">
+                <span style="font-size: 10px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
@@ -50,14 +50,14 @@
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
-              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
-              <div style="height: 40px;width: 40px;float: left">
-                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+              <el-divider content-position="left"></el-divider>
+              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+                <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
               </div>
-              <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{item.userName}}</span>
+              <div style="height: 30px;line-height: 30px">
+                <span style="font-size: 10px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
@@ -70,14 +70,14 @@
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
             <div style="padding: 13px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
-              <el-divider content-position="left" style="padding: 0px;margin: 0px"></el-divider>
-              <div style="height: 40px;width: 40px;float: left">
-                <el-avatar :size="40" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+              <el-divider content-position="left"></el-divider>
+              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+                <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
               </div>
-              <div style="height: 40px;line-height: 40px">
-                <span style="font-size: 8px">{{item.userName}}</span>
+              <div style="height: 30px;line-height: 30px">
+                <span style="font-size: 10px">{{item.userName}}</span>
               </div>
             </div>
           </el-card>
