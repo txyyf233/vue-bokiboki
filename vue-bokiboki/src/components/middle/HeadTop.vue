@@ -78,6 +78,7 @@ export default {
     },
     // 跳转登录面
     goLogin () {
+      this.$refs.drawerClose.closeDrawer()
       return this.$router.push('/login')
     },
     // 回到顶部
