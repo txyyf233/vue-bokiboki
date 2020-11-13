@@ -4,7 +4,7 @@
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
-        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
+        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(0,i)">
           <div class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
@@ -24,6 +24,26 @@
         </div>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="4">
+        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
+          <div  class="collectButton">采集</div>
+          <el-card :body-style="{ padding: '0px' }">
+            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
+            <div style="padding: 8px">
+              <span style="font-size: 11px">{{ item.cardName }}</span>
+              <el-divider content-position="left"></el-divider>
+              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+                <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                  <img src="@/assets/errorImg.png"/>
+                </el-avatar>
+              </div>
+              <div style="height: 30px;line-height: 30px">
+                <span style="font-size: 10px">{{item.userName}}</span>
+              </div>
+            </div>
+          </el-card>
+        </div>
+      </el-col>
+      <el-col class="hidden-md-and-down" :lg="4">
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
@@ -45,26 +65,6 @@
       </el-col>
       <el-col class="hidden-md-and-down" :lg="4">
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
-          <div  class="collectButton">采集</div>
-          <el-card :body-style="{ padding: '0px' }">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
-            <div style="padding: 8px">
-              <span style="font-size: 11px">{{ item.cardName }}</span>
-              <el-divider content-position="left"></el-divider>
-              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
-                <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
-                  <img src="@/assets/errorImg.png"/>
-                </el-avatar>
-              </div>
-              <div style="height: 30px;line-height: 30px">
-                <span style="font-size: 10px">{{item.userName}}</span>
-              </div>
-            </div>
-          </el-card>
-        </div>
-      </el-col>
-      <el-col class="hidden-md-and-down" :lg="4">
-        <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(4,i)">
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
             <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
@@ -173,7 +173,7 @@ export default {
     },
     cardIf (num, i) {
       var mainLine = this.$store.state.mainLine
-      if (num === (i + 1) || (i + 1) % mainLine === num || (num === mainLine && (i + 1) % mainLine === 0)) {
+      if (num === i % mainLine) {
         return true
       }
       return false
