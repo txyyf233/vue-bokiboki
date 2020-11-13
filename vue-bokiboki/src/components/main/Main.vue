@@ -11,7 +11,7 @@
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
-              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+              <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
                 <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
@@ -31,7 +31,7 @@
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
-              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+              <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
                 <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
@@ -51,7 +51,7 @@
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
-              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+              <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
                 <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
@@ -71,7 +71,7 @@
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
-              <div style="height: 30px;width: 30px;float: left;margin-right: 5px">
+              <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
                 <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
                   <img src="@/assets/errorImg.png"/>
                 </el-avatar>
