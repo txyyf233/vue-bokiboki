@@ -76,6 +76,8 @@ export default {
       checkCodeVal: '发送验证码',
       // 验证码时间
       checkCodeTimeOut: true,
+      // 接收验证码
+      checkCode: '',
       // 表单
       resetPassForm: {
         userName: '',
@@ -122,7 +124,7 @@ export default {
   watch: {
     // 验证码输入四位显示password
     checkCodeLength (val) {
-      if (val.length === 4) {
+      if (val.length === 4 && this.checkCode === val) {
         this.passwordisHidden = ''
       } else if (val.length > 4) {
         this.resetPassForm.checkCode = val.substring(0, 4)
@@ -142,8 +144,13 @@ export default {
     },
     // 发送验证码
     sendCode (formName) {
+      if (this.checkCodeTimeOut === false) {
+        this.$message({message: '请稍后再试', type: 'error'})
+        return false
+      }
       this.$refs[formName].validateField(['userName'], (errorMessage) => {
         if (!errorMessage) {
+          this.checkCodeTimeOut = false
           const loading = this.$loading({lock: true})
           this.$axios({
             method: 'post',
@@ -151,16 +158,18 @@ export default {
             data: this.resetPassForm,
             timeout: 10000
           }).then((response) => {
-            this.checkCodeTimeOut = false
+            setTimeout(this.checkCodeTimeOut = false, 3 * 60 * 1000)
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success'})
+              this.checkCode = resposeData.resource
             } else {
               this.$message({message: resposeData.message, type: 'error'})
             }
-          }).catch((error) =>
+          }).catch((error) => {
+            this.checkCodeTimeOut = true
             this.$message({message: error, type: 'error'})
-          )
+          })
           loading.close()
         }
       })
@@ -173,8 +182,8 @@ export default {
           this.$axios({
             method: 'post',
             url: '/api/login/forget',
-            data: this.resetPassForm,
-            timeout: 5000
+            data: this.resetPassFormComputed,
+            timeout: 10000
           }).then((response) => {
             console.log(response)
             var resposeData = response.data
@@ -182,6 +191,7 @@ export default {
               this.$message({message: resposeData.message, type: 'success'})
               localStorage.removeItem('token')
               localStorage.setItem('token', resposeData.resource.token)
+              return this.$router.push('/')
             } else {
               this.$message({message: resposeData.message, type: 'error'})
             }

@@ -96,6 +96,7 @@ export default {
               this.$message({message: resposeData.message, type: 'success'})
               localStorage.removeItem('token')
               localStorage.setItem('token', resposeData.resource.token)
+              return this.$router.push('/')
             } else {
               this.$message({message: resposeData.message, type: 'error'})
             }
