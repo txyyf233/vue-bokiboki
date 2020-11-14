@@ -58,13 +58,10 @@ export default {
     // 校验新密码
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        console.log(5)
         callback(new Error('请输入密码'))
       } else if (!this.regular.pass.test(value)) {
-        console.log(6)
         callback(new Error('格式：字母|数字 4-10字符'))
       } else {
-        console.log(7)
         callback()
       }
     }
@@ -76,8 +73,6 @@ export default {
       checkCodeVal: '发送验证码',
       // 验证码时间
       checkCodeTimeOut: true,
-      // 接收验证码
-      checkCode: '',
       // 表单
       resetPassForm: {
         userName: '',
@@ -124,7 +119,7 @@ export default {
   watch: {
     // 验证码输入四位显示password
     checkCodeLength (val) {
-      if (val.length === 4 && this.checkCode === val) {
+      if (val.length === 4) {
         this.passwordisHidden = ''
       } else if (val.length > 4) {
         this.resetPassForm.checkCode = val.substring(0, 4)
@@ -162,7 +157,6 @@ export default {
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success'})
-              this.checkCode = resposeData.resource
             } else {
               this.$message({message: resposeData.message, type: 'error'})
             }
@@ -185,7 +179,6 @@ export default {
             data: this.resetPassFormComputed,
             timeout: 10000
           }).then((response) => {
-            console.log(response)
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success'})

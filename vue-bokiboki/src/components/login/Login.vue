@@ -34,7 +34,6 @@ export default {
   name: 'Login',
   data () {
     var validateName = (rule, value, callback) => {
-      console.log(value + '-----' + this.regular.name.test(value))
       if (value.trim() === '') {
         callback(new Error('请输入用户名'))
       } else if (!this.regular.name.test(value.trim())) {
@@ -82,7 +81,6 @@ export default {
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
-        console.log(valid)
         if (valid) {
           this.$axios({
             method: 'post',
@@ -90,7 +88,6 @@ export default {
             data: this.signInForm,
             timeout: 10000
           }).then((response) => {
-            console.log(response)
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success'})

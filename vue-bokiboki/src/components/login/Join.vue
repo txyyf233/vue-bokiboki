@@ -63,6 +63,11 @@ export default {
         email: '',
         passWord: ''
       },
+      regular: {
+        user: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/,
+        pass: /^[a-zA-Z0-9]{4,10}$/,
+        email: /^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$/
+      },
       rules: {
         userName: [
           { validator: validateName, trigger: 'blur' }
