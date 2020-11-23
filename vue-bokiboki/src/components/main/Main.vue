@@ -7,7 +7,7 @@
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(0,i)">
           <div class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
+            <el-image :src="item.cardImgSrc" class="image"></el-image>
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
@@ -27,7 +27,7 @@
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
+            <el-image :src="item.cardImgSrc" class="image"></el-image>
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
@@ -47,7 +47,7 @@
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
+            <el-image :src="item.cardImgSrc" class="image"></el-image>
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
@@ -67,7 +67,7 @@
         <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
           <div  class="collectButton">采集</div>
           <el-card :body-style="{ padding: '0px' }">
-            <el-image :src="item.cardImgSrc" class="image" :preview-src-list="cardImgSrc2(item)"></el-image>
+            <el-image :src="item.cardImgSrc" class="image"></el-image>
             <div style="padding: 8px">
               <span style="font-size: 11px">{{ item.cardName }}</span>
               <el-divider content-position="left"></el-divider>
@@ -120,7 +120,30 @@
     <!--<div style="height: 200px;width: 200px">
       <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
     </div>-->
-    <div id="vu-add" class="vu-fixed"><i class="el-icon el-icon-cherry"></i></div>
+    <div id="vu-add" class="vu-fixed" @click="addMainCard = true"><i class="el-icon el-icon-cherry"></i></div>
+    <el-dialog title="动态发布" :visible.sync="addMainCard">
+      <el-form class="el-form" :label-position="labelPosition" :model="signInForm" status-icon :rules="rules" ref="signInForm" label-width="0px">
+        <el-form-item label="标题或简介" prop="userName">
+          <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="context123" clearable></el-input>
+        </el-form-item>
+        <el-form-item label="上传封面" prop="passWord">
+          <el-upload
+            action="https://jsonplaceholder.typicode.com/posts/"
+            list-type="picture-card"
+            :on-preview="handlePictureCardPreview"
+            :on-remove="handleRemove"
+            :auto-upload="false">
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
+        </el-form-item>
+        <el-form-item>
+          <el-button class="el-button" type="primary" @click="submitForm('signInForm')">发布</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -131,6 +154,13 @@ export default {
   components: { HeadTop },
   data () {
     return {
+      labelPosition: 'top',
+      // 发布弹出层
+      addMainCard: false,
+      // 发布文件列表，
+      fileList: [],
+      dialogImageUrl: '',
+      dialogVisible: false,
       // 卡片list
       mainList: [],
       // 右侧用户昵称
@@ -171,6 +201,7 @@ export default {
         this.$message({message: error, type: 'error'})
       )
     },
+    // 卡片显示分发
     cardIf (num, i) {
       var mainLine = this.$store.state.mainLine
       if (num === i % mainLine) {
@@ -178,10 +209,12 @@ export default {
       }
       return false
     },
-    cardImgSrc2 (item) {
-      var arr = []
-      arr.push(item.cardImgSrc)
-      return arr
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview (file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
     }
   }
 }
@@ -189,9 +222,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .el-divider--horizontal{
+  /deep/ .el-divider--horizontal{
     margin: 8px 0;
   }
+  /deep/ .el-image-viewer__close > .el-icon-circle-close {
+    color: rgba(5,102,116,1);
+  }
+  /deep/ .el-dialog {
+    padding: 5px;
+  }
+  /deep/ .el-dialog__body {
+    padding: 5px 10px 5px;
+  }
+  /deep/ .el-dialog__header {
+    padding: 20px 20px 10px;
+  }
+  .el-button {
+    float: right;
+  }
+
   .cardDiv {
     background-color: white;
     border-radius: 5px;

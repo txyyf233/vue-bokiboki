@@ -31,6 +31,7 @@
                   <el-menu-item index="2-1" @click="goLogin"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
                   <el-menu-item index="2-2"><i class="el-icon el-icon-s-shop"></i>&nbsp;采集板</el-menu-item>
                   <el-menu-item index="2-3"><i class="el-icon el-icon-s-tools"></i>&nbsp;设置</el-menu-item>
+                  <el-menu-item index="2-4" @click="goLoginOut"><i class="el-icon el-icon-switch-button"></i>&nbsp;注销</el-menu-item>
                 </el-submenu>
               </el-menu>
             </el-col>
@@ -65,7 +66,7 @@ export default {
       // 搜索结果
       result: '',
       // 头像
-      headSrc: 'http://pic3.pocoimg.cn/image/poco/works/55/2020/1107/21/16047561596118410_178397864.jpg?imageMogr2/auto-orient/thumbnail/x800/blur/1x0/quality/100&',
+      headSrc: '',
       // 回到顶部按钮状态
       goTopHidden: 'none'
     }
@@ -80,6 +81,11 @@ export default {
     goLogin () {
       this.$refs.drawerClose.closeDrawer()
       return this.$router.push('/login')
+    },
+    // 跳转登出
+    goLoginOut () {
+      localStorage.removeItem('token')
+      this.headSrc = ''
     },
     // 回到顶部
     goTop () {
