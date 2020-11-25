@@ -140,7 +140,7 @@ export default {
     // 发送验证码
     sendCode (formName) {
       if (this.checkCodeTimeOut === false) {
-        this.$message({message: '请稍后再试', type: 'error'})
+        this.$message({message: '请稍后再试', type: 'error', duration: 1000})
         return false
       }
       this.$refs[formName].validateField(['userName'], (errorMessage) => {
@@ -156,13 +156,13 @@ export default {
             setTimeout(this.checkCodeTimeOut = false, 3 * 60 * 1000)
             var resposeData = response.data
             if (resposeData.code === '1') {
-              this.$message({message: resposeData.message, type: 'success'})
+              this.$message({message: resposeData.message, type: 'success', duration: 1000})
             } else {
-              this.$message({message: resposeData.message, type: 'error'})
+              this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
           }).catch((error) => {
             this.checkCodeTimeOut = true
-            this.$message({message: error, type: 'error'})
+            this.$message({message: error, type: 'error', duration: 1000})
           })
           loading.close()
         }
@@ -181,15 +181,15 @@ export default {
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {
-              this.$message({message: resposeData.message, type: 'success'})
+              this.$message({message: resposeData.message, type: 'success', duration: 1000})
               localStorage.removeItem('token')
               localStorage.setItem('token', resposeData.resource.token)
               return this.$router.push('/')
             } else {
-              this.$message({message: resposeData.message, type: 'error'})
+              this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
           }).catch((error) => {
-            this.$message({message: error, type: 'error'})
+            this.$message({message: error, type: 'error', duration: 1000})
           })
           loading.close()
         } else {

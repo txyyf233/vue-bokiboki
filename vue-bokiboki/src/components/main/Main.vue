@@ -1,6 +1,8 @@
 <template>
   <div>
+    <!---------------------------------------导航栏----------------------------------->
     <headTop></headTop>
+    <!---------------------------------------左侧展示栏----------------------------------->
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="12" :sm="12" :lg="4">
@@ -83,6 +85,7 @@
           </el-card>
         </div>
       </el-col>
+      <!---------------------------------------右侧展示栏----------------------------------->
       <el-col class="hidden-md-and-down" :lg="6">
         <el-card :body-style="{ padding: '0px' }" style="background-color: white;border-radius: 5px;margin: 5px">
           <div style="height: 80px">
@@ -120,19 +123,39 @@
     <!--<div style="height: 200px;width: 200px">
       <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
     </div>-->
+    <!---------------------------------------发布上传栏----------------------------------->
     <div id="vu-add" class="vu-fixed" @click="addMainCard = true"><i class="el-icon el-icon-cherry"></i></div>
     <el-dialog title="动态发布" :visible.sync="addMainCard">
-      <el-form class="el-form" :label-position="labelPosition" :model="signInForm" status-icon :rules="rules" ref="signInForm" label-width="0px">
-        <el-form-item label="标题或简介" prop="userName">
-          <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="context123" clearable></el-input>
+      <el-form class="el-form" :label-position="labelPosition" :model="addCardForm" status-icon :rules="rules" ref="addCardForm" label-width="0px">
+        <el-form-item label="标题或简介" prop="cardContext">
+          <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="addCardForm.cardContext" clearable  prop="cardContext"></el-input>
         </el-form-item>
-        <el-form-item label="上传封面" prop="passWord">
+        <el-form-item label="采集板（不存在将新建）" prop="cardType">
+          <el-select style="width: 100%"
+            v-model="value"
+            multiple
+            filterable
+            allow-create
+            default-first-option
+            placeholder="请选择您的采集板">
+            <el-option
+              v-for="item in cardTypeOptions"
+              :key="item.cardType"
+              :label="item.label"
+              :value="item.cardType">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="上传封面" prop="cardFile">
           <el-upload
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="/api/file/upload"
+            ref="upload"
             list-type="picture-card"
+            :on-change="handleChange"
+            :on-exceed="handleExceed"
             :on-preview="handlePictureCardPreview"
-            :on-remove="handleRemove"
-            :auto-upload="false">
+            :auto-upload="false"
+            limit="1">
             <i class="el-icon-plus"></i>
           </el-upload>
           <el-dialog :visible.sync="dialogVisible">
@@ -140,7 +163,8 @@
           </el-dialog>
         </el-form-item>
         <el-form-item>
-          <el-button class="el-button" type="primary" @click="submitForm('signInForm')">发布</el-button>
+          <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">发布</el-button>
+          <el-button type="primary" @click="submitCardOff" style="float: right;background-color: rgba(5,102,116,1)">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -153,14 +177,24 @@ export default {
   name: 'Main',
   components: { HeadTop },
   data () {
+    var validateCardContext = (rule, value, callback) => {
+      if (value.trim() === '') {
+        callback(new Error('请填写标题/简介'))
+      } else {
+        callback()
+      }
+    }
+    var validateCardFile = (rule, value, callback) => {
+      if (this.addCardForm.fileList !== undefined && this.addCardForm.fileList.length === 0) {
+        callback(new Error('请上传封面'))
+      } else {
+        callback()
+      }
+    }
     return {
       labelPosition: 'top',
-      // 发布弹出层
+      // 发布弹出层状态
       addMainCard: false,
-      // 发布文件列表，
-      fileList: [],
-      dialogImageUrl: '',
-      dialogVisible: false,
       // 卡片list
       mainList: [],
       // 右侧用户昵称
@@ -174,6 +208,30 @@ export default {
       // 富文本工具栏
       editorOption: {
         placeholder: '编辑文章内容'
+      },
+      rules: {
+        cardContext: [
+          { validator: validateCardContext, trigger: 'blur' }
+        ],
+        cardFile: [
+          { validator: validateCardFile, trigger: 'blur' }
+        ]
+      },
+      // 采集板下拉框展示值
+      cardTypeOptions: [{
+        value: 'HTML',
+        label: 'HTML'
+      }],
+      // 文件预览？？？
+      dialogImageUrl: '',
+      dialogVisible: false,
+      addCardForm: {
+        // 发布表单标题
+        cardContext: '',
+        // 下拉框选中值
+        cardType: '',
+        // 发布文件列表，
+        cardList: []
       }
     }
   },
@@ -188,17 +246,17 @@ export default {
         method: 'post',
         url: '/api/main/list',
         data: {},
-        timeout: 10000
+        timeout: 60000
       }).then((response) => {
         console.log(response)
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.mainList = resposeData.resource
         } else {
-          this.$message({message: resposeData.message, type: 'error'})
+          this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
       }).catch((error) =>
-        this.$message({message: error, type: 'error'})
+        this.$message({message: error, type: 'error', duration: 1000})
       )
     },
     // 卡片显示分发
@@ -209,12 +267,58 @@ export default {
       }
       return false
     },
-    handleRemove (file, fileList) {
-      console.log(file, fileList)
+    // 文件有改变时
+    handleChange (file, fileList) {
+      var count = 0
+      for (let i = 0; i < fileList.length; i++) {
+        if (file.name === fileList[i].name) {
+          count = count + 1
+        }
+      }
+      if (count === 0) {
+        this.addMainCard.fileList
+      }
     },
+    // 点击已上传文件钩子
     handlePictureCardPreview (file) {
-      this.dialogImageUrl = file.url
-      this.dialogVisible = true
+      this.addCardForm.dialogImageUrl = file.url
+      this.addMainCard.dialogVisible = true
+    },
+    // 超出上传数量上限钩子
+    handleExceed (files, fileList) {
+      this.$message({message: `已达到选择上限`, type: 'warning', duration: 1000})
+    },
+    // 卡片表单提交
+    submitCard () {
+      // 表单提交
+      this.$refs['addCardForm'].validate((valid) => {
+        if (valid) {
+          // 文件上传
+          this.$refs.upload.submit()
+          this.$axios({
+            method: 'post',
+            url: '/api/addCard/addCard',
+            data: this.addCardForm,
+            timeout: 10000
+          }).then((response) => {
+            var resposeData = response.data
+            if (resposeData.code === '1') {
+              this.$message({message: resposeData.message, type: 'success', duration: 1000})
+              this.addMainCard = false
+            } else {
+              this.$message({message: resposeData.message, type: 'error', duration: 1000})
+            }
+          }).catch((error) =>
+            this.$message({message: error, type: 'error', duration: 1000})
+          )
+        } else {
+          return false
+        }
+      })
+    },
+    // 关闭提交弹出框
+    submitCardOff () {
+      this.addMainCard = false
     }
   }
 }
@@ -230,15 +334,13 @@ export default {
   }
   /deep/ .el-dialog {
     padding: 5px;
+    min-width: 290px;
   }
   /deep/ .el-dialog__body {
-    padding: 5px 10px 5px;
+    padding: 5px;
   }
   /deep/ .el-dialog__header {
-    padding: 20px 20px 10px;
-  }
-  .el-button {
-    float: right;
+    padding: 5px;
   }
 
   .cardDiv {
