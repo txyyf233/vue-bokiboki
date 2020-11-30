@@ -85,7 +85,7 @@ export default {
           this.$axios({
             method: 'post',
             url: '/api/login/login',
-            data: this.signInForm,
+            data: this.$qs.stringify(this.signInForm),
             timeout: 30000
           }).then((response) => {
             var resposeData = response.data

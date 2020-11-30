@@ -288,13 +288,13 @@ export default {
       this.addMainCard.dialogVisible = true
     },
     httpUpLoad (params) {
-      console.log('httpUpLoad')
       var file = params.file
-      console.log(file)
+      let formData = new window.FormData()
+      formData.append('multipartFile', file)
       this.$axios({
         method: 'post',
         url: '/api/file/upload',
-        data: {'file': file},
+        data: formData,
         async: false,
         timeout: 30000
       }).then((response) => {
@@ -308,7 +308,7 @@ export default {
               this.$axios({
                 method: 'post',
                 url: '/api/addCard/addCard',
-                data: this.addCardForm,
+                data: this.$qs.stringify(this.addCardForm),
                 timeout: 30000
               }).then((response) => {
                 var resposeData = response.data

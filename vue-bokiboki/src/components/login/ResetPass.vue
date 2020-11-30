@@ -176,7 +176,7 @@ export default {
           this.$axios({
             method: 'post',
             url: '/api/login/forget',
-            data: this.resetPassFormComputed,
+            data: this.$qs.stringify(this.resetPassFormComputed),
             timeout: 30000
           }).then((response) => {
             var resposeData = response.data
