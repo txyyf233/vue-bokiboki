@@ -8,20 +8,20 @@
             <div style="text-align: center">
               <img src="@/assets/bokiboki.png" style="height: 60px">
             </div>
-            <el-form-item label="Username" prop="userName">
+            <el-form-item label="用户名" prop="userName">
               <el-input v-model="signUpForm.userName" clearable></el-input>
             </el-form-item>
-            <el-form-item label="Email address" prop="email">
+            <el-form-item label="邮箱" prop="email">
               <el-input v-model="signUpForm.email" clearable></el-input>
             </el-form-item>
-            <el-form-item label="Password" prop="passWord">
+            <el-form-item label="密码" prop="passWord">
               <el-input v-model="signUpForm.passWord"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button class="el-button" type="primary" @click="submitForm('signUpForm')">Create accout</el-button>
+              <el-button class="el-button" type="primary" @click="submitForm('signUpForm')">创建用户</el-button>
             </el-form-item>
             <el-row>
-              <el-col :span="24"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goLogin">Sign in</p></el-col>
+              <el-col :span="24"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goLogin">登录</p></el-col>
             </el-row>
           </el-form>
         </el-row>
@@ -93,7 +93,7 @@ export default {
             method: 'post',
             url: '/api/login/create',
             data: this.signUpForm,
-            timeout: 10000
+            timeout: 30000
           }).then((response) => {
             console.log(response)
             var resposeData = response.data

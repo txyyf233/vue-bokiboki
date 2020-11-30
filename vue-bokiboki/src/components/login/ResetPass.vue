@@ -29,8 +29,8 @@
               <el-button class="el-button" type="primary" @click="submitForm('resetPassForm')">更换密码并登录</el-button>
             </el-form-item>
             <el-row>
-              <el-col :span="12"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goLogin">Sign in</p></el-col>
-              <el-col :span="12"><p style="color: rgba(67,138,94,0.9)" align="right" @click="goJoin">Sign up</p></el-col>
+              <el-col :span="12"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goLogin">登录</p></el-col>
+              <el-col :span="12"><p style="color: rgba(67,138,94,0.9)" align="right" @click="goJoin">注册</p></el-col>
             </el-row>
           </el-form>
         </el-row>
@@ -151,7 +151,7 @@ export default {
             method: 'post',
             url: '/api/login/checkCode',
             data: this.resetPassForm,
-            timeout: 10000
+            timeout: 30000
           }).then((response) => {
             setTimeout(this.checkCodeTimeOut = false, 3 * 60 * 1000)
             var resposeData = response.data
@@ -177,7 +177,7 @@ export default {
             method: 'post',
             url: '/api/login/forget',
             data: this.resetPassFormComputed,
-            timeout: 10000
+            timeout: 30000
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {

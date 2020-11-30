@@ -130,40 +130,41 @@
         <el-form-item label="标题或简介" prop="cardContext">
           <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="addCardForm.cardContext" clearable  prop="cardContext"></el-input>
         </el-form-item>
-        <el-form-item label="采集板（不存在将新建）" prop="cardType">
-          <el-select style="width: 100%"
-            v-model="value"
+        <el-form-item label="采集板（不存在可新建）" prop="cardType">
+          <el-select
+            style="width: 100%"
+            v-model="cardTypeValue"
             multiple
             filterable
             allow-create
             default-first-option
-            placeholder="请选择您的采集板">
+            placeholder="请选择采集板">
             <el-option
               v-for="item in cardTypeOptions"
-              :key="item.cardType"
+              :key="item.value"
               :label="item.label"
-              :value="item.cardType">
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
-            action="/api/file/upload"
             ref="upload"
-            list-type="picture-card"
-            :on-change="handleChange"
+            action="/api/file/upload"
+            list-type="picture"
+            :before-upload="handleBefore"
+            :on-success="handleSuccess"
+            :on-preview="handlePreview"
             :on-exceed="handleExceed"
-            :on-preview="handlePictureCardPreview"
-            :auto-upload="false"
-            limit="1">
-            <i class="el-icon-plus"></i>
+            :http-request="httpUpLoad"
+            :limit="1"
+            :auto-upload="false">
+            <el-button size="small" type="primary" style="background-color: rgba(5,102,116,1)">选取封面</el-button>
           </el-upload>
-          <el-dialog :visible.sync="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt="">
-          </el-dialog>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">发布</el-button>
+          <el-button type="primary" @click="submitCardReset" style="float: right;background-color: rgba(5,102,116,1)">重置</el-button>
           <el-button type="primary" @click="submitCardOff" style="float: right;background-color: rgba(5,102,116,1)">取消</el-button>
         </el-form-item>
       </el-form>
@@ -185,8 +186,8 @@ export default {
       }
     }
     var validateCardFile = (rule, value, callback) => {
-      if (this.addCardForm.fileList !== undefined && this.addCardForm.fileList.length === 0) {
-        callback(new Error('请上传封面'))
+      if (value.trim() === '') {
+        callback(new Error('请选择封面'))
       } else {
         callback()
       }
@@ -222,7 +223,8 @@ export default {
         value: 'HTML',
         label: 'HTML'
       }],
-      // 文件预览？？？
+      cardTypeValue: [],
+      // 文件预览？？
       dialogImageUrl: '',
       dialogVisible: false,
       addCardForm: {
@@ -230,8 +232,8 @@ export default {
         cardContext: '',
         // 下拉框选中值
         cardType: '',
-        // 发布文件列表，
-        cardList: []
+        // 上传图片
+        cardImageUrl: ''
       }
     }
   },
@@ -246,7 +248,7 @@ export default {
         method: 'post',
         url: '/api/main/list',
         data: {},
-        timeout: 60000
+        timeout: 30000
       }).then((response) => {
         console.log(response)
         var resposeData = response.data
@@ -267,44 +269,64 @@ export default {
       }
       return false
     },
-    // 文件有改变时
-    handleChange (file, fileList) {
-      var count = 0
-      for (let i = 0; i < fileList.length; i++) {
-        if (file.name === fileList[i].name) {
-          count = count + 1
-        }
-      }
-      if (count === 0) {
-        this.addMainCard.fileList
-      }
+    // 文件上传达到上限
+    handleExceed (files, fileList) {
+      this.$message({message: '已达到上传上限', type: 'warning', duration: 1000})
+    },
+    // 上传文件之前的钩子
+    handleBefore (file) {
+    },
+    // 文件上传成功
+    handleSuccess (response, file, fileList) {
+      var resposeData = response.data
+      this.addCardForm.cardImageUrl = resposeData.resource
+      this.$message({message: resposeData.message, type: 'success', duration: 1000})
     },
     // 点击已上传文件钩子
-    handlePictureCardPreview (file) {
+    handlePreview (file) {
       this.addCardForm.dialogImageUrl = file.url
       this.addMainCard.dialogVisible = true
     },
-    // 超出上传数量上限钩子
-    handleExceed (files, fileList) {
-      this.$message({message: `已达到选择上限`, type: 'warning', duration: 1000})
+    httpUpLoad (params) {
+      console.log('httpUpLoad')
+      var file = params.file
+      console.log(file)
+      this.$axios({
+        method: 'post',
+        url: '/api/file/upload',
+        data: {'file': file},
+        timeout: 30000
+      }).then((response) => {
+        var resposeData = response.data
+        if (resposeData.code === '1') {
+          this.$message({message: resposeData.message, type: 'success', duration: 1000})
+          this.addCardForm.cardImageUrl = resposeData.resource
+        } else {
+          this.$message({message: resposeData.message, type: 'error', duration: 1000})
+        }
+      }).catch((error) => {
+        console.log(error)
+        this.$message({message: error, type: 'error', duration: 1000})
+      })
     },
     // 卡片表单提交
     submitCard () {
+      // 文件上传
+      this.$refs.upload.submit()
       // 表单提交
       this.$refs['addCardForm'].validate((valid) => {
         if (valid) {
-          // 文件上传
-          this.$refs.upload.submit()
           this.$axios({
             method: 'post',
             url: '/api/addCard/addCard',
             data: this.addCardForm,
-            timeout: 10000
+            timeout: 30000
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success', duration: 1000})
               this.addMainCard = false
+              this.submitCardReset()
             } else {
               this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
@@ -315,6 +337,11 @@ export default {
           return false
         }
       })
+    },
+    // 重置表单
+    submitCardReset () {
+      this.$refs['addCardForm'].resetFields()
+      this.$refs.upload.clearFiles()
     },
     // 关闭提交弹出框
     submitCardOff () {

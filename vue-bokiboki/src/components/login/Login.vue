@@ -8,18 +8,18 @@
             <div style="text-align: center">
               <img src="@/assets/bokiboki.png" style="height: 60px">
             </div>
-            <el-form-item label="Username or email address" prop="userName">
+            <el-form-item label="用户名或邮箱" prop="userName">
               <el-input v-model="signInForm.userName" clearable></el-input>
             </el-form-item>
-            <el-form-item label="Password" prop="passWord">
+            <el-form-item label="密码" prop="passWord">
               <el-input v-model="signInForm.passWord" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button class="el-button" type="primary" @click="submitForm('signInForm')">Sign in</el-button>
+              <el-button class="el-button" type="primary" @click="submitForm('signInForm')">登录</el-button>
             </el-form-item>
             <el-row>
-              <el-col :span="16"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goResetPass">Forget password?</p></el-col>
-              <el-col :span="8"><p style="color: rgba(67,138,94,0.9)" align="right" @click="goJoin">Sign up</p></el-col>
+              <el-col :span="16"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goResetPass">忘记密码?</p></el-col>
+              <el-col :span="8"><p style="color: rgba(67,138,94,0.9)" align="right" @click="goJoin">注册</p></el-col>
             </el-row>
           </el-form>
         </el-row>
@@ -86,7 +86,7 @@ export default {
             method: 'post',
             url: '/api/login/login',
             data: this.signInForm,
-            timeout: 10000
+            timeout: 30000
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {
