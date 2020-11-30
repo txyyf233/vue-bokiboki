@@ -295,12 +295,37 @@ export default {
         method: 'post',
         url: '/api/file/upload',
         data: {'file': file},
+        async: false,
         timeout: 30000
       }).then((response) => {
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.$message({message: resposeData.message, type: 'success', duration: 1000})
           this.addCardForm.cardImageUrl = resposeData.resource
+          // 表单提交
+          this.$refs['addCardForm'].validate((valid) => {
+            if (valid) {
+              this.$axios({
+                method: 'post',
+                url: '/api/addCard/addCard',
+                data: this.addCardForm,
+                timeout: 30000
+              }).then((response) => {
+                var resposeData = response.data
+                if (resposeData.code === '1') {
+                  this.$message({message: resposeData.message, type: 'success', duration: 1000})
+                  this.addMainCard = false
+                  this.submitCardReset()
+                } else {
+                  this.$message({message: resposeData.message, type: 'error', duration: 1000})
+                }
+              }).catch((error) =>
+                this.$message({message: error, type: 'error', duration: 1000})
+              )
+            } else {
+              return false
+            }
+          })
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
@@ -313,30 +338,6 @@ export default {
     submitCard () {
       // 文件上传
       this.$refs.upload.submit()
-      // 表单提交
-      this.$refs['addCardForm'].validate((valid) => {
-        if (valid) {
-          this.$axios({
-            method: 'post',
-            url: '/api/addCard/addCard',
-            data: this.addCardForm,
-            timeout: 30000
-          }).then((response) => {
-            var resposeData = response.data
-            if (resposeData.code === '1') {
-              this.$message({message: resposeData.message, type: 'success', duration: 1000})
-              this.addMainCard = false
-              this.submitCardReset()
-            } else {
-              this.$message({message: resposeData.message, type: 'error', duration: 1000})
-            }
-          }).catch((error) =>
-            this.$message({message: error, type: 'error', duration: 1000})
-          )
-        } else {
-          return false
-        }
-      })
     },
     // 重置表单
     submitCardReset () {
