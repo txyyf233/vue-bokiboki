@@ -31,7 +31,7 @@
                   <el-menu-item index="2-1" @click="goLogin"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
                   <el-menu-item index="2-2"><i class="el-icon el-icon-s-shop"></i>&nbsp;采集板</el-menu-item>
                   <el-menu-item index="2-3"><i class="el-icon el-icon-s-tools"></i>&nbsp;设置</el-menu-item>
-                  <el-menu-item index="2-4" @click="goLoginOut"><i class="el-icon el-icon-switch-button"></i>&nbsp;注销</el-menu-item>
+                  <el-menu-item index="2-4" @click="goLoginOut"><i class="el-icon el-icon-remove"></i>&nbsp;注销</el-menu-item>
                 </el-submenu>
               </el-menu>
             </el-col>

@@ -33,6 +33,23 @@ axios.interceptors.request.use(
   error => {
     return Promise.reject(error)
   })
+// 响应拦截
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
+  error => {
+    if (error && error.response) {
+      if (error.response.status === 401) {
+        this.$message({message: '授权失败，请您重新登录', type: 'error', duration: 1000})
+        return this.$router.push('/login')
+      }
+    } else {
+      error.message = '连接服务器失败!'
+    }
+    return Promise.reject(error)
+  }
+)
 
 /* eslint-disable no-new */
 new Vue({

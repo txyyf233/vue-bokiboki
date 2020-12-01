@@ -15,7 +15,7 @@
               <el-input v-model="signInForm.passWord" show-password></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button class="el-button" type="primary" @click="submitForm('signInForm')">登录</el-button>
+              <el-button class="el-button" type="primary" @click="submitForm">登录</el-button>
             </el-form-item>
             <el-row>
               <el-col :span="16"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goResetPass">忘记密码?</p></el-col>
@@ -79,8 +79,8 @@ export default {
     goJoin () {
       return this.$router.push('/join')
     },
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
+    submitForm () {
+      this.$refs['signInForm'].validate((valid) => {
         if (valid) {
           this.$axios({
             method: 'post',
@@ -90,15 +90,15 @@ export default {
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {
-              this.$message({message: resposeData.message, type: 'success'})
+              this.$message({message: resposeData.message, type: 'success', duration: 1000})
               localStorage.removeItem('token')
               localStorage.setItem('token', resposeData.resource.token)
               return this.$router.push('/')
             } else {
-              this.$message({message: resposeData.message, type: 'error'})
+              this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
           }).catch((error) =>
-            this.$message({message: error, type: 'error'})
+            this.$message({message: error, type: 'error', duration: 1000})
           )
         } else {
           return false

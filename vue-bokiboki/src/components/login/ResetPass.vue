@@ -48,7 +48,7 @@ export default {
     // 校验验证码
     var validateCode = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请检查验证码'))
+        callback(new Error('请输入验证码'))
       } else if (!this.regular.code.test(value)) {
         callback(new Error('格式：数字|小写字母 4字符'))
       } else {
@@ -87,7 +87,7 @@ export default {
       rules: {
         userName: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { pattern: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/, message: '格式', trigger: 'blur' }
+          { pattern: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/, message: '格式：汉字 字母 数字', trigger: 'blur' }
         ],
         checkCode: [
           { validator: validateCode, trigger: 'blur' }
