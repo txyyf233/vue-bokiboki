@@ -153,7 +153,7 @@ export default {
             data: this.$qs.stringify(this.resetPassForm),
             timeout: 30000
           }).then((response) => {
-            setTimeout(this.checkCodeTimeOut = false, 3 * 60 * 1000)
+            setTimeout(this.checkCodeTimeOut = true, 3 * 60 * 1000)
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success', duration: 3000})
