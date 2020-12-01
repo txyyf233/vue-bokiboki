@@ -127,6 +127,21 @@
     <div id="vu-add" class="vu-fixed" @click="addMainCard = true"><i class="el-icon el-icon-cherry"></i></div>
     <el-dialog title="动态发布" :visible.sync="addMainCard">
       <el-form class="el-form" :label-position="labelPosition" :model="addCardForm" status-icon :rules="rules" ref="addCardForm" label-width="0px">
+        <el-form-item label="上传封面" prop="cardFile">
+          <el-upload
+            ref="upload"
+            action="/api/file/upload"
+            list-type="picture"
+            :before-upload="handleBefore"
+            :on-success="handleSuccess"
+            :on-preview="handlePreview"
+            :on-exceed="handleExceed"
+            :http-request="httpUpLoad"
+            :limit="1"
+            :auto-upload="false">
+            <el-button size="small" type="primary" style="background-color: rgba(5,102,116,1)">选取封面</el-button>
+          </el-upload>
+        </el-form-item>
         <el-form-item label="标题或简介" prop="cardContext">
           <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="addCardForm.cardContext" clearable  prop="cardContext"></el-input>
         </el-form-item>
@@ -146,21 +161,6 @@
               :value="item.value">
             </el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="上传封面" prop="cardFile">
-          <el-upload
-            ref="upload"
-            action="/api/file/upload"
-            list-type="picture"
-            :before-upload="handleBefore"
-            :on-success="handleSuccess"
-            :on-preview="handlePreview"
-            :on-exceed="handleExceed"
-            :http-request="httpUpLoad"
-            :limit="1"
-            :auto-upload="false">
-            <el-button size="small" type="primary" style="background-color: rgba(5,102,116,1)">选取封面</el-button>
-          </el-upload>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">发布</el-button>
