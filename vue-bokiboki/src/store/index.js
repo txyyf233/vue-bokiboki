@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import persistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 const state = {
   // 屏幕宽度
@@ -37,5 +38,13 @@ export default new Vuex.Store({
   state,
   mutations,
   actions,
-  getters
+  getters,
+  plugins: [persistedState({
+    reducer (val) {
+      return {
+        user: val.user,
+        checkCodeTime: val.checkCodeTime
+      }
+    }
+  })]
 })
