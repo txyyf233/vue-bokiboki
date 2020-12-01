@@ -142,14 +142,10 @@
             <el-button size="small" type="primary" style="background-color: rgba(5,102,116,1)">选取封面</el-button>
           </el-upload>
         </el-form-item>
-        <el-form-item label="标题或简介" prop="cardContext">
-          <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="addCardForm.cardContext" clearable  prop="cardContext"></el-input>
-        </el-form-item>
         <el-form-item label="采集板（不存在可新建）" prop="cardType">
           <el-select
             style="width: 100%"
-            v-model="cardTypeValue"
-            multiple
+            v-model="addCardForm.cardType"
             filterable
             allow-create
             default-first-option
@@ -161,6 +157,9 @@
               :value="item.value">
             </el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="标题或简介" prop="cardContext">
+          <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 6}" v-model="addCardForm.cardContext" clearable  prop="cardContext"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">发布</el-button>
@@ -220,8 +219,8 @@ export default {
       },
       // 采集板下拉框展示值
       cardTypeOptions: [{
-        value: 'HTML',
-        label: 'HTML'
+        value: '表情',
+        label: '表情'
       }],
       cardTypeValue: [],
       // 文件预览？？
