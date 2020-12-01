@@ -18,7 +18,7 @@
                   <el-input v-model="resetPassForm.checkCode"></el-input>
                 </el-col>
                 <el-col :span="10" offset="1">
-                  <el-button  class="el-button" type="primary" @click="sendCode('resetPassForm')">{{checkCodeVal}}</el-button>
+                  <el-button  class="el-button" type="primary" @click="sendCode('resetPassForm')">发送验证码</el-button>
                 </el-col>
               </el-row>
             </el-form-item>
@@ -69,10 +69,8 @@ export default {
       labelPosition: 'top',
       // 初始隐藏密码字段
       passwordisHidden: 'none',
-      // 验证码按钮内容
-      checkCodeVal: '发送验证码',
       // 验证码时间
-      checkCodeTimeOut: true,
+      checkCodeTimeOut: false,
       // 表单
       resetPassForm: {
         userName: '',
@@ -127,14 +125,20 @@ export default {
     },
     // 发送验证码
     sendCode () {
+      var checkTime = new Date().getTime()
+      var timeDiff = Math.round((checkTime - this.$store.state.checkCodeTime) / 1000)
+      if (timeDiff > 180) {
+        this.checkCodeTimeOut = true
+      }
       if (this.checkCodeTimeOut === false) {
-        this.$message({message: '请稍后再试', type: 'error', duration: 1000})
+        this.$message({message: 180 - (timeDiff / 1000) + '秒后可再次发送', type: 'error', duration: 1000})
         return false
       }
       this.$refs['resetPassForm'].validateField(['userName'], (errorMessage) => {
         if (!errorMessage) {
           this.checkCodeTimeOut = false
           const loading = this.$loading({lock: true})
+          this.$store.commit('checkCodeTime', new Date().getTime())
           this.$axios({
             method: 'post',
             url: '/api/login/checkCode',
@@ -144,7 +148,6 @@ export default {
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success', duration: 3000})
-              setTimeout(() => { this.checkCodeTimeOut = true }, 3 * 60 * 1000)
             } else {
               this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
