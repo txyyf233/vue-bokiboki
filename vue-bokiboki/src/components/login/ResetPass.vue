@@ -156,7 +156,7 @@ export default {
             setTimeout(this.checkCodeTimeOut = false, 3 * 60 * 1000)
             var resposeData = response.data
             if (resposeData.code === '1') {
-              this.$message({message: resposeData.message, type: 'success', duration: 1000})
+              this.$message({message: resposeData.message, type: 'success', duration: 3000})
             } else {
               this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
