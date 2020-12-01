@@ -26,7 +26,7 @@
               <el-input v-model="resetPassForm.passWord" ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button class="el-button" type="primary" @click="submitForm('resetPassForm')">更换密码并登录</el-button>
+              <el-button class="el-button" type="primary" @click="submitForm">更换密码并登录</el-button>
             </el-form-item>
             <el-row>
               <el-col :span="12"><p style="color: rgba(67,138,94,0.9)" align="left" @click="goLogin">登录</p></el-col>
@@ -138,19 +138,19 @@ export default {
       return this.$router.push('/join')
     },
     // 发送验证码
-    sendCode (formName) {
+    sendCode () {
       if (this.checkCodeTimeOut === false) {
         this.$message({message: '请稍后再试', type: 'error', duration: 1000})
         return false
       }
-      this.$refs[formName].validateField(['userName'], (errorMessage) => {
+      this.$refs['resetPassForm'].validateField(['userName'], (errorMessage) => {
         if (!errorMessage) {
           this.checkCodeTimeOut = false
           const loading = this.$loading({lock: true})
           this.$axios({
             method: 'post',
             url: '/api/login/checkCode',
-            data: this.resetPassForm,
+            data: this.$qs.stringify(this.resetPassForm),
             timeout: 30000
           }).then((response) => {
             setTimeout(this.checkCodeTimeOut = false, 3 * 60 * 1000)
@@ -169,8 +169,8 @@ export default {
       })
     },
     // 更换密码
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
+    submitForm () {
+      this.$refs['resetPassForm'].validate((valid) => {
         if (valid) {
           const loading = this.$loading({lock: true})
           this.$axios({

@@ -5,7 +5,9 @@ const state = {
   // 屏幕宽度
   windowWidth: window.innerWidth,
   // Main主页列数
-  mainLine: window.innerWidth > 1200 ? 4 : 2
+  mainLine: window.innerWidth > 1200 ? 4 : 2,
+  // 用户信息
+  user: {}
 }
 // 同步
 const mutations = {

@@ -66,7 +66,7 @@ export default {
       // 搜索结果
       result: '',
       // 头像
-      headSrc: '',
+      headSrc: this.$store.state.user.userImgSrc,
       // 回到顶部按钮状态
       goTopHidden: 'none'
     }
