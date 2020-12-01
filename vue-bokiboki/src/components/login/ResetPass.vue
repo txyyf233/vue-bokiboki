@@ -102,18 +102,6 @@ export default {
     // watch监听验证码位数
     checkCodeLength () {
       return this.resetPassForm.checkCode
-    },
-    // 表单数据数据优化
-    resetPassFormComputed: {
-      userName: function () {
-        return this.resetPassForm.userName.trim()
-      },
-      checkCode: function () {
-        return this.resetPassForm.checkCode
-      },
-      passWord: function () {
-        return this.resetPassForm.passWord.trim()
-      }
     }
   },
   watch: {
@@ -153,10 +141,10 @@ export default {
             data: this.$qs.stringify(this.resetPassForm),
             timeout: 30000
           }).then((response) => {
-            setTimeout(this.checkCodeTimeOut = true, 3 * 60 * 1000)
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success', duration: 3000})
+              setTimeout(() => { this.checkCodeTimeOut = true }, 3 * 60 * 1000)
             } else {
               this.$message({message: resposeData.message, type: 'error', duration: 1000})
             }
