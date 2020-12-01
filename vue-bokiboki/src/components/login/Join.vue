@@ -68,7 +68,7 @@ export default {
         passWord: ''
       },
       regular: {
-        user: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/,
+        name: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/,
         pass: /^[a-zA-Z0-9]{4,10}$/,
         email: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
       },
