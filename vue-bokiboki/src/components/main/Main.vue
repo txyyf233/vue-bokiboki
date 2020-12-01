@@ -186,8 +186,8 @@ export default {
       }
     }
     var validateCardFile = (rule, value, callback) => {
-      if (value.trim() === '') {
-        callback(new Error('请选择封面'))
+      if (this.addCardForm.cardImageUrl === '') {
+        callback(new Error('请上传封面'))
       } else {
         callback()
       }
