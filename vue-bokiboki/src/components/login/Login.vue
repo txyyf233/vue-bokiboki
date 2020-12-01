@@ -93,7 +93,9 @@ export default {
               this.$message({message: resposeData.message, type: 'success', duration: 1000})
               localStorage.removeItem('token')
               localStorage.setItem('token', resposeData.resource.token)
-              this.$store.commit('user', resposeData.resource.user)
+              var user = {}
+              user = resposeData.resource.user
+              this.$store.commit('user', user)
               return this.$router.push('/')
             } else {
               this.$message({message: resposeData.message, type: 'error', duration: 1000})

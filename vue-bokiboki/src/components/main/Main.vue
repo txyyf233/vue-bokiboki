@@ -164,7 +164,6 @@
         <el-form-item>
           <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">发布</el-button>
           <el-button type="primary" @click="submitCardReset" style="float: right;background-color: rgba(5,102,116,1)">重置</el-button>
-          <el-button type="primary" @click="submitCardOff" style="float: right;background-color: rgba(5,102,116,1)">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -342,10 +341,6 @@ export default {
     submitCardReset () {
       this.$refs['addCardForm'].resetFields()
       this.$refs.upload.clearFiles()
-    },
-    // 关闭提交弹出框
-    submitCardOff () {
-      this.addMainCard = false
     }
   }
 }
