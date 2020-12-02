@@ -87,7 +87,7 @@ export default {
       localStorage.removeItem('token')
       this.headSrc = ''
       this.$store.commit('user', {})
-      return this.$router.push('/')
+      return this.$router.go(0)
     },
     // 回到顶部
     goTop () {

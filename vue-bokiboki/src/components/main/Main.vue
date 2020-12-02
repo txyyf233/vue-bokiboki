@@ -196,12 +196,14 @@ export default {
       addMainCard: false,
       // 卡片list
       mainList: [],
+      // 右侧头像
+      headSrc: this.$store.state.user.userImgUrl,
       // 右侧用户昵称
-      userNick: '',
+      userNick: this.$store.state.user.userNick,
       // 右侧用户关注
-      userCare: '',
+      userCare: this.$store.state.user.userCare,
       // 右侧用户粉丝
-      userFans: '',
+      userFans: this.$store.state.user.userFans,
       // 富文本内容
       content: '',
       // 富文本工具栏
