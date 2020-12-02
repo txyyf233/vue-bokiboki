@@ -334,13 +334,7 @@ export default {
     // 卡片表单提交
     submitCard () {
       // 文件上传
-      this.$refs['addCardForm'].validateField(['cardFile'], (errorMessage) => {
-        if (!errorMessage) {
-          this.$refs.upload.submit()
-        } else {
-          return false
-        }
-      })
+      this.$refs.upload.submit()
     },
     // 重置表单
     submitCardReset () {
