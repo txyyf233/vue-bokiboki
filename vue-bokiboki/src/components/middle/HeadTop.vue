@@ -86,6 +86,8 @@ export default {
     goLoginOut () {
       localStorage.removeItem('token')
       this.headSrc = ''
+      this.$store.commit('user', {})
+      return this.$router.push('/')
     },
     // 回到顶部
     goTop () {
