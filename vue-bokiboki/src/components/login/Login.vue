@@ -8,7 +8,7 @@
             <div style="text-align: center">
               <img src="@/assets/bokiboki.png" style="height: 60px">
             </div>
-            <el-form-item label="用户名或邮箱" prop="userName">
+            <el-form-item label="用户名" prop="userName">
               <el-input v-model="signInForm.userName" clearable></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="passWord">
