@@ -114,8 +114,9 @@ export default {
             }
           }).catch((error) =>
             this.$message({message: error, type: 'error', duration: 1000})
+          ).finally(
+            loading.close()
           )
-          loading.close()
         } else {
           return false
         }

@@ -112,9 +112,9 @@
           <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">bokiboki</span></el-divider>
           <div style="padding:10px 40px 20px">
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">©2020&nbsp;bokiboki&nbsp;今天的风儿甚是喧嚣啊</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{userSum}}</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{todayUserSum}}</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{userNowSum}}</span>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{visitSum}}</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{todayVisitSum}}</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{visitNowSum}}</span>
           </div>
         </el-card>
       </el-col>
@@ -205,11 +205,11 @@ export default {
       // 右侧用户粉丝
       userFans: this.$store.state.user.userFans,
       // 右侧总访问量
-      userSum: 0,
+      visitSum: 0,
       // 右侧今日访问量
-      todayUserSum: 0,
+      todayVisitSum: 0,
       // 右侧在线人数
-      userNowSum: 0,
+      visitNowSum: 0,
       // 富文本内容
       content: '',
       // 富文本工具栏
@@ -290,9 +290,10 @@ export default {
         if (resposeData.code === '1') {
           var sum = {}
           sum = resposeData.resource
-          this.userSum = sum.userSum
-          this.todayUserSum = sum.todayUserSum
-          this.userNowSum = sum.userNowSum
+          this.visitSum = sum.visitSum
+          this.todayVisitSum = sum.todayVisitSum
+          this.visitNowSum = sum.visitNowSum
+          console.log(sum)
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
