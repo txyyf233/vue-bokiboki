@@ -204,6 +204,12 @@ export default {
       userCare: this.$store.state.user.userCare,
       // 右侧用户粉丝
       userFans: this.$store.state.user.userFans,
+      // 右侧总访问量
+      userSum: 0,
+      // 右侧今日访问量
+      todayUserSum: 0,
+      // 右侧在线人数
+      userNowSum: 0,
       // 富文本内容
       content: '',
       // 富文本工具栏
@@ -240,6 +246,8 @@ export default {
   mounted () {
     // 卡片列表初始化
     this.getList()
+    // 右侧访问量初始化
+    this.getUserSum()
   },
   methods: {
     // 卡片列表
@@ -269,6 +277,28 @@ export default {
         return true
       }
       return false
+    },
+    // 抓取用户访问量
+    getUserSum () {
+      this.$axios({
+        method: 'post',
+        url: '/api/main/visit',
+        data: {},
+        timeout: 60000
+      }).then((response) => {
+        var resposeData = response.data
+        if (resposeData.code === '1') {
+          var sum = {}
+          sum = resposeData.resource
+          this.userSum = sum.userSum
+          this.todayUserSum = sum.todayUserSum
+          this.userNowSum = sum.userNowSum
+        } else {
+          this.$message({message: resposeData.message, type: 'error', duration: 1000})
+        }
+      }).catch((error) =>
+        this.$message({message: error, type: 'error', duration: 1000})
+      )
     },
     // 文件上传达到上限
     handleExceed (files, fileList) {
