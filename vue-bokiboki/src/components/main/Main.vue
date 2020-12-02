@@ -242,6 +242,7 @@ export default {
   methods: {
     // 卡片列表
     getList () {
+      const loading = this.$loading({lock: true, background: 'rgba(255, 255, 255, 0.1)'})
       this.$axios({
         method: 'post',
         url: '/api/main/list',
@@ -258,6 +259,7 @@ export default {
       }).catch((error) =>
         this.$message({message: error, type: 'error', duration: 1000})
       )
+      loading.close()
     },
     // 卡片显示分发
     cardIf (num, i) {
@@ -289,6 +291,7 @@ export default {
       var file = params.file
       let formData = new window.FormData()
       formData.append('multipartFile', file)
+      const loading = this.$loading({lock: true, background: 'rgba(255, 255, 255, 0.1)'})
       this.$axios({
         method: 'post',
         url: '/api/file/upload',
@@ -331,6 +334,7 @@ export default {
         console.log(error)
         this.$message({message: error, type: 'error', duration: 1000})
       })
+      loading.close()
     },
     // 卡片表单提交
     submitCard () {

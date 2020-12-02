@@ -82,6 +82,7 @@ export default {
     submitForm () {
       this.$refs['signInForm'].validate((valid) => {
         if (valid) {
+          const loading = this.$loading({lock: true, background: 'rgba(255, 255, 255, 0.1)'})
           this.$axios({
             method: 'post',
             url: '/api/login/login',
@@ -103,6 +104,7 @@ export default {
           }).catch((error) =>
             this.$message({message: error, type: 'error', duration: 1000})
           )
+          loading.close()
         } else {
           return false
         }
