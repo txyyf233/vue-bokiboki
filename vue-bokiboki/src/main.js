@@ -41,7 +41,7 @@ axios.interceptors.response.use(
   error => {
     if (error && error.response) {
       if (error.response.status === 401) {
-        error.message = '授权失败，请您重新登录!'
+        error.message = '用户认证失效，请您重新登录!'
         router.push('/login')
       }
     } else {
