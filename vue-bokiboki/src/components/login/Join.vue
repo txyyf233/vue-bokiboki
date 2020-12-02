@@ -100,7 +100,6 @@ export default {
             data: this.$qs.stringify(this.signUpForm),
             timeout: 60000
           }).then((response) => {
-            console.log(response)
             var resposeData = response.data
             if (resposeData.code === '1') {
               this.$message({message: resposeData.message, type: 'success', duration: 1000})

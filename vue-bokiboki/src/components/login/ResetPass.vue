@@ -156,6 +156,8 @@ export default {
             this.$message({message: error, type: 'error', duration: 1000})
           })
           loading.close()
+        } else {
+          return false
         }
       })
     },

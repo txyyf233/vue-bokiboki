@@ -42,6 +42,7 @@ axios.interceptors.response.use(
     if (error && error.response) {
       if (error.response.status === 401) {
         error.message = '授权失败，请您重新登录!'
+        router.push('/login')
       }
     } else {
       error.message = '连接服务器失败!'

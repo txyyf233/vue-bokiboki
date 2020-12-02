@@ -249,7 +249,6 @@ export default {
         data: {},
         timeout: 60000
       }).then((response) => {
-        console.log(response)
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.mainList = resposeData.resource
@@ -278,9 +277,6 @@ export default {
     },
     // 文件上传成功
     handleSuccess (response, file, fileList) {
-      var resposeData = response.data
-      this.addCardForm.cardImageUrl = resposeData.resource
-      this.$message({message: resposeData.message, type: 'success', duration: 1000})
     },
     // 点击已上传文件钩子
     handlePreview (file) {
@@ -331,7 +327,6 @@ export default {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
       }).catch((error) => {
-        console.log(error)
         this.$message({message: error, type: 'error', duration: 1000})
       })
       loading.close()
@@ -339,7 +334,13 @@ export default {
     // 卡片表单提交
     submitCard () {
       // 文件上传
-      this.$refs.upload.submit()
+      this.$refs['addCardForm'].validateField(['cardFile'], (errorMessage) => {
+        if (!errorMessage) {
+          this.$refs.upload.submit()
+        } else {
+          return false
+        }
+      })
     },
     // 重置表单
     submitCardReset () {
