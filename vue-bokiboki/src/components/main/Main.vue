@@ -112,9 +112,9 @@
           <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">bokiboki</span></el-divider>
           <div style="padding:10px 40px 20px">
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">©2020&nbsp;bokiboki&nbsp;今天的风儿甚是喧嚣啊</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{a}}</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{a}}</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{a}}</span>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{userSum}}</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{todayUserSum}}</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{userNowSum}}</span>
           </div>
         </el-card>
       </el-col>
