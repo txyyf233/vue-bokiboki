@@ -41,7 +41,7 @@ axios.interceptors.response.use(
   error => {
     if (error && error.response) {
       if (error.response.status === 401) {
-        this.$message({message: '授权失败，请您重新登录', type: 'error', duration: 1000})
+        error.message = '授权失败，请您重新登录!'
         return this.$router.push('/login')
       }
     } else {
