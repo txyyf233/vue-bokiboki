@@ -126,12 +126,12 @@ export default {
     // 发送验证码
     sendCode () {
       var checkTime = new Date().getTime()
-      var timeDiff = Math.round((checkTime - this.$store.state.checkCodeTime) / 1000)
+      var timeDiff = (checkTime - this.$store.state.checkCodeTime) / 1000
       if (timeDiff > 180) {
         this.checkCodeTimeOut = true
       }
       if (this.checkCodeTimeOut === false) {
-        this.$message({message: 180 - (timeDiff / 1000) + '秒后可再次发送', type: 'error', duration: 1000})
+        this.$message({message: Math.round(180 - (timeDiff / 1000)) + '秒后可再次发送', type: 'error', duration: 1000})
         return false
       }
       this.$refs['resetPassForm'].validateField(['userName'], (errorMessage) => {
@@ -143,7 +143,7 @@ export default {
             method: 'post',
             url: '/api/login/checkCode',
             data: this.$qs.stringify(this.resetPassForm),
-            timeout: 30000
+            timeout: 60000
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {
@@ -168,7 +168,7 @@ export default {
             method: 'post',
             url: '/api/login/forget',
             data: this.$qs.stringify(this.resetPassForm),
-            timeout: 30000
+            timeout: 60000
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {

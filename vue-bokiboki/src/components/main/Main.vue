@@ -246,7 +246,7 @@ export default {
         method: 'post',
         url: '/api/main/list',
         data: {},
-        timeout: 30000
+        timeout: 60000
       }).then((response) => {
         console.log(response)
         var resposeData = response.data
@@ -294,7 +294,7 @@ export default {
         url: '/api/file/upload',
         data: formData,
         async: false,
-        timeout: 30000
+        timeout: 60000
       }).then((response) => {
         var resposeData = response.data
         if (resposeData.code === '1') {
@@ -307,7 +307,7 @@ export default {
                 method: 'post',
                 url: '/api/addCard/addCard',
                 data: this.$qs.stringify(this.addCardForm),
-                timeout: 30000
+                timeout: 60000
               }).then((response) => {
                 var resposeData = response.data
                 if (resposeData.code === '1') {

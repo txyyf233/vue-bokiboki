@@ -86,7 +86,7 @@ export default {
             method: 'post',
             url: '/api/login/login',
             data: this.$qs.stringify(this.signInForm),
-            timeout: 30000
+            timeout: 60000
           }).then((response) => {
             var resposeData = response.data
             if (resposeData.code === '1') {

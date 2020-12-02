@@ -97,7 +97,7 @@ export default {
             method: 'post',
             url: '/api/login/create',
             data: this.$qs.stringify(this.signUpForm),
-            timeout: 30000
+            timeout: 60000
           }).then((response) => {
             console.log(response)
             var resposeData = response.data
