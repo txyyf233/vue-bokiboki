@@ -19,7 +19,7 @@
                 </el-avatar>
               </div>
               <div style="height: 30px;line-height: 30px">
-                <span style="font-size: 10px">{{item.userName}}</span>
+                <span style="font-size: 10px">{{item.userNick}}</span>
               </div>
             </div>
           </el-card>
@@ -39,7 +39,7 @@
                 </el-avatar>
               </div>
               <div style="height: 30px;line-height: 30px">
-                <span style="font-size: 10px">{{item.userName}}</span>
+                <span style="font-size: 10px">{{item.userNick}}</span>
               </div>
             </div>
           </el-card>
@@ -59,7 +59,7 @@
                 </el-avatar>
               </div>
               <div style="height: 30px;line-height: 30px">
-                <span style="font-size: 10px">{{item.userName}}</span>
+                <span style="font-size: 10px">{{item.userNick}}</span>
               </div>
             </div>
           </el-card>
@@ -79,7 +79,7 @@
                 </el-avatar>
               </div>
               <div style="height: 30px;line-height: 30px">
-                <span style="font-size: 10px">{{item.userName}}</span>
+                <span style="font-size: 10px">{{item.userNick}}</span>
               </div>
             </div>
           </el-card>
