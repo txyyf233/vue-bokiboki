@@ -131,13 +131,13 @@ export default {
         this.checkCodeTimeOut = true
       }
       if (this.checkCodeTimeOut === false) {
-        this.$message({message: Math.round(180 - (timeDiff / 1000)) + '秒后可再次发送', type: 'error', duration: 1000})
+        this.$message({message: Math.round(180 - timeDiff) + '秒后可再次发送', type: 'error', duration: 1000})
         return false
       }
       this.$refs['resetPassForm'].validateField(['userName'], (errorMessage) => {
         if (!errorMessage) {
           this.checkCodeTimeOut = false
-          const loading = this.$loading({lock: true})
+          const loading = this.$loading({lock: true, background: 'rgba(255, 255, 255, 0.1)'})
           this.$store.commit('checkCodeTime', new Date().getTime())
           this.$axios({
             method: 'post',
@@ -163,7 +163,7 @@ export default {
     submitForm () {
       this.$refs['resetPassForm'].validate((valid) => {
         if (valid) {
-          const loading = this.$loading({lock: true})
+          const loading = this.$loading({lock: true, background: 'rgba(255, 255, 255, 0.1)'})
           this.$axios({
             method: 'post',
             url: '/api/login/forget',
