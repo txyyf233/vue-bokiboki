@@ -1,5 +1,6 @@
 <template>
     <div>
+      <!-------------------------------------------------顶部------------------------------------------->
       <el-container class="el-container">
         <el-header class="el-header">
           <el-row>
@@ -40,6 +41,7 @@
       </el-container>
       <el-row><el-col :span="24"><div style="height: 60px"></div></el-col></el-row>
       <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}" @click="goTop"><i class="el-icon el-icon-arrow-up"></i></div>
+<!-------------------------------------------------抽屉------------------------------------------->
       <el-drawer class="el-drawer" size="40px"
         :visible.sync="drawer"
         :direction="direction"
