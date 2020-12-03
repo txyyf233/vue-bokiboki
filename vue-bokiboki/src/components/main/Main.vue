@@ -91,7 +91,7 @@
           <div style="height: 80px">
             <div style="height: 60px;width: 60px;float: left;margin: 10px">
               <el-avatar :size="60" :src="headSrc" @error="errorHandler" fit="scale-down">
-                <img src="@/assets/errorImg2.png"/>
+                <img src="@/assets/errorImg.png"/>
               </el-avatar>
             </div>
             <div style="height: 60px;float: left;margin: 10px 0px">

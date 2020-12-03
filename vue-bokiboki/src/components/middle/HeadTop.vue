@@ -26,7 +26,7 @@
                 <el-submenu index="3">
                   <template slot="title">
                     <el-avatar :size="40" :src="headSrc" @error="errorHandler" fit="scale-down">
-                      <img src="@/assets/errorImg2.png"/>
+                      <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </template>
                   <el-menu-item index="2-1" @click="goLogin"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
