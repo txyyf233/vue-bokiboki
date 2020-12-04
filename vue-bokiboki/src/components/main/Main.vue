@@ -253,7 +253,10 @@ export default {
     // 卡片列表初始化
     this.getList()
     // 右侧访问量初始化
-    this.getUserSum()
+    var mainLine = this.$store.state.mainLine
+    if (mainLine === 4) {
+      this.getUserSum()
+    }
   },
   methods: {
     // 卡片列表
