@@ -105,7 +105,7 @@
               </div>
             </div>
           </div>
-          <div style="display: none">
+          <div>
             <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">采集</span></el-divider>
             <div style="height: 440px"></div>
             <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">空间</span></el-divider>
@@ -253,7 +253,10 @@ export default {
     // 卡片列表初始化
     this.getList()
     // 右侧访问量初始化
-    this.getUserSum()
+    var mainLine = this.$store.state.mainLine
+    if (mainLine === 4) {
+      this.getUserSum()
+    }
   },
   methods: {
     // 卡片列表
@@ -313,6 +316,16 @@ export default {
     },
     // 上传文件之前的钩子
     handleBefore (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 10
+
+      if (!isJPG) {
+        this.$message({message: '上传头像图片只能是 JPG 格式!', type: 'warning', duration: 1000})
+      }
+      if (!isLt2M) {
+        this.$message({message: '上传头像图片大小不能超过 10MB!', type: 'warning', duration: 1000})
+      }
+      return isJPG && isLt2M
     },
     // 文件上传成功
     handleSuccess (response, file, fileList) {

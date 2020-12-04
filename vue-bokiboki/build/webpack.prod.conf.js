@@ -69,7 +69,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       template: 'index.html',
       favicon: path.resolve('logo.png'),
       inject: true,
-      favicon: path.resolve('head_logo.png'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,
