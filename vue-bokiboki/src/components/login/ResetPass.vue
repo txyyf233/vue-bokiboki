@@ -45,6 +45,15 @@ export default {
   name: 'ResetPass',
   components: {HeadTop},
   data () {
+    var validateName = (rule, value, callback) => {
+      if (value.trim() === '') {
+        callback(new Error('请输入用户名'))
+      } else if (!this.regular.name.test(value.trim())) {
+        callback(new Error('格式：汉字 字母 数字'))
+      } else {
+        callback()
+      }
+    }
     // 校验验证码
     var validateCode = (rule, value, callback) => {
       if (value === '') {
@@ -84,8 +93,7 @@ export default {
       },
       rules: {
         userName: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { pattern: /^[a-zA-Z0-9\u4e00-\u9fa5\s]{1,20}$/, message: '格式：汉字 字母 数字', trigger: 'blur' }
+          { validator: validateName, trigger: 'blur' }
         ],
         checkCode: [
           { validator: validateCode, trigger: 'blur' }
