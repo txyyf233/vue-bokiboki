@@ -105,7 +105,7 @@
               </div>
             </div>
           </div>
-          <div style="display: none">
+          <div>
             <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">采集</span></el-divider>
             <div style="height: 440px"></div>
             <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">空间</span></el-divider>
