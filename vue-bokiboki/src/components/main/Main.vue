@@ -286,7 +286,7 @@ export default {
           cardList = resposeData.resource
           this.mainList = this.mainList.concat(cardList)
           if (cardList.length < this.cardPageSum) {
-            this.noMoreCard = false
+            this.noMoreCard = true
           }
           this.cardPageSize = this.cardPageSize + 1
         } else {
