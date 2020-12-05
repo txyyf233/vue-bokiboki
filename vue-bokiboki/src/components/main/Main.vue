@@ -284,9 +284,7 @@ export default {
         if (resposeData.code === '1') {
           var cardList = []
           cardList = resposeData.resource
-          this.mainList.concat(cardList)
-          console.log(cardList)
-          console.log(this.mainList)
+          this.mainList = this.mainList.concat(cardList)
           if (cardList.length < this.cardPageSum) {
             this.noMoreCard = false
           }
