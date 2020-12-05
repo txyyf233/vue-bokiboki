@@ -22,7 +22,7 @@
                 </el-col>
               </el-row>
             </el-form-item>
-            <el-form-item label="新密码" prop="passWord" :style="{display:passwordisHidden}">
+            <el-form-item label="新密码" prop="passWord" v-if="passwordisHidden">
               <el-input v-model="resetPassForm.passWord" ></el-input>
             </el-form-item>
             <el-form-item>
@@ -77,7 +77,7 @@ export default {
     return {
       labelPosition: 'top',
       // 初始隐藏密码字段
-      passwordisHidden: 'none',
+      passwordisHidden: false,
       // 验证码时间
       checkCodeTimeOut: false,
       // 表单
@@ -114,11 +114,11 @@ export default {
     // 验证码输入四位显示password
     checkCodeLength (val) {
       if (val.length === 4) {
-        this.passwordisHidden = ''
+        this.passwordisHidden = true
       } else if (val.length > 4) {
         this.resetPassForm.checkCode = val.substring(0, 4)
       } else {
-        this.passwordisHidden = 'none'
+        this.passwordisHidden = false
       }
     }
   },

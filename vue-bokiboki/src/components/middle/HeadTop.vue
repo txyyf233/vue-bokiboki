@@ -70,7 +70,7 @@ export default {
       // 搜索结果
       result: '',
       // 头像
-      headSrc: this.$store.state.user.userImgUrl,
+      headSrc: this.$store.state.user.userImgUrl
     }
   },
   methods: {
