@@ -87,8 +87,8 @@
               </el-card>
             </div>
           </el-col>
-          <el-col :span="24"><p v-if="cardAddLoad" style="text-align: center;font-size: 20px;color: rgba(0,0,0,0.5)">加载中...</p></el-col>
-          <el-col  :span="24"><p v-if="noMoreCard"  style="text-align: center;font-size: 20px;color: rgba(0,0,0,0.5)">没有更多了</p></el-col>
+          <el-col :span="24"><p v-if="cardAddLoad" style="text-align: center;font-size: 15px;color: rgba(0,0,0,0.5);margin: 10px auto">加载中...</p></el-col>
+          <el-col  :span="24"><p v-if="noMoreCard"  style="text-align: center;font-size: 15px;color: rgba(0,0,0,0.5);margin: 10px auto">没有更多了</p></el-col>
         </el-row>
       </el-col>
       <!---------------------------------------右侧展示栏----------------------------------->

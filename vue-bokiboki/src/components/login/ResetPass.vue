@@ -158,9 +158,9 @@ export default {
               this.$message({message: resposeData.message, type: 'success', duration: 3000})
             } else {
               this.$message({message: resposeData.message, type: 'error', duration: 1000})
+              this.checkCodeTimeOut = true
             }
           }).catch((error) => {
-            this.checkCodeTimeOut = true
             this.$message({message: error, type: 'error', duration: 1000})
           })
           loading.close()
