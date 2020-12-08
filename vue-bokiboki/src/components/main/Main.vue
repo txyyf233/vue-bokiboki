@@ -3,10 +3,10 @@
     <!---------------------------------------导航栏----------------------------------->
     <headTop></headTop>
     <!---------------------------------------左侧展示栏----------------------------------->
-    <el-row style="margin-top: 5px" v-infinite-scroll="addCardLoad">
+    <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="24" :sm="24" :lg="16">
-        <el-row>
+        <el-row  v-infinite-scroll="addCardLoad">
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(0,i)">
               <div class="collectButton">采集</div>
@@ -112,14 +112,47 @@
             </div>
           </div>
           <div>
-            <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">采集</span></el-divider>
-            <div style="height: 440px"></div>
-            <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">空间</span></el-divider>
-            <div style="height: 440px"></div>
+            <el-divider content-position="left"  style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">采集</span></el-divider>
+            <el-scrollbar style="height:100%">
+              <div style="height: 440px">
+                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionUrlList" :key="item">
+                  <el-row>
+                    <el-col :span="10">
+                      <img class="image" style="width: 100px;max-height: 100px" :src="item.url">
+                    </el-col>
+                    <el-col :span="14" >{{item.userNick}}</el-col>
+                  </el-row>
+                </el-card>
+              </div>
+            </el-scrollbar>
+            <el-divider content-position="left"  style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">空间</span></el-divider>
+            <el-scrollbar style="height:100%">
+              <div style="height: 440px">
+                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionUrlList" :key="item">
+                  <el-row>
+                    <el-col :span="10">
+                      <img class="image" style="width: 100px;max-height: 100px" :src="item.url">
+                    </el-col>
+                    <el-col :span="14" >{{item.userNick}}</el-col>
+                  </el-row>
+                </el-card>
+              </div>
+            </el-scrollbar>
           </div>
           <div>
-            <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">排行</span></el-divider>
-            <div style="height: 710px"></div>
+            <el-divider content-position="left" style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">排行</span></el-divider>
+            <el-scrollbar style="height:100%">
+              <div style="height: 440px">
+                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionUrlList" :key="item">
+                  <el-row>
+                    <el-col :span="10">
+                      <img class="image" style="width: 100px;max-height: 100px" :src="item.url">
+                    </el-col>
+                    <el-col :span="14" >{{item.userNick}}</el-col>
+                  </el-row>
+                </el-card>
+              </div>
+            </el-scrollbar>
           </div>
           <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">bokiboki</span></el-divider>
           <div style="padding:10px 40px 20px">
@@ -216,6 +249,11 @@ export default {
       userCare: this.$store.state.user.userCare,
       // 右侧用户粉丝
       userFans: this.$store.state.user.userFans,
+      // 右侧采集卡
+      collectionUrlList: [{userNick: '晚来天欲雪', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},
+        {userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},
+        {userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},{userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},
+        {userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'}],
       // 右侧总访问量
       visitSum: 0,
       // 右侧今日访问量
