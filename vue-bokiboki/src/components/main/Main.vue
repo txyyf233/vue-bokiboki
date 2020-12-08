@@ -312,6 +312,8 @@ export default {
       this.$axios({
         method: 'post',
         url: '/api/main/visit',
+        // 同步请求
+        async: false,
         data: {},
         timeout: 60000
       }).then((response) => {
