@@ -40,7 +40,9 @@
         </el-header>
       </el-container>
       <el-row><el-col :span="24"><div style="height: 60px"></div></el-col></el-row>
-      <div id="vu-goTop" class="vu-fixed" :style="{display: goTopHidden}" @click="goTop"><i class="el-icon el-icon-arrow-up"></i></div>
+      <el-backtop  :right="22" :bottom="110" style="background-color: rgba(0,0,0,0)">
+        <div class="vu-fixed"><i class="el-icon el-icon-arrow-up"></i></div>
+      </el-backtop>
 <!-------------------------------------------------抽屉------------------------------------------->
       <el-drawer class="el-drawer" size="40px"
         :visible.sync="drawer"
@@ -69,8 +71,6 @@ export default {
       result: '',
       // 头像
       headSrc: this.$store.state.user.userImgUrl,
-      // 回到顶部按钮状态
-      goTopHidden: 'none'
     }
   },
   methods: {
@@ -91,11 +91,6 @@ export default {
       this.$store.commit('user', {})
       return this.$router.go(0)
     },
-    // 回到顶部
-    goTop () {
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-    },
     // 提交搜索
     searchMethods () {
       if (this.vuSearch) {
@@ -104,16 +99,11 @@ export default {
     },
     errorHandler () {
       return true
-    },
-    // 页面离顶部距离
-    getScroll () {
-      this.appTop = document.documentElement.scrollTop || document.body.scrollTop
-      if (this.appTop > 300) {
-        this.goTopHidden = ''
-      } else {
-        this.goTopHidden = 'none'
-      }
     }
+    // 页面离顶部距离
+    /* getScroll () {
+       this.appTop = document.documentElement.scrollTop || document.body.scrollTop
+    } */
   },
   mounted () {
     // 窗口大小监听
@@ -126,10 +116,10 @@ export default {
         this.$store.commit('mainLine', 4)
       }
     }
-    window.addEventListener('scroll', this.getScroll, true)
+    // window.addEventListener('scroll', this.getScroll, true)
   },
   destroyed () {
-    window.removeEventListener('scroll', this.getScroll)
+    // window.removeEventListener('scroll', this.getScroll)
   }
 }
 </script>
@@ -179,8 +169,6 @@ export default {
   .vu-fixed {
     width: 40px;
     height: 40px;
-    position: fixed;
-    right: 22px;
     color: rgba(0,0,0,0.8);
     text-align: center;
     line-height: 40px;
@@ -188,12 +176,8 @@ export default {
     background-color: rgba(67,138,94,0);
     border-radius: 30px;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-    z-index: 999;
   }
   .vu-fixed:hover {
     background-color: rgba(5,102,116,1);
-  }
-  #vu-goTop {
-    bottom: 110px;
   }
 </style>
