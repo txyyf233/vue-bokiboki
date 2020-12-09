@@ -96,18 +96,18 @@
         <el-card :body-style="{ padding: '0px' }" style="background-color: white;border-radius: 5px;margin: 5px">
           <div style="height: 80px">
             <div style="height: 60px;width: 60px;float: left;margin: 10px">
-              <el-avatar :size="60" :src="headSrc" @error="errorHandler" fit="scale-down">
+              <el-avatar :size="60" :src="rightUserInfo.headSrc" @error="errorHandler" fit="scale-down">
                 <img src="@/assets/errorImg.png"/>
               </el-avatar>
             </div>
             <div style="height: 60px;float: left;margin: 10px 0px">
               <div style="height: 40px;line-height: 40px;font-size: 17px">
-                <span>{{userNick}}</span>
+                <span>{{rightUserInfo.userNick}}</span>
               </div>
               <div style="height: 20px;line-height: 20px;font-size: 12px">
-                <span>关注：{{userCare}}</span>
+                <span>关注：{{rightUserInfo.userCare}}</span>
                 <el-divider direction="vertical"></el-divider>
-                <span>粉丝：{{userFans}}</span>
+                <span>粉丝：{{rightUserInfo.userFans}}</span>
               </div>
             </div>
           </div>
@@ -115,12 +115,20 @@
             <el-divider content-position="left"  style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">采集</span></el-divider>
             <el-scrollbar style="height:100%">
               <div style="height: 440px">
-                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionUrlList" :key="item">
+                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionList" :key="item">
                   <el-row>
-                    <el-col :span="10">
-                      <img class="image" style="width: 100px;max-height: 100px" :src="item.url">
+                    <el-col :span="8">
+                      <img class="image" style="height: 100px" :src="item.cardImgSrc">
                     </el-col>
-                    <el-col :span="14" >{{item.userNick}}</el-col>
+                    <el-col :span="16" >
+                      <div class="cardDiv" style="height: 90px">
+                        <div  class="collectButton2">采集：{{item.cardCollectNum}}</div>
+                        <div  class="likeButton">喜欢：{{item.cardLaudNum}}</div>
+                        <div style="padding: 10px;text-align: center">
+                          {{item.cardName}}
+                        </div>
+                      </div>
+                    </el-col>
                   </el-row>
                 </el-card>
               </div>
@@ -128,12 +136,20 @@
             <el-divider content-position="left"  style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">空间</span></el-divider>
             <el-scrollbar style="height:100%">
               <div style="height: 440px">
-                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionUrlList" :key="item">
+                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in zoneList" :key="item">
                   <el-row>
-                    <el-col :span="10">
-                      <img class="image" style="width: 100px;max-height: 100px" :src="item.url">
+                    <el-col :span="8">
+                      <img class="image" style="height: 100px" :src="item.cardImgSrc">
                     </el-col>
-                    <el-col :span="14" >{{item.userNick}}</el-col>
+                    <el-col :span="16" >
+                      <div class="cardDiv" style="height: 90px">
+                        <div  class="collectButton2">采集：{{item.cardCollectNum}}</div>
+                        <div  class="likeButton">喜欢：{{item.cardLaudNum}}</div>
+                        <div style="padding: 10px;text-align: center">
+                          {{item.cardName}}
+                        </div>
+                      </div>
+                    </el-col>
                   </el-row>
                 </el-card>
               </div>
@@ -143,12 +159,20 @@
             <el-divider content-position="left" style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">排行</span></el-divider>
             <el-scrollbar style="height:100%">
               <div style="height: 440px">
-                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in collectionUrlList" :key="item">
+                <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in rankingList" :key="item">
                   <el-row>
-                    <el-col :span="10">
-                      <img class="image" style="width: 100px;max-height: 100px" :src="item.url">
+                    <el-col :span="8">
+                      <img class="image" style="height: 100px" :src="item.cardImgSrc">
                     </el-col>
-                    <el-col :span="14" >{{item.userNick}}</el-col>
+                    <el-col :span="16" >
+                      <div class="cardDiv" style="height: 90px">
+                        <div  class="collectButton2">采集：{{item.cardCollectNum}}</div>
+                        <div  class="likeButton">喜欢：{{item.cardLaudNum}}</div>
+                        <div style="padding: 10px;text-align: center">
+                          {{item.cardName}}
+                        </div>
+                      </div>
+                    </el-col>
                   </el-row>
                 </el-card>
               </div>
@@ -157,9 +181,9 @@
           <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">bokiboki</span></el-divider>
           <div style="padding:10px 40px 20px">
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">©2020&nbsp;bokiboki&nbsp;今天的风儿甚是喧嚣啊</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{visitSum}}</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{todayVisitSum}}</span><br/>
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{visitNowSum}}</span>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{visitInfo.visitSum}}</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{visitInfo.todayVisitSum}}</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{visitInfo.visitNowSum}}</span>
           </div>
         </el-card>
       </el-col>
@@ -241,25 +265,35 @@ export default {
       addMainCard: false,
       // 卡片list
       mainList: [],
-      // 右侧头像
-      headSrc: this.$store.state.user.userImgUrl,
-      // 右侧用户昵称
-      userNick: this.$store.state.user.userNick,
-      // 右侧用户关注
-      userCare: this.$store.state.user.userCare,
-      // 右侧用户粉丝
-      userFans: this.$store.state.user.userFans,
+      // 右侧用户详情
+      rightUserInfo: {
+        // 右侧头像
+        headSrc: this.$store.state.user.userImgUrl,
+        // 右侧用户昵称
+        userNick: this.$store.state.user.userNick,
+        // 右侧用户关注
+        userCare: this.$store.state.user.userCare,
+        // 右侧用户粉丝
+        userFans: this.$store.state.user.userFans
+      },
       // 右侧采集卡
-      collectionUrlList: [{userNick: '晚来天欲雪', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},
-        {userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},
-        {userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},{userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'},
-        {userNick: '能饮一杯无', url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1607429296381&di=d71f42710ffedead1d96ef2ae69718fa&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170222%2Fe778a7e925dd43ff9a61ab7cd0f31643_th.jpeg'}],
-      // 右侧总访问量
-      visitSum: 0,
-      // 右侧今日访问量
-      todayVisitSum: 0,
-      // 右侧在线人数
-      visitNowSum: 0,
+      collectionList: [{
+        cardName: '晚来天欲雪',
+        cardLaudNum: 239,
+        cardCollectNum: 56,
+        cardImgSrc: 'http://47.93.57.186:4396/file_oss/bokiboki/2020-12-01/30d463f1269140218c622f7445f4a7cc-mmexport1606659219397.png'}],
+      // 右侧空间卡
+      zoneList: [],
+      // 右侧排行卡
+      rankingList: [],
+      visitInfo: {
+        // 右侧总访问量
+        visitSum: 0,
+        // 右侧今日访问量
+        todayVisitSum: 0,
+        // 右侧在线人数
+        visitNowSum: 0
+      },
       // 富文本内容
       content: '',
       // 富文本工具栏
@@ -359,9 +393,9 @@ export default {
         if (resposeData.code === '1') {
           var sum = {}
           sum = resposeData.resource
-          this.visitSum = sum.visitSum
-          this.todayVisitSum = sum.todayVisitSum
-          this.visitNowSum = sum.visitNowSum
+          this.visitInfo.visitSum = sum.visitSum
+          this.visitInfo.todayVisitSum = sum.todayVisitSum
+          this.visitInfo.visitNowSum = sum.visitNowSum
           console.log(sum)
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
@@ -466,7 +500,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /deep/ .el-divider--horizontal{
+  .cardDiv /deep/ .el-divider--horizontal{
     margin: 8px 0;
   }
   /deep/ .el-image-viewer__close > .el-icon-circle-close {
@@ -498,11 +532,43 @@ export default {
     box-shadow: 0px 0px 1px rgba(255,75,92,0.4);
     text-align: center;
     line-height: 25px;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(0,0,0,0.1);
     float:right;
     position: absolute;
     top: 5px;
     right: 5px;
+    z-index: 100;
+  }
+  .collectButton2 {
+    height: 25px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: rgba(255,75,92,0.6);
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px rgba(255,75,92,0.4);
+    text-align: center;
+    line-height: 25px;
+    background-color: rgba(0,0,0,0.1);
+    float:right;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 100;
+  }
+  .likeButton {
+    height: 25px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: rgba(255,75,92,0.6);
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px rgba(255,75,92,0.4);
+    text-align: center;
+    line-height: 25px;
+    background-color: rgba(0,0,0,0.1);
+    float:right;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
     z-index: 100;
   }
   .image {
