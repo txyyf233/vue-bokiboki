@@ -6,7 +6,7 @@
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
       <el-col :xs="24" :sm="24" :lg="16">
-        <el-row  v-infinite-scroll="addCardLoad">
+        <el-row>
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(0,i)">
               <div class="collectButton">采集</div>
@@ -157,6 +157,13 @@
           </div>
           <div>
             <el-divider content-position="left" style="margin: 15px"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">排行</span></el-divider>
+            <div style="margin:10px auto;text-align: center">
+              <el-radio-group v-model="rankRadio" size="mini" fill="#66bfbf">
+                <el-radio-button label="今日排行"></el-radio-button>
+                <el-radio-button label="当月排行"></el-radio-button>
+                <el-radio-button label="总排行"></el-radio-button>
+              </el-radio-group>
+            </div>
             <el-scrollbar style="height:100%">
               <div style="height: 440px">
                 <el-card :body-style="{ padding: '0px' }"  shadow="hover" style="margin:5px 10px 0px 10px" v-for="item in rankingList" :key="item">
@@ -285,6 +292,7 @@ export default {
       // 右侧空间卡
       zoneList: [],
       // 右侧排行卡
+      rankRadio: '',
       rankingList: [],
       visitInfo: {
         // 右侧总访问量
@@ -326,15 +334,15 @@ export default {
         cardImageUrl: ''
       },
       // 卡片加载数量 瀑布流
-      cardPageSum: 40,
-      cardPageSize: 1,
+      cardPage: 1,
+      cardPageSize: 40,
       cardAddLoad: false,
       noMoreCard: false
     }
   },
   mounted () {
     // 卡片列表初始化
-    this.getList(this.cardPageSum, this.cardPageSize)
+    this.getList(this.cardPage, this.cardPageSize)
     // 右侧访问量初始化
     var mainLine = this.$store.state.mainLine
     if (mainLine === 4) {
@@ -360,7 +368,7 @@ export default {
           if (cardList.length < this.cardPageSum) {
             this.noMoreCard = true
           }
-          this.cardPageSize = this.cardPageSize + 1
+          this.cardPage = this.cardPage + 1
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
@@ -490,8 +498,9 @@ export default {
     },
     // 卡片流懒加载
     addCardLoad () {
+      console.log(123456789)
       if (!this.noMoreCard) {
-        this.getList(this.cardPageSum, this.cardPageSize)
+        this.getList(this.cardPage, this.cardPageSize)
       }
     }
   }
