@@ -271,7 +271,17 @@ export default {
       // 发布弹出层状态
       addMainCard: false,
       // 卡片list
-      mainList: [],
+      mainList: [/* {
+        'id': 'a',
+        'cardImgSrc': 'png',
+        'cardName': '有',
+        'cardType': '表',
+        'userId': '1',
+        'cardLaudNum': 0,
+        'cardCollectNum': 0,
+        'userNick': '今',
+        'userImgSrc': 'png'
+      } */],
       // 右侧用户详情
       rightUserInfo: {
         // 右侧头像
@@ -284,11 +294,12 @@ export default {
         userFans: this.$store.state.user.userFans
       },
       // 右侧采集卡
-      collectionList: [{
-        cardName: '晚来天欲雪',
-        cardLaudNum: 239,
-        cardCollectNum: 56,
-        cardImgSrc: 'http://47.93.57.186:4396/file_oss/bokiboki/2020-12-01/30d463f1269140218c622f7445f4a7cc-mmexport1606659219397.png'}],
+      collectionList: [/* {
+        cardName: 'bokiboki',
+        cardLaudNum: 0,
+        cardCollectNum: 0,
+        cardImgSrc: 'http://47.93.57.186:4396/a.png'
+      } */],
       // 右侧空间卡
       zoneList: [],
       // 右侧排行卡
@@ -369,7 +380,7 @@ export default {
           var cardList = []
           cardList = resposeData.resource
           this.mainList = this.mainList.concat(cardList)
-          if (cardList.length < this.cardPage) {
+          if (cardList.length < this.cardPageSize) {
             this.noMoreCard = true
           }
           this.cardPage = this.cardPage + 1
