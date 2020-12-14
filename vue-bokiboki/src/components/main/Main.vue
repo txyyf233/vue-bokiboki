@@ -335,7 +335,7 @@ export default {
       },
       // 卡片加载数量 瀑布流
       cardPage: 1,
-      cardPageSize: 40,
+      cardPageSize: 28,
       cardAddLoad: false,
       noMoreCard: false
     }
@@ -348,6 +348,10 @@ export default {
     if (mainLine === 4) {
       this.getUserSum()
     }
+    window.addEventListener('scroll', this.getScroll, true)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.getScroll)
   },
   methods: {
     // 卡片列表
@@ -365,7 +369,7 @@ export default {
           var cardList = []
           cardList = resposeData.resource
           this.mainList = this.mainList.concat(cardList)
-          if (cardList.length < this.cardPageSum) {
+          if (cardList.length < this.cardPage) {
             this.noMoreCard = true
           }
           this.cardPage = this.cardPage + 1
@@ -404,7 +408,6 @@ export default {
           this.visitInfo.visitSum = sum.visitSum
           this.visitInfo.todayVisitSum = sum.todayVisitSum
           this.visitInfo.visitNowSum = sum.visitNowSum
-          console.log(sum)
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
@@ -421,9 +424,6 @@ export default {
       const picType = file.name.substring(file.name.lastIndexOf('.') + 1)
       const checkType = ['jpg', 'png', 'img', 'bmp', 'webp', 'jpeg', 'tif', 'gif']
       const isPic = checkType.indexOf(picType)
-      console.log(file)
-      console.log(picType)
-      console.log(isPic)
       const isLt2M = file.size / 1024 / 1024 < 10
 
       if (isPic < 0) {
@@ -501,11 +501,13 @@ export default {
       this.$refs['addCardForm'].resetFields()
       this.$refs.upload.clearFiles()
     },
-    // 卡片流懒加载
-    addCardLoad () {
-      console.log(123456789)
-      if (!this.noMoreCard) {
-        this.getList(this.cardPage, this.cardPageSize)
+    // 页面离底部距离
+    getScroll () {
+      let top = document.documentElement.scrollTop || document.body.scrollTop // 滚动条在Y轴上的滚动距离
+      let vh = document.compatMode === 'CSS1Compat' ? document.documentElement.clientHeight : document.body.clientHeight // 浏览器视口的高度
+      let height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) // 文档的总高度
+      if ((top + vh >= height) && !this.noMoreCard) { // 滚动到底部
+        this.getList(this.cardPage, this.cardPageSize) // 如果已经滚到底了 获取数据
       }
     }
   }
