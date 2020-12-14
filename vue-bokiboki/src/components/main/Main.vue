@@ -9,7 +9,7 @@
         <el-row>
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(0,i)">
-              <div class="collectButton">采集</div>
+              <div class="collectButton" @click="collectionCard(item.id)">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -29,7 +29,7 @@
           </el-col>
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
-              <div  class="collectButton">采集</div>
+              <div  class="collectButton" @click="collectionCard(item.id)">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -49,7 +49,7 @@
           </el-col>
           <el-col class="hidden-md-and-down" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
-              <div  class="collectButton">采集</div>
+              <div  class="collectButton" @click="collectionCard(item.id)">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -69,7 +69,7 @@
           </el-col>
           <el-col class="hidden-md-and-down" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
-              <div  class="collectButton">采集</div>
+              <div  class="collectButton" @click="collectionCard(item.id)">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -401,6 +401,26 @@ export default {
         return true
       }
       return false
+    },
+    // 卡片采集
+    collectionCard (id) {
+      this.$axios({
+        method: 'post',
+        url: '/api/main/collectCard',
+        // 同步请求
+        async: false,
+        data: this.$qs.stringify({'id': id}),
+        timeout: 60000
+      }).then((response) => {
+        var resposeData = response.data
+        if (resposeData.code === '1') {
+          this.$message({message: resposeData.message, type: 'success', duration: 1000})
+        } else {
+          this.$message({message: resposeData.message, type: 'error', duration: 1000})
+        }
+      }).catch((error) =>
+        this.$message({message: error, type: 'error', duration: 1000})
+      )
     },
     // 抓取用户访问量
     getUserSum () {
