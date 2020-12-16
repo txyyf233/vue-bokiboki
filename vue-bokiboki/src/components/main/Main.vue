@@ -403,13 +403,13 @@ export default {
       return false
     },
     // 卡片采集
-    collectionCard (id) {
+    collectionCard (cardId) {
       this.$axios({
         method: 'post',
         url: '/api/main/collectCard',
         // 同步请求
         async: false,
-        data: this.$qs.stringify({'id': id}),
+        data: this.$qs.stringify({'cardId': cardId}),
         timeout: 60000
       }).then((response) => {
         var resposeData = response.data
@@ -537,7 +537,8 @@ export default {
       let top = document.documentElement.scrollTop || document.body.scrollTop // 滚动条在Y轴上的滚动距离
       let vh = document.compatMode === 'CSS1Compat' ? document.documentElement.clientHeight : document.body.clientHeight // 浏览器视口的高度
       let height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) // 文档的总高度
-      if ((top + vh >= height) && !this.noMoreCard) { // 滚动到底部
+      let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight
+      if (((top + vh >= height) || bottomOfWindow) && !this.noMoreCard) { // 滚动到底部
         this.getList(this.cardPage, this.cardPageSize) // 如果已经滚到底了 获取数据
       }
     }
