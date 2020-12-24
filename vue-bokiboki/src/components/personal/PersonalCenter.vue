@@ -6,7 +6,7 @@
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="4">&nbsp;</el-col>
       <el-col  :xs="24" :sm="24"  :lg="16">
-        <div style="background-color: white;margin: 70px 0 20px;width: 130px;text-align: center;padding-top: 5px">
+        <div style="background-color: white;margin: 30px 0 20px;width: 130px;text-align: center;padding-top: 5px">
           <img :src="headSrc" style="width: 120px"/>
         </div>
         <el-collapse accordion v-model="activeNames">
