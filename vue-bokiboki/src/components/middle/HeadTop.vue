@@ -29,7 +29,7 @@
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </template>
-                  <el-menu-item index="2-1" @click="goLogin"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
+                  <el-menu-item index="2-1" @click="goPersonal"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
                   <el-menu-item index="2-2"><i class="el-icon el-icon-s-shop"></i>&nbsp;采集板</el-menu-item>
                   <el-menu-item index="2-3"><i class="el-icon el-icon-s-tools"></i>&nbsp;设置</el-menu-item>
                   <el-menu-item index="2-4" @click="goLoginOut"><i class="el-icon el-icon-remove"></i>&nbsp;注销</el-menu-item>
@@ -50,7 +50,7 @@
         ref="drawerClose"
         :with-header="false">
         <el-tag class="el-tag" @click="goMain">首页</el-tag>
-        <el-tag class="el-tag" @click="goLogin">个人中心</el-tag>
+        <el-tag class="el-tag" @click="goPersonal">个人中心</el-tag>
         <el-tag class="el-tag">消息</el-tag>
         <el-tag class="el-tag">采集板</el-tag>
         <el-tag class="el-tag">设置</el-tag>
@@ -83,6 +83,11 @@ export default {
     goLogin () {
       this.$refs.drawerClose.closeDrawer()
       return this.$router.push('/login')
+    },
+    // 跳转个人中心
+    goPersonal () {
+      this.$refs.drawerClose.closeDrawer()
+      return this.$router.push('/personal')
     },
     // 跳转登出
     goLoginOut () {
