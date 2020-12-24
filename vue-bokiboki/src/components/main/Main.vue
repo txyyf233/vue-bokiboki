@@ -542,6 +542,11 @@ export default {
         this.getList(this.cardPage, this.cardPageSize) // 如果已经滚到底了 获取数据
       }
     }
+  },
+  watch: {
+    $route (to, from) {
+      this.$router.go(0)
+    }
   }
 }
 </script>

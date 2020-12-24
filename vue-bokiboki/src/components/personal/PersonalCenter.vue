@@ -29,9 +29,9 @@
             </template>
             <div></div>
           </el-collapse-item>
-          <el-collapse-item  name="个人资料">
+          <el-collapse-item  name="设置">
             <template slot="title">
-              <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">个人资料</span>
+              <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">设置</span>
             </template>
             <div></div>
           </el-collapse-item>
@@ -47,8 +47,13 @@ export default {
   components: {HeadTop},
   data () {
     return {
-      activeNames: '发布',
+      activeNames: this.$route.query.activeNames,
       headSrc: 'https://img.erp.ctrl.com.cn/group1/M00/01/9C/PNAg4F_JnxiAb8nIAAE5fHZhYlo865.jpg'
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.$router.go(0)
     }
   }
 }
