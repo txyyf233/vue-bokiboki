@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/main/main'
-import Login from '@/components/login/login'
-import Join from '@/components/login/join'
-import ResetPass from '@/components/login/resetPass'
-import PersonalCenter from '@/components/personal/personalCenter'
+import Main from '@/components/main/Main'
+import Login from '@/components/login/Login'
+import Join from '@/components/login/Join'
+import ResetPass from '@/components/login/ResetPass'
+import PersonalCenter from '@/components/personal/PersonalCenter'
 
 Vue.use(Router)
 

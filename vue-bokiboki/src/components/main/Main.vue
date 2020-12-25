@@ -188,7 +188,9 @@
           <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">bokiboki</span></el-divider>
           <div style="padding:10px 40px 20px">
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">©2021&nbsp;bokiboki&nbsp;今天的风儿甚是喧嚣啊</span><br/>
-            <span style="font-size: 12px"><a style="text-decoration: none;color:rgba(0,0,0,0.5) " href="https://beian.miit.gov.cn">鲁ICP备2020049493号</a></span><br/>
+            <span style="font-size: 12px">
+              <a style="color:rgba(0,0,0,0.5) " href="https://beian.miit.gov.cn" target="_blank">鲁ICP备2020049493号</a>
+            </span><br/>
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{visitInfo.visitSum}}</span><br/>
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{visitInfo.todayVisitSum}}</span><br/>
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{visitInfo.visitNowSum}}</span>
