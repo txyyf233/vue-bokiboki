@@ -9,7 +9,7 @@
         <el-row>
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(0,i)">
-              <div class="collectButton" @click="collectionCard(item.id)">采集</div>
+              <div class="collectButton" @click="collectionCard(item)" v-show="item.collectShow">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -187,7 +187,8 @@
           </div>
           <el-divider content-position="left"><span style="font-size: 10px;color: rgba(0,0,0,0.5)">bokiboki</span></el-divider>
           <div style="padding:10px 40px 20px">
-            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">©2020&nbsp;bokiboki&nbsp;今天的风儿甚是喧嚣啊</span><br/>
+            <span style="font-size: 12px;color: rgba(0,0,0,0.5)">©2021&nbsp;bokiboki&nbsp;今天的风儿甚是喧嚣啊</span><br/>
+            <span style="font-size: 12px"><a style="text-decoration: none;color:rgba(0,0,0,0.5) " href="https://beian.miit.gov.cn">鲁ICP备2020049493号</a></span><br/>
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">总访问量：{{visitInfo.visitSum}}</span><br/>
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">今日访问量：{{visitInfo.todayVisitSum}}</span><br/>
             <span style="font-size: 12px;color: rgba(0,0,0,0.5)">当前在线：{{visitInfo.visitNowSum}}</span>
@@ -403,18 +404,19 @@ export default {
       return false
     },
     // 卡片采集
-    collectionCard (cardId) {
+    collectionCard (item) {
       this.$axios({
         method: 'post',
         url: '/api/main/collectCard',
         // 同步请求
         async: false,
-        data: this.$qs.stringify({'cardId': cardId}),
+        data: this.$qs.stringify({'cardId': item.id}),
         timeout: 60000
       }).then((response) => {
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.$message({message: resposeData.message, type: 'success', duration: 1000})
+          item.collectShow = false
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
