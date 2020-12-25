@@ -103,9 +103,7 @@ export default {
     },
     // 提交搜索
     searchMethods () {
-      if (this.vuSearch) {
-        this.result = this.vuSearch
-      }
+      this.$parent.searchMethods(this.vuSearch)
     },
     errorHandler () {
       return true

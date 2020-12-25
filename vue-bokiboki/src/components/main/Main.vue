@@ -29,7 +29,7 @@
           </el-col>
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
-              <div  class="collectButton" @click="collectionCard(item.id)">采集</div>
+              <div  class="collectButton" @click="collectionCard(item.id)"  v-show="item.collectShow">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -49,7 +49,7 @@
           </el-col>
           <el-col class="hidden-md-and-down" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
-              <div  class="collectButton" @click="collectionCard(item.id)">采集</div>
+              <div  class="collectButton" @click="collectionCard(item.id)"  v-show="item.collectShow">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -69,7 +69,7 @@
           </el-col>
           <el-col class="hidden-md-and-down" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
-              <div  class="collectButton" @click="collectionCard(item.id)">采集</div>
+              <div  class="collectButton" @click="collectionCard(item.id)" v-show="item.collectShow">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -273,6 +273,8 @@ export default {
       labelPosition: 'top',
       // 发布弹出层状态
       addMainCard: false,
+      // 搜索条件
+      search: '',
       // 卡片list
       mainList: [/* {
         'id': 'a',
@@ -356,7 +358,7 @@ export default {
   },
   mounted () {
     // 卡片列表初始化
-    this.getList(this.cardPage, this.cardPageSize)
+    this.getList(this.cardPage, this.cardPageSize, '')
     // 右侧访问量初始化
     var mainLine = this.$store.state.mainLine
     if (mainLine === 4) {
@@ -368,14 +370,19 @@ export default {
     window.removeEventListener('scroll', this.getScroll)
   },
   methods: {
+    // 提交搜索
+    searchMethods (search) {
+      this.search = search
+      this.getList(1, 28, search)
+    },
     // 卡片列表
-    getList (pageSum, pageSize) {
+    getList (pageSum, pageSize, search) {
       this.cardAddLoad = true
       const loading = this.$loading({lock: true, background: 'rgba(255, 255, 255, 0.1)'})
       this.$axios({
         method: 'post',
         url: '/api/main/list',
-        data: this.$qs.stringify({'pageSum': pageSum, 'pageSize': pageSize}),
+        data: this.$qs.stringify({'pageSum': pageSum, 'pageSize': pageSize, 'search': search}),
         timeout: 60000
       }).then((response) => {
         var resposeData = response.data
@@ -543,7 +550,7 @@ export default {
       let height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) // 文档的总高度
       let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight
       if (((top + vh >= height) || bottomOfWindow) && !this.noMoreCard) { // 滚动到底部
-        this.getList(this.cardPage, this.cardPageSize) // 如果已经滚到底了 获取数据
+        this.getList(this.cardPage, this.cardPageSize, this.search) // 如果已经滚到底了 获取数据
       }
     }
   },
