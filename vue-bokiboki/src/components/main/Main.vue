@@ -16,12 +16,12 @@
                   <span style="font-size: 11px">{{ item.cardName }}</span>
                   <el-divider content-position="left"></el-divider>
                   <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
-                    <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                    <el-avatar :size="30" :src="item.bokiUser.userImgUrl" @error="errorHandler" fit="scale-down">
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </div>
                   <div style="height: 30px;line-height: 30px">
-                    <span style="font-size: 10px">{{item.userNick}}</span>
+                    <span style="font-size: 10px">{{item.bokiUser.userNick}}</span>
                   </div>
                 </div>
               </el-card>
@@ -36,12 +36,12 @@
                   <span style="font-size: 11px">{{ item.cardName }}</span>
                   <el-divider content-position="left"></el-divider>
                   <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
-                    <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                    <el-avatar :size="30" :src="item.bokiUser.userImgUrl" @error="errorHandler" fit="scale-down">
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </div>
                   <div style="height: 30px;line-height: 30px">
-                    <span style="font-size: 10px">{{item.userNick}}</span>
+                    <span style="font-size: 10px">{{item.bokiUser.userNick}}</span>
                   </div>
                 </div>
               </el-card>
@@ -56,12 +56,12 @@
                   <span style="font-size: 11px">{{ item.cardName }}</span>
                   <el-divider content-position="left"></el-divider>
                   <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
-                    <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                    <el-avatar :size="30" :src="item.bokiUser.userImgUrl" @error="errorHandler" fit="scale-down">
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </div>
                   <div style="height: 30px;line-height: 30px">
-                    <span style="font-size: 10px">{{item.userNick}}</span>
+                    <span style="font-size: 10px">{{item.bokiUser.userNick}}</span>
                   </div>
                 </div>
               </el-card>
@@ -76,12 +76,12 @@
                   <span style="font-size: 11px">{{ item.cardName }}</span>
                   <el-divider content-position="left"></el-divider>
                   <div style="height: 30px;width: 30px;float: left;margin-right: 10px">
-                    <el-avatar :size="30" :src="item.userImgSrc" @error="errorHandler" fit="scale-down">
+                    <el-avatar :size="30" :src="item.bokiUser.userImgUrl" @error="errorHandler" fit="scale-down">
                       <img src="@/assets/errorImg.png"/>
                     </el-avatar>
                   </div>
                   <div style="height: 30px;line-height: 30px">
-                    <span style="font-size: 10px">{{item.userNick}}</span>
+                    <span style="font-size: 10px">{{item.bokiUser.userNick}}</span>
                   </div>
                 </div>
               </el-card>
@@ -285,7 +285,7 @@ export default {
         'cardLaudNum': 0,
         'cardCollectNum': 0,
         'userNick': '今',
-        'userImgSrc': 'png'
+        'userImgUrl': 'png'
       } */],
       // 右侧用户详情
       rightUserInfo: {
@@ -373,6 +373,7 @@ export default {
     // 提交搜索
     searchMethods (search) {
       this.search = search
+      this.mainList = []
       this.getList(1, 28, search)
     },
     // 卡片列表
