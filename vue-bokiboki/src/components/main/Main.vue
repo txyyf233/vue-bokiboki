@@ -573,7 +573,7 @@ export default {
   }
   /deep/ .el-dialog {
     padding: 5px;
-    min-width: 290px;
+    min-width: 300px;
   }
   /deep/ .el-dialog__body {
     padding: 5px;
