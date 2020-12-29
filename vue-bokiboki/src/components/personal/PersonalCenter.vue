@@ -6,68 +6,75 @@
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="4">&nbsp;</el-col>
       <el-col  :xs="24" :sm="24"  :lg="16">
-        <div>
-          <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 0 20px;width: 130px;text-align: center;padding-top: 5px">
-            <img :src="headSrc" style="width: 120px"/>
-          </div>
-          <div style="float: left">
-          </div>
-        </div>
-        <!------------------------------------修改头像------------------------------------>
-        <el-dialog title="动态发布" :visible.sync="updateHeadImgVisit">
-          <el-form class="el-form" :label-position="labelPosition" :model="updateHeadImgForm" status-icon :rules="rules" ref="updateHeadImgForm" label-width="0px">
-            <el-form-item label="上传封面" prop="cardFile">
-              <el-upload
-                ref="upload"
-                action="/api/file/upload"
-                list-type="picture"
-                :before-upload="handleBefore"
-                :on-success="handleSuccess"
-                :on-preview="handlePreview"
-                :on-exceed="handleExceed"
-                :http-request="httpUpLoad"
-                :limit="1"
-                :auto-upload="false">
-                <el-button size="small" type="primary" style="background-color: rgba(5,102,116,1)">选取头像</el-button>
-              </el-upload>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">修改头像</el-button>
-            </el-form-item>
-          </el-form>
-        </el-dialog>
-        <el-collapse accordion v-model="activeNames">
-          <el-collapse-item name="发布">
-            <template slot="title">
-              <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">发布</span>
-            </template>
+        <el-row>
+          <el-col :span="24">
             <div>
+              <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 0 20px;width: 130px;height: 130px;text-align: center;padding-top: 5px;float: left">
+                <img class="image" :src="headSrc" style="width: 120px;height: 120px"/>
+              </div>
+              <div style="float: left">
+                今天的风儿
+              </div>
             </div>
-          </el-collapse-item>
-          <el-collapse-item  name="消息">
-            <template slot="title">
-              <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">消息</span>
-            </template>
-            <div>
-            </div>
-          </el-collapse-item>
-          <el-collapse-item  name="采集板">
-            <template slot="title">
-              <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">采集板</span>
-            </template>
-            <div>
-            </div>
-          </el-collapse-item>
-          <el-collapse-item  name="设置">
-            <template slot="title">
-              <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">设置</span>
-            </template>
-            <div>
-            </div>
-          </el-collapse-item>
-        </el-collapse>
+          </el-col>
+          <el-col :span="24">
+            <el-collapse accordion v-model="activeNames">
+              <el-collapse-item name="发布">
+                <template slot="title">
+                  <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">发布</span>
+                </template>
+                <div>
+                </div>
+              </el-collapse-item>
+              <el-collapse-item  name="消息">
+                <template slot="title">
+                  <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">消息</span>
+                </template>
+                <div>
+                </div>
+              </el-collapse-item>
+              <el-collapse-item  name="采集板">
+                <template slot="title">
+                  <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">采集板</span>
+                </template>
+                <div>
+                </div>
+              </el-collapse-item>
+              <el-collapse-item  name="设置">
+                <template slot="title">
+                  <span style="padding-left: 20px;font-size: 20px;color: rgba(0,0,0,0.6)">设置</span>
+                </template>
+                <div>
+                </div>
+              </el-collapse-item>
+            </el-collapse>
+          </el-col>
+        </el-row>
       </el-col>
     </el-row>
+    <!------------------------------------修改头像------------------------------------>
+    <el-dialog title="动态发布" :visible.sync="updateHeadImgVisit">
+      <el-form class="el-form" :label-position="labelPosition" :model="updateHeadImgForm" status-icon :rules="rules" ref="updateHeadImgForm" label-width="0px">
+        <el-form-item label="上传封面" prop="cardFile">
+          <el-upload
+            ref="upload"
+            action="/api/file/upload"
+            list-type="picture"
+            :before-upload="handleBefore"
+            :on-success="handleSuccess"
+            :on-preview="handlePreview"
+            :on-exceed="handleExceed"
+            :http-request="httpUpLoad"
+            :limit="1"
+            :auto-upload="false">
+            <el-button size="small" type="primary" style="background-color: rgba(5,102,116,1)">选取头像</el-button>
+          </el-upload>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitCard" style="float: right;margin-left: 10px;background-color: rgba(5,102,116,1)">修改头像</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -206,5 +213,13 @@ export default {
   }
   /deep/ .el-dialog__header {
     padding: 5px;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    max-height: 1000px;
   }
 </style>
