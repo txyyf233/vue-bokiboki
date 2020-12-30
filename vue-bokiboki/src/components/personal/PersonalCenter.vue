@@ -9,7 +9,7 @@
         <el-row>
           <el-col :span="24">
             <div>
-              <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 0 20px;width: 130px;height: 130px;padding: 5px;float: left">
+              <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 10px 20px;padding: 5px;float: left">
                 <img class="image" :src="headSrc" style="width: 120px;height: 120px"/>
               </div>
               <div style="float: left">
