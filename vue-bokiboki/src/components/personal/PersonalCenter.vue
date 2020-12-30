@@ -9,7 +9,7 @@
         <el-row>
           <el-col :span="24">
             <div>
-              <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 0 20px;width: 130px;height: 130px;text-align: center;padding-top: 5px;float: left">
+              <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 0 20px;width: 130px;height: 130px;padding: 5px;float: left">
                 <img class="image" :src="headSrc" style="width: 120px;height: 120px"/>
               </div>
               <div style="float: left">
@@ -53,7 +53,7 @@
       </el-col>
     </el-row>
     <!------------------------------------修改头像------------------------------------>
-    <el-dialog title="动态发布" :visible.sync="updateHeadImgVisit">
+    <el-dialog title="上传封面" :visible.sync="updateHeadImgVisit">
       <el-form class="el-form" :label-position="labelPosition" :model="updateHeadImgForm" status-icon :rules="rules" ref="updateHeadImgForm" label-width="0px">
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
