@@ -216,26 +216,22 @@ export default {
     updateUserNickEnd () {
       this.updateInput = false
       this.updateNick = true
-      this.$confirm('确认修改昵称？')
-        .then(() => {
-          this.$axios({
-            method: 'post',
-            url: '/api/user/updateUserNick',
-            data: this.$qs.stringify(this.user.userNick),
-            timeout: 60000
-          }).then((response) => {
-            var resposeData = response.data
-            if (resposeData.code === '1') {
-              this.$message({message: resposeData.message, type: 'success', duration: 1000})
-              this.$store.commit('user', this.user)
-            } else {
-              this.$message({message: resposeData.message, type: 'error', duration: 1000})
-            }
-          }).catch((error) =>
-            this.$message({message: error, type: 'error', duration: 1000})
-          )
-        })
-        .catch(() => {})
+      this.$axios({
+        method: 'post',
+        url: '/api/user/updateUserNick',
+        data: this.$qs.stringify(this.user.userNick),
+        timeout: 60000
+      }).then((response) => {
+        var resposeData = response.data
+        if (resposeData.code === '1') {
+          this.$message({message: resposeData.message, type: 'success', duration: 1000})
+          this.$store.commit('user', this.user)
+        } else {
+          this.$message({message: resposeData.message, type: 'error', duration: 1000})
+        }
+      }).catch((error) =>
+        this.$message({message: error, type: 'error', duration: 1000})
+      )
     },
     // 打开上传弹窗回调
     openDialog () {
