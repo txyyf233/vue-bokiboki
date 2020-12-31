@@ -548,9 +548,9 @@ export default {
     getScroll () {
       let top = document.documentElement.scrollTop || document.body.scrollTop // 滚动条在Y轴上的滚动距离
       let vh = document.documentElement.clientHeight || document.body.clientHeight // 浏览器视口的高度
+      let scrollh = document.body.scrollHeight || document.documentElement.scrollHeight
       let wh = window.innerHeight
-      let offh = Math.max(document.documentElement.offsetHeight, document.body.offsetHeight)
-      let scrollh = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)
+      let offh = document.documentElement.offsetHeight || document.body.offsetHeight
       let bottomOfWindow = top + vh >= scrollh
       let bottomOfWindow2 = top + wh >= offh
       if ((bottomOfWindow || bottomOfWindow2) && !this.noMoreCard) { // 滚动到底部
