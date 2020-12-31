@@ -13,15 +13,15 @@
                 <img class="image" :src="user.userImgUrl" style="width: 120px;height: 120px"/>
               </div>
               <div style="float: left">
-                <div style="height: 70px"></div>
+                <div style="height: 90px"></div>
                 <div style="height: 60px">
                   <div style="height: 40px;line-height: 40px;font-size: 17px">
                     {{user.userNick}}
                   </div>
                   <div style="height: 20px;line-height: 20px;font-size: 12px">
-                    <span>关注：{{rightUserInfo.userCare}}</span>
+                    <span>关注：{{user.userCare}}</span>
                     <el-divider direction="vertical"></el-divider>
-                    <span>粉丝：{{rightUserInfo.userFans}}</span>
+                    <span>粉丝：{{user.userFans}}</span>
                   </div>
                 </div>
               </div>
