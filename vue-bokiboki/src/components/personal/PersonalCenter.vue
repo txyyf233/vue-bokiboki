@@ -10,14 +10,14 @@
           <el-col :span="24">
             <div>
               <div @dblclick="updateHeadImgVisit = true" style="background-color: white;margin: 30px 10px 20px;padding: 5px;float: left">
-                <img class="image" :src="user.userImgUrl" style="width: 120px;height: 120px"/>
+                <img class="image" :src="user.userImgUrl" style="width: 100px;height: 100px"/>
               </div>
               <div style="float: left">
-                <div style="height: 90px"></div>
+                <div style="height: 70px"></div>
                 <div style="height: 60px">
-                  <div class="updateUserNick" style="height: 40px;line-height: 40px;font-size: 17px">
+                  <div class="updateUserNick" style="height: 40px;line-height: 40px;font-size: 15px;max-width: 200px">
                     <span v-show="updateNick" style="margin-left: 15px">{{user.userNick}}</span>
-                    <el-input v-model="user.userNick" @blur="updateUserNickEnd" placeholder="请输入内容" v-show="updateInput"></el-input>
+                    <el-input ref="updateInputRef" v-model="user.userNick" @blur="updateUserNickEnd" placeholder="请输入内容" v-show="updateInput"></el-input>
                     <span v-show="updateNick" @click="updateUserNick"  style="margin-left: 10px"><i class="el-icon el-icon-edit"></i></span>
                   </div>
                   <div style="height: 20px;line-height: 20px;font-size: 12px;margin-left: 15px">
@@ -209,6 +209,7 @@ export default {
     updateUserNick () {
       this.updateNick = false
       this.updateInput = true
+      this.$refs['updateInputRef'].focus()
     },
     //
     updateUserNickEnd () {
@@ -242,7 +243,8 @@ export default {
   .updateUserNick /deep/ .el-input__inner {
     border: 0px;
     background-color: rgba(0,0,0,0);
-    font-size: 17px;
+    font-size: 15px;
+    width: 170px;
   }
 
   .image {
