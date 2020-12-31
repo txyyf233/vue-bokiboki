@@ -10,10 +10,20 @@
           <el-col :span="24">
             <div>
               <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 10px 20px;padding: 5px;float: left">
-                <img class="image" :src="headSrc" style="width: 120px;height: 120px"/>
+                <img class="image" :src="user.userImgUrl" style="width: 120px;height: 120px"/>
               </div>
               <div style="float: left">
-                今天的风儿
+                <div style="height: 70px"></div>
+                <div style="height: 60px">
+                  <div style="height: 40px;line-height: 40px;font-size: 17px">
+                    {{user.userNick}}
+                  </div>
+                  <div style="height: 20px;line-height: 20px;font-size: 12px">
+                    <span>关注：{{rightUserInfo.userCare}}</span>
+                    <el-divider direction="vertical"></el-divider>
+                    <span>粉丝：{{rightUserInfo.userFans}}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </el-col>
@@ -93,7 +103,7 @@ export default {
     return {
       labelPosition: 'top',
       activeNames: this.$route.query.activeNames,
-      headSrc: this.$store.state.user.userImgUrl,
+      user: this.$store.state.user,
       updateHeadImgVisit: false,
       rules: {
         cardFile: [

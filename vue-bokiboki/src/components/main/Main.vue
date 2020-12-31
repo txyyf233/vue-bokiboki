@@ -204,7 +204,7 @@
     </div>-->
     <!---------------------------------------发布上传栏----------------------------------->
     <div id="vu-add" class="vu-fixed" @click="addMainCard = true"><i class="el-icon el-icon-cherry"></i></div>
-    <el-dialog title="动态发布" :visible.sync="addMainCard">
+    <el-dialog title="动态发布" :visible.sync="addMainCard" :open="openDialog">
       <el-form class="el-form" :label-position="labelPosition" :model="addCardForm" status-icon :rules="rules" ref="addCardForm" label-width="0px">
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
@@ -555,6 +555,12 @@ export default {
       let bottomOfWindow2 = top + wh >= offh
       if ((bottomOfWindow || bottomOfWindow2) && !this.noMoreCard) { // 滚动到底部
         this.getList(this.cardPage, this.cardPageSize, this.search) // 如果已经滚到底了 获取数据
+      }
+    },
+    // 打开上传弹窗回调
+    openDialog () {
+      if (!this.$store.state.user) {
+        return this.router.push('/login')
       }
     }
   },
