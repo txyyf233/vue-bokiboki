@@ -17,7 +17,8 @@
                 <div style="height: 60px">
                   <div class="updateUserNick" style="height: 40px;line-height: 40px;font-size: 15px;max-width: 200px">
                     <span v-show="updateNick" style="margin-left: 15px">{{user.userNick}}</span>
-                    <el-input ref="updateInputRef" v-model="user.userNick" @blur="updateUserNickEnd" placeholder="请输入内容" v-show="updateInput"></el-input>
+                    <el-input ref="updateInputRef" v-model="user.userNick" @blur="updateUserNickEnd" placeholder="请输入内容"
+                              v-show="updateInput" maxlength="10"></el-input>
                     <span v-show="updateNick" @click="updateUserNick"  style="margin-left: 10px"><i class="el-icon el-icon-edit"></i></span>
                   </div>
                   <div style="height: 20px;line-height: 20px;font-size: 12px;margin-left: 15px">
@@ -65,7 +66,7 @@
       </el-col>
     </el-row>
     <!------------------------------------修改头像------------------------------------>
-    <el-dialog title="上传封面" :visible.sync="updateHeadImgVisit">
+    <el-dialog title="上传封面" :visible.sync="updateHeadImgVisit"  :open="openDialog">
       <el-form class="el-form" :label-position="labelPosition" :model="updateHeadImgForm" status-icon :rules="rules" ref="updateHeadImgForm" label-width="0px">
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
@@ -211,11 +212,36 @@ export default {
       this.updateInput = true
       this.$refs['updateInputRef'].focus()
     },
-    //
+    // 修改昵称完成回调
     updateUserNickEnd () {
       this.updateInput = false
       this.updateNick = true
-      this.$store.commit('user', this.user)
+      this.$confirm('确认修改昵称？')
+        .then(() => {
+          this.$axios({
+            method: 'post',
+            url: '/api/user/updateUserNick',
+            data: this.$qs.stringify(this.user.userNick),
+            timeout: 60000
+          }).then((response) => {
+            var resposeData = response.data
+            if (resposeData.code === '1') {
+              this.$message({message: resposeData.message, type: 'success', duration: 1000})
+              this.$store.commit('user', this.user)
+            } else {
+              this.$message({message: resposeData.message, type: 'error', duration: 1000})
+            }
+          }).catch((error) =>
+            this.$message({message: error, type: 'error', duration: 1000})
+          )
+        })
+        .catch(() => {})
+    },
+    // 打开上传弹窗回调
+    openDialog () {
+      if (!this.$store.state.user) {
+        return this.router.push('/login')
+      }
     }
   },
   watch: {
