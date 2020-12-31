@@ -9,16 +9,18 @@
         <el-row>
           <el-col :span="24">
             <div>
-              <div @click="updateHeadImgVisit = true" style="background-color: white;margin: 30px 10px 20px;padding: 5px;float: left">
+              <div @dblclick="updateHeadImgVisit = true" style="background-color: white;margin: 30px 10px 20px;padding: 5px;float: left">
                 <img class="image" :src="user.userImgUrl" style="width: 120px;height: 120px"/>
               </div>
               <div style="float: left">
                 <div style="height: 90px"></div>
                 <div style="height: 60px">
-                  <div style="height: 40px;line-height: 40px;font-size: 17px">
-                    {{user.userNick}}
+                  <div class="updateUserNick" style="height: 40px;line-height: 40px;font-size: 17px">
+                    <span v-show="updateNick" style="margin-left: 15px">{{user.userNick}}</span>
+                    <el-input v-model="user.userNick" @blur="updateUserNickEnd" placeholder="请输入内容" v-show="updateInput"></el-input>
+                    <span v-show="updateNick" @click="updateUserNick"  style="margin-left: 10px"><i class="el-icon el-icon-edit"></i></span>
                   </div>
-                  <div style="height: 20px;line-height: 20px;font-size: 12px">
+                  <div style="height: 20px;line-height: 20px;font-size: 12px;margin-left: 15px">
                     <span>关注：{{user.userCare}}</span>
                     <el-divider direction="vertical"></el-divider>
                     <span>粉丝：{{user.userFans}}</span>
@@ -102,6 +104,8 @@ export default {
     }
     return {
       labelPosition: 'top',
+      updateInput: false,
+      updateNick: true,
       activeNames: this.$route.query.activeNames,
       user: this.$store.state.user,
       updateHeadImgVisit: false,
@@ -200,6 +204,17 @@ export default {
     submitCard () {
       // 文件上传
       this.$refs.upload.submit()
+    },
+    // 修改昵称
+    updateUserNick () {
+      this.updateNick = false
+      this.updateInput = true
+    },
+    //
+    updateUserNickEnd () {
+      this.updateInput = false
+      this.updateNick = true
+      this.$store.commit('user', this.user)
     }
   },
   watch: {
@@ -223,6 +238,11 @@ export default {
   }
   /deep/ .el-dialog__header {
     padding: 5px;
+  }
+  .updateUserNick /deep/ .el-input__inner {
+    border: 0px;
+    background-color: rgba(0,0,0,0);
+    font-size: 17px;
   }
 
   .image {
