@@ -426,7 +426,7 @@ export default {
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.$message({message: resposeData.message, type: 'success', duration: 1000})
-          item.collectShow = false
+          // item.collectShow = false
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
