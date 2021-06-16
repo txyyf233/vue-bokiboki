@@ -10,7 +10,7 @@
           <el-col :span="24">
             <div>
               <div @dblclick="updateHeadImgVisit = true" style="background-color: white;margin: 30px 10px 20px;padding: 5px;float: left">
-                <img class="image" :src="user.userImgUrl" style="width: 100px;height: 100px"/>
+                <el-image class="image" style="width: 100px; height: 100px" :src="user.userImgUrl"></el-image>
               </div>
               <div style="float: left">
                 <div style="height: 70px"></div>
