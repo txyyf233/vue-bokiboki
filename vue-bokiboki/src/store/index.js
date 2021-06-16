@@ -39,6 +39,7 @@ export default new Vuex.Store({
   mutations,
   actions,
   getters,
+  // 持久化
   plugins: [persistedState({
     reducer (val) {
       return {
