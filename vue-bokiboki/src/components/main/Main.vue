@@ -275,6 +275,8 @@ export default {
       addMainCard: false,
       // 搜索条件
       search: '',
+      // 错误图片
+      errorHandler: '',
       // 卡片list
       mainList: [/* {
         'id': 'a',
@@ -426,7 +428,6 @@ export default {
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.$message({message: resposeData.message, type: 'success', duration: 1000})
-          // item.collectShow = false
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }
