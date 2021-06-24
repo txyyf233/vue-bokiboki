@@ -1,19 +1,19 @@
 <template>
   <div>
-    <!---------------------------------------导航栏----------------------------------->
+    <!--导航栏-->
     <headTop></headTop>
     <el-row style="margin-top: 5px">
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
-      <!---------------------------------------左侧展示栏----------------------------------->
+      <!--左侧展示栏-->
       <leftVue ref="leftVue"></leftVue>
-      <!---------------------------------------右侧展示栏----------------------------------->
+      <!--右侧展示栏-->
       <rightVue ref="rightVue"></rightVue>
       <el-col class="hidden-md-and-down" :lg="1">&nbsp;</el-col>
     </el-row>
-    <!--<div style="height: 200px;width: 200px">
-      <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
-    </div>-->
-    <!---------------------------------------发布上传栏----------------------------------->
+      <!--<div style="height: 200px;width: 200px">
+        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
+      </div>-->
+    <!--发布上传栏-->
     <div id="vu-add" class="vu-fixed" @click="addMainCard = true"><i class="el-icon el-icon-cherry"></i></div>
     <upload-vue  ref="uploadVue"></upload-vue>
   </div>
@@ -29,9 +29,9 @@ export default {
   components: {HeadTop, LeftVue, RightVue, UploadVue},
   data () {
     return {
-      // 搜索条件
+      // 搜索条件headTop
       search: '',
-      // 发布弹出层状态
+      // 发布弹出层状态uploadVue
       addMainCard: false,
       // 错误图片
       errorHandler: '',
