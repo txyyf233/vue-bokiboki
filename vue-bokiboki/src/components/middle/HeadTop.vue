@@ -30,8 +30,6 @@
                     </el-avatar>
                   </template>
                   <el-menu-item index="2-1" @click="goPersonal('发布')"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
-                  <el-menu-item index="2-2" @click="goPersonal('采集板')"><i class="el-icon el-icon-s-shop"></i>&nbsp;采集板</el-menu-item>
-                  <el-menu-item index="2-3" @click="goPersonal('设置')"><i class="el-icon el-icon-s-tools"></i>&nbsp;设置</el-menu-item>
                   <el-menu-item index="2-4" @click="goLogin"><i class="el-icon el-icon-user-solid"></i>&nbsp;登录</el-menu-item>
                   <el-menu-item index="2-4" @click="goLoginOut"><i class="el-icon el-icon-remove"></i>&nbsp;注销</el-menu-item>
                 </el-submenu>
@@ -52,9 +50,6 @@
         :with-header="false">
         <el-tag class="el-tag" @click="goMain">首页</el-tag>
         <el-tag class="el-tag" @click="goPersonal('发布')">个人中心</el-tag>
-        <el-tag class="el-tag" @click="goPersonal('消息')">消息</el-tag>
-        <el-tag class="el-tag" @click="goPersonal('采集板')">采集板</el-tag>
-        <el-tag class="el-tag" @click="goPersonal('设置')">设置</el-tag>
         <el-tag class="el-tag" @click="goLogin">登录</el-tag>
         <el-tag class="el-tag" @click="goLoginOut">注销</el-tag>
       </el-drawer>
