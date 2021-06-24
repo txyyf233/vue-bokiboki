@@ -187,23 +187,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .cardDiv /deep/ .el-divider--horizontal{
-    margin: 8px 0;
-  }
   /deep/ .el-image-viewer__close > .el-icon-circle-close {
     color: rgba(5,102,116,1);
   }
-  /deep/ .el-dialog {
-    padding: 5px;
-    min-width: 300px;
-  }
-  /deep/ .el-dialog__body {
-    padding: 5px;
-  }
-  /deep/ .el-dialog__header {
-    padding: 5px;
-  }
-
   .cardDiv {
     background-color: white;
     border-radius: 5px;
