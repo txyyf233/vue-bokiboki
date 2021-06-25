@@ -86,7 +86,7 @@ export default {
     goPersonal (value) {
       this.$refs.drawerClose.closeDrawer()
       if (JSON.stringify(this.$store.state.user) === '{}') {
-        return this.router.push('/login')
+        return this.$router.push('/login')
       }
       return this.$router.push({
         path: '/personal',
