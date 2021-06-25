@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="动态发布" :visible.sync="this.$parent.addMainCard" :open="openDialog">
+    <el-dialog title="动态发布" :visible.sync="addMainCard" :open="openDialog">
       <el-form class="el-form" :label-position="labelPosition" :model="addCardForm" status-icon :rules="rules" ref="addCardForm" label-width="0px">
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
@@ -65,6 +65,8 @@ export default {
     }
     return {
       labelPosition: 'top',
+      // 发布弹出层状态uploadVue
+      addMainCard: false,
       // 错误图片
       errorHandler: '',
       rules: {
@@ -120,7 +122,7 @@ export default {
     // 点击已上传文件钩子
     handlePreview (file) {
       this.addCardForm.dialogImageUrl = file.url
-      this.$parent.addMainCard.dialogVisible = true
+      this.addMainCard.dialogVisible = true
     },
     httpUpLoad (params) {
       var file = params.file
@@ -150,7 +152,7 @@ export default {
                 var resposeData = response.data
                 if (resposeData.code === '1') {
                   this.$message({message: resposeData.message, type: 'success', duration: 1000})
-                  this.$parent.addMainCard = false
+                  this.addMainCard = false
                   this.submitCardReset()
                 } else {
                   this.$message({message: resposeData.message, type: 'error', duration: 1000})
@@ -183,7 +185,7 @@ export default {
     },
     // 打开上传弹窗回调
     openDialog () {
-      if (!this.$store.state.user) {
+      if (this.$store.state.user === {}) {
         return this.router.push('/login')
       }
     }

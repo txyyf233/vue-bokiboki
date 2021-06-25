@@ -24,7 +24,7 @@
           </el-col>
           <el-col :xs="12" :sm="12" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(1,i)">
-              <div  class="collectButton" @click="collectionCard(item.id)" v-show="item.bokiCollectCard.userId === null">采集</div>
+              <div  class="collectButton" @click="collectionCard(item)" v-show="item.bokiCollectCard.userId === null">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -44,7 +44,7 @@
           </el-col>
           <el-col class="hidden-md-and-down" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(2,i)">
-              <div  class="collectButton" @click="collectionCard(item.id)"  v-show="item.bokiCollectCard.userId === null">采集</div>
+              <div  class="collectButton" @click="collectionCard(item)"  v-show="item.bokiCollectCard.userId === null">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -64,7 +64,7 @@
           </el-col>
           <el-col class="hidden-md-and-down" :lg="6">
             <div class="cardDiv" v-for="(item,i) in mainList" :key="item" v-if="cardIf(3,i)">
-              <div  class="collectButton" @click="collectionCard(item.id)" v-show="item.bokiCollectCard.userId === null">采集</div>
+              <div  class="collectButton" @click="collectionCard(item)" v-show="item.bokiCollectCard.userId === null">采集</div>
               <el-card :body-style="{ padding: '0px' }">
                 <el-image :src="item.cardImgSrc" class="image"></el-image>
                 <div style="padding: 8px">
@@ -172,6 +172,7 @@ export default {
         var resposeData = response.data
         if (resposeData.code === '1') {
           this.$message({message: resposeData.message, type: 'success', duration: 1000})
+          item.bokiCollectCard.userId = resposeData.resource
         } else {
           this.$message({message: resposeData.message, type: 'error', duration: 1000})
         }

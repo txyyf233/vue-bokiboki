@@ -14,7 +14,7 @@
         <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
       </div>-->
     <!--发布上传栏-->
-    <div id="vu-add" class="vu-fixed" @click="addMainCard = true"><i class="el-icon el-icon-cherry"></i></div>
+    <div id="vu-add" class="vu-fixed" @click="uploadClick"><i class="el-icon el-icon-cherry"></i></div>
     <upload-vue  ref="uploadVue"></upload-vue>
   </div>
 </template>
@@ -49,6 +49,10 @@ export default {
       this.search = search
       this.$refs.leftVue.mainList = []
       this.$refs.leftVue.getList(1, 28, search)
+    },
+    // 上传按钮
+    uploadClick () {
+      this.$refs.uploadVue.addMainCard = true
     }
   },
   watch: {

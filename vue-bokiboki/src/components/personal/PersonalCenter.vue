@@ -239,7 +239,7 @@ export default {
     },
     // 打开上传弹窗回调
     openDialog () {
-      if (!this.$store.state.user) {
+      if (this.$store.state.user === {}) {
         return this.router.push('/login')
       }
     }
