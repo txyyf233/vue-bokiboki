@@ -85,8 +85,8 @@ export default {
     // 跳转个人中心
     goPersonal (value) {
       this.$refs.drawerClose.closeDrawer()
-      if (this.$store.state.user === {}) {
-        return this.$router.push('/login')
+      if (JSON.stringify(this.$store.state.user) === {}) {
+        return this.router.push('/login')
       }
       return this.$router.push({
         path: '/personal',

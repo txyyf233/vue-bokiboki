@@ -66,7 +66,7 @@
       </el-col>
     </el-row>
     <!------------------------------------修改头像------------------------------------>
-    <el-dialog title="上传封面" :visible.sync="updateHeadImgVisit"  :open="openDialog">
+    <el-dialog title="上传封面" :visible.sync="updateHeadImgVisit"  @open="openDialog">
       <el-form class="el-form" :label-position="labelPosition" :model="updateHeadImgForm" status-icon :rules="rules" ref="updateHeadImgForm" label-width="0px">
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
@@ -239,7 +239,7 @@ export default {
     },
     // 打开上传弹窗回调
     openDialog () {
-      if (this.$store.state.user === {}) {
+      if (JSON.stringify(this.$store.state.user) === {}) {
         return this.router.push('/login')
       }
     }

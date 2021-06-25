@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="动态发布" :visible.sync="addMainCard" :open="openDialog">
+    <el-dialog title="动态发布" :visible.sync="addMainCard" @open="openDialog">
       <el-form class="el-form" :label-position="labelPosition" :model="addCardForm" status-icon :rules="rules" ref="addCardForm" label-width="0px">
         <el-form-item label="上传封面" prop="cardFile">
           <el-upload
@@ -185,7 +185,7 @@ export default {
     },
     // 打开上传弹窗回调
     openDialog () {
-      if (this.$store.state.user === {}) {
+      if (JSON.stringify(this.$store.state.user) === {}) {
         return this.router.push('/login')
       }
     }
