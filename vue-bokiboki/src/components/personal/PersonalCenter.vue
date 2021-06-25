@@ -178,10 +178,10 @@ export default {
                 if (resposeData.code === '1') {
                   this.$message({message: resposeData.message, type: 'success', duration: 1000})
                   this.updateHeadImgVisit = false
-                  this.user.userImgUrl = this.updateHeadImgForm.userImgUrl
                   var user = this.$store.state.user
-                  user.userImgUrl = this.user.userImgUrl
+                  user.userImgUrl = this.updateHeadImgForm.userImgUrl
                   this.$store.commit('user', user)
+                  this.user = user
                 } else {
                   this.$message({message: resposeData.message, type: 'error', duration: 1000})
                   this.user = this.$store.state.user
