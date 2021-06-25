@@ -30,8 +30,8 @@
                     </el-avatar>
                   </template>
                   <el-menu-item index="2-1" @click="goPersonal('发布')"><i class="el-icon el-icon-s-custom"></i>&nbsp;个人中心</el-menu-item>
-                  <el-menu-item index="2-4" @click="goLogin"><i class="el-icon el-icon-user-solid"></i>&nbsp;登录</el-menu-item>
-                  <el-menu-item index="2-4" @click="goLoginOut"><i class="el-icon el-icon-remove"></i>&nbsp;注销</el-menu-item>
+                  <el-menu-item index="2-4" @click="goLogin" v-if="!this.headSrc"><i class="el-icon el-icon-user-solid"></i>&nbsp;登录</el-menu-item>
+                  <el-menu-item index="2-4" @click="goLoginOut" v-if="this.headSrc"><i class="el-icon el-icon-remove"></i>&nbsp;注销</el-menu-item>
                 </el-submenu>
               </el-menu>
             </el-col>
@@ -50,8 +50,8 @@
         :with-header="false">
         <el-tag class="el-tag" @click="goMain">首页</el-tag>
         <el-tag class="el-tag" @click="goPersonal('发布')">个人中心</el-tag>
-        <el-tag class="el-tag" @click="goLogin">登录</el-tag>
-        <el-tag class="el-tag" @click="goLoginOut">注销</el-tag>
+        <el-tag class="el-tag" @click="goLogin" v-if="!this.headSrc">登录</el-tag>
+        <el-tag class="el-tag" @click="goLoginOut" v-if="this.headSrc">注销</el-tag>
       </el-drawer>
     </div>
 </template>
