@@ -150,7 +150,6 @@ export default {
       this.updateHeadImgVisit.dialogVisible = true
     },
     httpUpLoad (params) {
-      var prefixUrl = 'https://bokiboki.top/file_oss/'
       var file = params.file
       let formData = new window.FormData()
       formData.append('multipartFile', file)
@@ -180,7 +179,7 @@ export default {
                   this.$message({message: resposeData.message, type: 'success', duration: 1000})
                   this.updateHeadImgVisit = false
                   var user = this.$store.state.user
-                  user.userImgUrl = prefixUrl + this.updateHeadImgForm.userImgUrl
+                  user.userImgUrl = this.updateHeadImgForm.userImgUrl
                   this.$store.commit('user', user)
                   this.user = user
                 } else {
